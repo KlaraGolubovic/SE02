@@ -23,7 +23,7 @@ public class MainView extends VerticalLayout {
 
     @Autowired
     private LoginControl loginControl;
-
+    //ToDo: Add registry as mentioned in #1
     public MainView() {
         setSizeFull();
         LoginForm component = new LoginForm();
