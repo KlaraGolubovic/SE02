@@ -26,7 +26,7 @@ import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.hellocar.dtos.impl.UserDTOImpl;
 import org.hbrs.se2.project.hellocar.util.Globals;
 
-@Route(value = Globals.Pages.REGISTER_VIEW, layout = AppView.class)
+@Route(value = Globals.Pages.REGISTER_VIEW, layout = PublicAppView.class)
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
@@ -83,4 +83,9 @@ public class RegisterView extends Div {
         buttonLayout.add(cancel);
         return buttonLayout;
     }
+
+    
+
+
+
 }
