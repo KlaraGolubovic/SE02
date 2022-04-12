@@ -52,17 +52,11 @@ public class RegisterView extends Div {
         // Source: https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
         binder.bindInstanceFields(this);
         clearForm();
-
         // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
         cancel.addClickListener(event -> clearForm());
-
-        
-
         save.addClickListener(e -> {
-
             userService.createUser(binder.getBean());
-
-            Notification.show("Car details stored.");
+            Notification.show("User account has been created");
             clearForm();
         });
     }
@@ -89,6 +83,4 @@ public class RegisterView extends Div {
         buttonLayout.add(cancel);
         return buttonLayout;
     }
-
-
 }
