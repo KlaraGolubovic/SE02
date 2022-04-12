@@ -5,6 +5,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import org.hbrs.se2.project.hellocar.control.LoginControl;
@@ -52,6 +53,12 @@ public class MainView extends VerticalLayout {
         });
 
         add(component);
+        Button button = new Button("Button");
+
+        button.addClickListener(clickEvent -> {
+            UI.getCurrent().navigate( Globals.Pages.REGISTER_VIEW);
+        });
+        add(button);
         this.setAlignItems( Alignment.CENTER );
     }
 
