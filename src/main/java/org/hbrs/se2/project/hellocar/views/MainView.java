@@ -53,11 +53,12 @@ public class MainView extends VerticalLayout {
         });
 
         add(component);
-        Button button = new Button("Button");
+        Button button = new Button("Register");
 
         button.addClickListener(clickEvent -> {
             UI.getCurrent().navigate( Globals.Pages.REGISTER_VIEW);
         });
+
         add(button);
         this.setAlignItems( Alignment.CENTER );
     }
