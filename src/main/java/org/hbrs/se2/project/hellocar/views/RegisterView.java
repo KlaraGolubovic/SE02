@@ -26,25 +26,23 @@ import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.hellocar.dtos.impl.UserDTOImpl;
 import org.hbrs.se2.project.hellocar.util.Globals;
 
-@Route(value = Globals.Pages.ENTER_CAR, layout = AppView.class)
-@PageTitle("Enter Car")
+@Route(value = Globals.Pages.REGISTER_VIEW, layout = AppView.class)
+@PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
 
-    private TextField brand = new TextField("Brand of car");
-    private TextField model = new TextField("Model");
-    private TextField description = new TextField("Description");
-    private DatePicker date = new DatePicker("Date of Admission");
-    private PhoneNumberField phone = new PhoneNumberField("Phone number of Owner");
-    private TextField price = new TextField("Price");
+    private TextField id = new TextField("id");
+    private TextField firstname = new TextField("fn");
+    private TextField lastname = new TextField("ln");
 
+    
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private Binder<UserDTOImpl> binder = new Binder(UserDTOImpl.class);
+    private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
     public RegisterView(UserControl userService) {
-        addClassName("enter-car-view");
+        addClassName("register-view");
 
         add(createTitle());
         add(createFormLayout());
@@ -58,14 +56,7 @@ public class RegisterView extends Div {
         // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
         cancel.addClickListener(event -> clearForm());
 
-        // Registrierung eines Listeners Nr. 2 (traditionelle Variante mit anonymen Objekt)
-        cancel.addAttachListener( new ComponentEventListener() {
-            @Override
-            public void onComponentEvent(ComponentEvent event) {
-                clearForm();
-
-            }
-        } );
+        
 
         save.addClickListener(e -> {
 
@@ -81,12 +72,12 @@ public class RegisterView extends Div {
     }
 
     private Component createTitle() {
-        return new H3("Car information");
+        return new H3("Registration");
     }
 
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(brand, model, date, phone, description, price);
+        formLayout.add(id, firstname, lastname);
         return formLayout;
     }
 
@@ -99,48 +90,5 @@ public class RegisterView extends Div {
         return buttonLayout;
     }
 
-    private static class PhoneNumberField extends CustomField<String> {
-        private ComboBox<String> countryCode = new ComboBox<>();
-        private TextField number = new TextField();
-
-        public PhoneNumberField(String label) {
-            setLabel(label);
-            countryCode.setWidth("120px");
-            countryCode.setPlaceholder("Country");
-            countryCode.setPattern("\\+\\d*");
-            countryCode.setPreventInvalidInput(true);
-            countryCode.setItems("+354", "+91", "+62", "+98", "+964", "+353", "+44", "+972", "+39", "+225");
-            countryCode.addCustomValueSetListener(e -> countryCode.setValue(e.getDetail()));
-            number.setPattern("\\d*");
-            number.setPreventInvalidInput(true);
-            HorizontalLayout layout = new HorizontalLayout(countryCode, number);
-            layout.setFlexGrow(1.0, number);
-            add(layout);
-        }
-
-        @Override
-        protected String generateModelValue() {
-            if (countryCode.getValue() != null && number.getValue() != null) {
-                String s = countryCode.getValue() + " " + number.getValue();
-                return s;
-            }
-            return "";
-        }
-
-        @Override
-        protected void setPresentationValue(String phoneNumber) {
-            String[] parts = phoneNumber != null ? phoneNumber.split(" ", 2) : new String[0];
-            if (parts.length == 1) {
-                countryCode.clear();
-                number.setValue(parts[0]);
-            } else if (parts.length == 2) {
-                countryCode.setValue(parts[0]);
-                number.setValue(parts[1]);
-            } else {
-                countryCode.clear();
-                number.clear();
-            }
-        }
-    }
 
 }
