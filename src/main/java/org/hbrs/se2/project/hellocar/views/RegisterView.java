@@ -5,6 +5,7 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
 import org.hbrs.se2.project.hellocar.control.ManageCarControl;
 import org.hbrs.se2.project.hellocar.control.UserControl;
+import org.hbrs.se2.project.hellocar.dtos.RolleDTO;
 import org.hbrs.se2.project.hellocar.dtos.impl.CarDTOImpl;
 import org.hbrs.se2.project.hellocar.dtos.UserDTO;
 import com.vaadin.flow.component.Component;
@@ -26,6 +27,9 @@ import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.hellocar.dtos.impl.UserDTOImpl;
 import org.hbrs.se2.project.hellocar.util.Globals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Route(value = Globals.Pages.REGISTER_VIEW, layout = PublicAppView.class)
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
@@ -35,30 +39,42 @@ public class RegisterView extends Div {
     private TextField firstname = new TextField("fn");
     private TextField lastname = new TextField("ln");
 
-    
+    private List<RolleDTO> roles = new ArrayList<>();
+
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
     private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
     public RegisterView(UserControl userService) {
-        addClassName("register-view");
+        try {
+            addClassName("register-view");
 
-        add(createTitle());
-        add(createFormLayout());
-        add(createButtonLayout());
+            add(createTitle());
+            add(createFormLayout());
+            add(createButtonLayout());
 
-        // Default Mapping of Cars attributes and the names of this View based on names
-        // Source: https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
-        binder.bindInstanceFields(this);
-        clearForm();
-        // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
-        cancel.addClickListener(event -> clearForm());
-        save.addClickListener(e -> {
-            userService.createUser(binder.getBean());
-            Notification.show("User account has been created");
+        } catch (Exception e) {
+            System.out.println("Error occurred adding layout");
+        }
+        try {
+
+            // Default Mapping of Cars attributes and the names of this View based on names
+            // Source:
+            // https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
+            binder.bindInstanceFields(this);
             clearForm();
-        });
+            // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
+            cancel.addClickListener(event -> clearForm());
+            save.addClickListener(e -> {
+                userService.createUser(binder.getBean());
+                Notification.show("User account has been created");
+                clearForm();
+            });
+        } catch (Exception e) {
+            System.out.println("Error occurred adding bindings");
+        }
+
     }
 
     private void clearForm() {
@@ -83,9 +99,5 @@ public class RegisterView extends Div {
         buttonLayout.add(cancel);
         return buttonLayout;
     }
-
-    
-
-
 
 }
