@@ -7,5 +7,11 @@
         "markdown",
         "latex",
         "plaintext"
+    ],
+    "favorites.resources": [
+        {
+            "filePath": "src/main/java/org/hbrs/se2/project/hellocar/HellocarApplication.java",
+            "group": "Default"
+        }
     ]
 }
