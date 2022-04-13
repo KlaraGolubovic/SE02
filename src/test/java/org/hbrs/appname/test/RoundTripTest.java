@@ -46,8 +46,8 @@ public class RoundTripTest {
         }
 
         // Schritt 3: Ass = Assertion: Vergleich der vorhandenen Objekte auch Gleichheit...
-        assertEquals( userAfterCreate.getLastName() , "Michel" );
-        assertEquals( userAfterCreate.getFirstName() , "Torben" );
+        assertEquals( "Michel", userAfterCreate.getLastName() );
+        assertEquals( "Torben", userAfterCreate.getFirstName() );
         // ... sowie auf Identität
         assertNotSame( user , userAfterCreate );
 
