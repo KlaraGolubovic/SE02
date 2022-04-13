@@ -2,11 +2,13 @@ package org.hbrs.se2.project.hellocar.views;
 
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.UI;
 import org.hbrs.se2.project.hellocar.control.ManageCarControl;
 import org.hbrs.se2.project.hellocar.control.UserControl;
 import org.hbrs.se2.project.hellocar.dtos.RolleDTO;
 import org.hbrs.se2.project.hellocar.dtos.impl.CarDTOImpl;
+import org.hbrs.se2.project.hellocar.dtos.impl.RolleDTOImpl;
 import org.hbrs.se2.project.hellocar.dtos.UserDTO;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -23,6 +25,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.PropertyId;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.hbrs.se2.project.hellocar.dtos.impl.UserDTOImpl;
@@ -41,11 +44,15 @@ public class RegisterView extends Div {
     private TextField lastname = new TextField("ln");
 
     private List<RolleDTO> roles = new ArrayList<>();
+    @PropertyId("roles")
+    private ComboBox<RolleDTOImpl> role = new ComboBox<>("roles");
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
+
+
+    private Binder<UserDTOImpl> binder = new Binder(UserDTOImpl.class);
 
     @SuppressWarnings({ "java:S106" })
     public RegisterView(UserControl userService) {
@@ -54,8 +61,10 @@ public class RegisterView extends Div {
         try {
             addClassName("register-view");
             layout.add(createTitle());
+            layout.add(role);
             layout.add(createFormLayout());
             layout.add(createButtonLayout());
+            
         } catch (Exception e) {
             System.out.println("Error occurred adding layout");
         }
@@ -65,8 +74,8 @@ public class RegisterView extends Div {
             // Default Mapping of Cars attributes and the names of this View based on names
             // Source:
             // https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
-            binder.bindInstanceFields(this);
-            clearForm();
+            binder.bindInstanceFields(layout);
+
 
         } catch (Exception e) {
             System.out.println("Error occurred adding bindings");
@@ -75,7 +84,7 @@ public class RegisterView extends Div {
         try {
 
             // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
-
+            clearForm();
             cancel.addClickListener(event -> clearForm());
             save.addClickListener(e -> {
                 userService.createUser(binder.getBean());
