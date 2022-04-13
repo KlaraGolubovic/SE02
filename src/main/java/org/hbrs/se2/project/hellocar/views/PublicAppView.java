@@ -72,36 +72,17 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
         layout.setJustifyContentMode(FlexComponent.JustifyContentMode.EVENLY);
 
-        // Hinzufügen des Toogle ('Big Mac') zum Ein- und Ausschalten des Drawers
-        layout.add(new DrawerToggle());
+        
         viewTitle = new H1();
         viewTitle.setWidthFull();
         layout.add(viewTitle);
 
-        // Interner Layout
-        HorizontalLayout topRightPanel = new HorizontalLayout();
-        topRightPanel.setWidthFull();
-        topRightPanel.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
-        topRightPanel.setAlignItems(FlexComponent.Alignment.CENTER);
-
-        // Der Name des Users wird später reingesetzt, falls die Navigation stattfindet
-        helloUser = new H1();
-        topRightPanel.add(helloUser);
-
-        // Logout-Button am rechts-oberen Rand.
-        MenuBar bar = new MenuBar();
-
-        topRightPanel.add(bar);
-
-        layout.add(topRightPanel);
+        
+        
         return layout;
     }
 
-    private void logoutUser() {
-        UI ui = this.getUI().get();
-        ui.getSession().close();
-        ui.getPage().setLocation("/");
-    }
+    
 
     /**
      * Hinzufügen der vertikalen Leiste (Drawer)
@@ -114,22 +95,9 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
      */
     private Component createDrawerContent(Tabs menu) {
         VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
-        layout.setPadding(false);
-        layout.setSpacing(false);
-        layout.getThemeList().set("spacing-s", true);
-        layout.setAlignItems(FlexComponent.Alignment.STRETCH);
-
-        HorizontalLayout logoLayout = new HorizontalLayout();
-
-        // Hinzufügen des Logos
-        logoLayout.setId("logo");
-        logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "HelloCar logo"));
-        logoLayout.add(new H1("HelloCar"));
-
-        // Hinzufügen des Menus inklusive der Tabs
-        layout.add(logoLayout, menu);
+       
+        
+        
         return layout;
     }
 

@@ -20,6 +20,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
@@ -47,12 +48,14 @@ public class RegisterView extends Div {
     private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
     public RegisterView(UserControl userService) {
+        VerticalLayout layout = new VerticalLayout();
+        layout.setWidth("80%");
         try {
             addClassName("register-view");
 
-            add(createTitle());
-            add(createFormLayout());
-            add(createButtonLayout());
+            layout.add(createTitle());
+            layout.add(createFormLayout());
+            layout.add(createButtonLayout());
 
         } catch (Exception e) {
             System.out.println("Error occurred adding layout");
@@ -74,7 +77,7 @@ public class RegisterView extends Div {
         } catch (Exception e) {
             System.out.println("Error occurred adding bindings");
         }
-
+        add(layout);
     }
 
     private void clearForm() {
@@ -87,7 +90,10 @@ public class RegisterView extends Div {
 
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(id, firstname, lastname);
+        formLayout.add(id,firstname, lastname);
+        formLayout.setColspan(id, 1);
+        formLayout.setColspan(firstname, 1);
+        formLayout.setColspan(lastname, 1);
         return formLayout;
     }
 
