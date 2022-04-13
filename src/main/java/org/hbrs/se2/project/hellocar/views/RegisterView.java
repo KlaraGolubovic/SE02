@@ -47,19 +47,19 @@ public class RegisterView extends Div {
 
     private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
+    @SuppressWarnings({ "java:S106" })
     public RegisterView(UserControl userService) {
         VerticalLayout layout = new VerticalLayout();
         layout.setWidth("80%");
         try {
             addClassName("register-view");
-
             layout.add(createTitle());
             layout.add(createFormLayout());
             layout.add(createButtonLayout());
-
         } catch (Exception e) {
             System.out.println("Error occurred adding layout");
         }
+
         try {
 
             // Default Mapping of Cars attributes and the names of this View based on names
@@ -67,7 +67,15 @@ public class RegisterView extends Div {
             // https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
             binder.bindInstanceFields(this);
             clearForm();
+
+        } catch (Exception e) {
+            System.out.println("Error occurred adding bindings");
+        }
+
+        try {
+
             // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
+
             cancel.addClickListener(event -> clearForm());
             save.addClickListener(e -> {
                 userService.createUser(binder.getBean());
@@ -75,7 +83,7 @@ public class RegisterView extends Div {
                 clearForm();
             });
         } catch (Exception e) {
-            System.out.println("Error occurred adding bindings");
+            System.out.println("Error occurred registering Listeners to Form Buttons");
         }
         add(layout);
     }
@@ -90,7 +98,7 @@ public class RegisterView extends Div {
 
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(id,firstname, lastname);
+        formLayout.add(id, firstname, lastname);
         formLayout.setColspan(id, 1);
         formLayout.setColspan(firstname, 1);
         formLayout.setColspan(lastname, 1);
