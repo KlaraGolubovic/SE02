@@ -46,15 +46,12 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
     }
 
     public void setUpUI() {
-        // Anzeige des Toggles über den Drawer
-        setPrimarySection(Section.DRAWER);
+        
 
         // Erstellung der horizontalen Statusleiste (Header)
         addToNavbar(true, createHeaderContent());
 
-        // Erstellung der vertikalen Navigationsleiste (Drawer)
-        menu = createMenu();
-        addToDrawer(createDrawerContent(menu));
+        
     }
 
     /**
@@ -70,8 +67,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
-        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.EVENLY);
-
+        
         
         viewTitle = new H1();
         viewTitle.setWidthFull();
@@ -83,66 +79,6 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
     }
 
     
-
-    /**
-     * Hinzufügen der vertikalen Leiste (Drawer)
-     * Diese besteht aus dem Logo ganz oben links sowie den Menu-Einträgen (menu
-     * items).
-     * Die Menu Items sind zudem verlinkt zu den internen Tab-Components.
-     * 
-     * @param menu
-     * @return
-     */
-    private Component createDrawerContent(Tabs menu) {
-        VerticalLayout layout = new VerticalLayout();
-       
-        
-        
-        return layout;
-    }
-
-    /**
-     * Erzeugung des Menu auf der vertikalen Leiste (Drawer)
-     * 
-     * @return
-     */
-    private Tabs createMenu() {
-
-        // Anlegen der Grundstruktur
-        final Tabs tabs = new Tabs();
-        tabs.setOrientation(Tabs.Orientation.VERTICAL);
-        tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL);
-        tabs.setId("tabs");
-
-        // Anlegen der einzelnen Menuitems
-        tabs.add(createMenuItems());
-        return tabs;
-    }
-
-    private Component[] createMenuItems() {
-
-        // Jeder User sollte Autos sehen können, von daher wird dieser schon mal erzeugt
-        // und
-        // und dem Tabs-Array hinzugefügt. In der Methode createTab wird ein (Key,
-        // Value)-Pair übergeben:
-        // Key: der sichtbare String des Menu-Items
-        // Value: Die UI-Component, die nach dem Klick auf das Menuitem angezeigt wird.
-        Tab[] tabs = new Tab[] { createTab("Show Cars", ShowCarsView.class) };
-
-        // Falls er Admin-Rechte hat, sollte der User auch Autos hinzufügen können
-        // (Alternative: Verwendung der Methode 'isUserisAllowedToAccessThisFeature')
-
-        // ToDo für die Teams: Weitere Tabs aus ihrem Projekt hier einfügen!
-
-        return tabs;
-    }
-
-    private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
-        final Tab tab = new Tab();
-        tab.add(new RouterLink(text, navigationTarget));
-        ComponentUtil.setData(tab, Class.class, navigationTarget);
-        return tab;
-    }
 
     @Override
     protected void afterNavigation() {
@@ -158,10 +94,6 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
     private String getCurrentPageTitle() {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
-    }
-
-    private UserDTO getCurrentUser() {
-        return (UserDTO) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
     }
 
     @Override
@@ -180,7 +112,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
      */
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
        
-        
+        //THIS METHOD STOPS EXECUTION (CONDITIONALLY), WE DO NOT WANT THAT HERE.
 
     }
 }
