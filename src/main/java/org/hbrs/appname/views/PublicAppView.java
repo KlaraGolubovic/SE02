@@ -47,12 +47,10 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
     }
 
     public void setUpUI() {
-        
 
         // Erstellung der horizontalen Statusleiste (Header)
         addToNavbar(true, createHeaderContent());
 
-        
     }
 
     /**
@@ -68,18 +66,13 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
-        
-        
+
         viewTitle = new H1();
         viewTitle.setWidthFull();
         layout.add(viewTitle);
 
-        
-        
         return layout;
     }
-
-    
 
     @Override
     protected void afterNavigation() {
@@ -112,8 +105,8 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
      *
      */
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-       
-        //THIS METHOD STOPS EXECUTION (CONDITIONALLY), WE DO NOT WANT THAT HERE.
+
+        // THIS METHOD STOPS EXECUTION (CONDITIONALLY), WE DO NOT WANT THAT HERE.
 
     }
 }

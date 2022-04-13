@@ -11,7 +11,7 @@ public class DatabaseUserException extends Exception {
         this.reason = reason;
     }
 
-    public DatabaseUserException( String reason ) {
+    public DatabaseUserException(String reason) {
         this.reason = reason;
     }
 }

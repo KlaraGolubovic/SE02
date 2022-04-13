@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table( name ="user" , schema = "carlook" )
+@Table(name = "user", schema = "carlook")
 public class User {
     private int id;
     private LocalDate dateOfBirth;
@@ -113,8 +113,10 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
         return id == user.id &&
                 Objects.equals(dateOfBirth, user.dateOfBirth) &&
@@ -133,10 +135,7 @@ public class User {
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_rolle", catalog = "demouser",
-            schema = "carlook",
-            joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "bezeichnung", referencedColumnName = "bezeichhnung", nullable = false))
+    @JoinTable(name = "user_to_rolle", catalog = "demouser", schema = "carlook", joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "bezeichnung", referencedColumnName = "bezeichhnung", nullable = false))
     public List<Rolle> getRoles() {
         return roles;
     }

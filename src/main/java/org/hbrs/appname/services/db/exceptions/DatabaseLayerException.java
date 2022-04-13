@@ -12,7 +12,7 @@ public class DatabaseLayerException extends Exception {
         this.reason = reason;
     }
 
-    public DatabaseLayerException( String reason ) {
+    public DatabaseLayerException(String reason) {
         this.reason = reason;
     }
 

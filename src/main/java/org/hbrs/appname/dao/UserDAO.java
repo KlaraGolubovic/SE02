@@ -16,6 +16,7 @@ public class UserDAO {
 
     /**
      * Method for finding Users
+     * 
      * @param id
      * @param password
      * @return
@@ -36,9 +37,9 @@ public class UserDAO {
 
             set = statement.executeQuery(
                     "SELECT * "
-                       + "FROM carlook.user "
-                       + "WHERE carlook.user.userid = \'" + id + "\'"
-                         + " AND carlook.user.password = \'" + password + "\'");
+                            + "FROM carlook.user "
+                            + "WHERE carlook.user.userid = \'" + id + "\'"
+                            + " AND carlook.user.password = \'" + password + "\'");
 
             // JDBCConnection.getInstance().closeConnection();
 
@@ -46,8 +47,7 @@ public class UserDAO {
             DatabaseLayerException e = new DatabaseLayerException("Fehler im SQL-Befehl!");
             e.setReason(Globals.Errors.SQLERROR);
             throw e;
-        }
-        catch (NullPointerException ex) {
+        } catch (NullPointerException ex) {
             DatabaseLayerException e = new DatabaseLayerException("Fehler bei Datenbankverbindung!");
             e.setReason(Globals.Errors.DATABASE);
             throw e;
@@ -60,8 +60,8 @@ public class UserDAO {
                 // Durchführung des Object-Relational-Mapping (ORM)
 
                 user = new UserDTOImpl();
-                user.setId( set.getInt(1));
-                user.setFirstname( set.getString(4) );
+                user.setId(set.getInt(1));
+                user.setFirstname(set.getString(4));
                 user.setLastname(set.getString(5));
 
                 // Beziehe die Rollen eines Users:
@@ -88,6 +88,5 @@ public class UserDAO {
             JDBCConnection.getInstance().closeConnection();
         }
     }
-
 
 }

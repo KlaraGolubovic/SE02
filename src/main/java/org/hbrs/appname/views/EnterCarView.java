@@ -50,28 +50,30 @@ public class EnterCarView extends Div {
         add(createButtonLayout());
 
         // Default Mapping of Cars attributes and the names of this View based on names
-        // Source: https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
+        // Source:
+        // https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
         binder.bindInstanceFields(this);
         clearForm();
 
         // Registrierung eines Listeners Nr. 1 (moderne Variante mit Lambda-Expression)
         cancel.addClickListener(event -> clearForm());
 
-        // Registrierung eines Listeners Nr. 2 (traditionelle Variante mit anonymen Objekt)
-        cancel.addAttachListener( new ComponentEventListener() {
+        // Registrierung eines Listeners Nr. 2 (traditionelle Variante mit anonymen
+        // Objekt)
+        cancel.addAttachListener(new ComponentEventListener() {
             @Override
             public void onComponentEvent(ComponentEvent event) {
                 clearForm();
 
             }
-        } );
+        });
 
         save.addClickListener(e -> {
             // Speicherung der Daten über das zuhörige Control-Object.
             // Daten des Autos werden aus Formular erfasst und als DTO übergeben.
             // Zusätzlich wird das aktuelle UserDTO übergeben.
             UserDTO userDTO = (UserDTO) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
-            carService.createCar(binder.getBean() ,  userDTO );
+            carService.createCar(binder.getBean(), userDTO);
 
             Notification.show("Car details stored.");
             clearForm();

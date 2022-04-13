@@ -13,12 +13,13 @@ import org.hbrs.appname.services.db.JDBCConnection;
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
 
 /**
- * Bereitstellung einer Schnittstelle für den Zugriff auf Rollen in der Datenbank
+ * Bereitstellung einer Schnittstelle für den Zugriff auf Rollen in der
+ * Datenbank
  * Realisierung einer CRUD-Schnittstelle (hier: nur Read (get...)) --> SE-2
  *
  */
 public class RolleDAO {
-    public List<RolleDTO> getRolesOfUser(UserDTO userDTO ) throws DatabaseLayerException {
+    public List<RolleDTO> getRolesOfUser(UserDTO userDTO) throws DatabaseLayerException {
         ResultSet set = null;
 
         try {
@@ -31,25 +32,26 @@ public class RolleDAO {
 
             set = statement.executeQuery(
                     "SELECT * "
-                       + "FROM carlook.user_to_rolle "
-                       + "WHERE carlook.user_to_rolle.userid = \'" + userDTO.getId() + "\'" );
+                            + "FROM carlook.user_to_rolle "
+                            + "WHERE carlook.user_to_rolle.userid = \'" + userDTO.getId() + "\'");
 
         } catch (SQLException ex) {
 
             throw new DatabaseLayerException("Fehler im SQL-Befehl! Bitte den Programmier benachrichtigen!");
         }
 
-        if ( set == null ) return null;
+        if (set == null)
+            return null;
 
         List<RolleDTO> liste = new ArrayList<RolleDTO>();
         RolleDTOImpl role = null;
 
         try {
-            while (set.next() ){
+            while (set.next()) {
 
                 role = new RolleDTOImpl();
                 // Object Relation Mapping (ORM)
-                role.setBezeichnung(set.getString(2) );
+                role.setBezeichnung(set.getString(2));
                 liste.add(role);
 
             }

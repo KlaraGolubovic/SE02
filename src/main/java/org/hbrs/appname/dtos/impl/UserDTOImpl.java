@@ -28,7 +28,6 @@ public class UserDTOImpl implements UserDTO {
         this.roles = roles;
     }
 
-
     @Override
     public int getId() {
         return this.id;

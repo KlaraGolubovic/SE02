@@ -34,74 +34,73 @@ import java.util.List;
 @Route(value = Globals.Pages.SHOW_CARS, layout = AppView.class)
 @PageTitle("Show Cars")
 @CssImport("./styles/views/showcars/show-cars-view.css")
-public class ShowCarsView extends Div  {
+public class ShowCarsView extends Div {
 
-    private List<CarDTO> personList;
+        private List<CarDTO> personList;
 
-    public ShowCarsView( ManageCarControl carControl ) {
-            addClassName("show-cars-view");
+        public ShowCarsView(ManageCarControl carControl) {
+                addClassName("show-cars-view");
 
-            // Auslesen alle abgespeicherten Autos aus der DB (über das Control)
-            personList = carControl.readAllCars();
+                // Auslesen alle abgespeicherten Autos aus der DB (über das Control)
+                personList = carControl.readAllCars();
 
-            // Titel überhalb der Tabelle
-            add(this.createTitle());
+                // Titel überhalb der Tabelle
+                add(this.createTitle());
 
-            // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
-            add(this.createGridTable());
-    }
+                // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
+                add(this.createGridTable());
+        }
 
-    private Component createGridTable() {
-        Grid<CarDTO> grid = new Grid<>();
+        private Component createGridTable() {
+                Grid<CarDTO> grid = new Grid<>();
 
-        // Befüllen der Tabelle mit den zuvor ausgelesenen Autos
-        ListDataProvider<CarDTO> dataProvider = new ListDataProvider<>(
-                personList);
-        grid.setDataProvider(dataProvider);
+                // Befüllen der Tabelle mit den zuvor ausgelesenen Autos
+                ListDataProvider<CarDTO> dataProvider = new ListDataProvider<>(
+                                personList);
+                grid.setDataProvider(dataProvider);
 
-        Grid.Column<CarDTO> brandColumn = grid
-                .addColumn(CarDTO::getBrand).setHeader("Brand");
-        Grid.Column<CarDTO> modelColumn = grid.addColumn(CarDTO::getModel)
-                .setHeader("Model");
-        Grid.Column<CarDTO> descriptionColumn = grid
-                .addColumn(CarDTO::getDescription)
-                .setHeader("Description");
-        Grid.Column<CarDTO> priceColumn = grid
-                .addColumn(CarDTO::getPrice)
-                .setHeader("Price");
+                Grid.Column<CarDTO> brandColumn = grid
+                                .addColumn(CarDTO::getBrand).setHeader("Brand");
+                Grid.Column<CarDTO> modelColumn = grid.addColumn(CarDTO::getModel)
+                                .setHeader("Model");
+                Grid.Column<CarDTO> descriptionColumn = grid
+                                .addColumn(CarDTO::getDescription)
+                                .setHeader("Description");
+                Grid.Column<CarDTO> priceColumn = grid
+                                .addColumn(CarDTO::getPrice)
+                                .setHeader("Price");
 
-        HeaderRow filterRow = grid.appendHeaderRow();
+                HeaderRow filterRow = grid.appendHeaderRow();
 
-        // First filter
-        TextField modelField = new TextField();
-        modelField.addValueChangeListener(event -> dataProvider.addFilter(
-                car -> StringUtils.containsIgnoreCase(car.getModel(),
-                        modelField.getValue())));
+                // First filter
+                TextField modelField = new TextField();
+                modelField.addValueChangeListener(event -> dataProvider.addFilter(
+                                car -> StringUtils.containsIgnoreCase(car.getModel(),
+                                                modelField.getValue())));
 
-        modelField.setValueChangeMode(ValueChangeMode.EAGER);
+                modelField.setValueChangeMode(ValueChangeMode.EAGER);
 
-        filterRow.getCell(modelColumn).setComponent(modelField);
-        modelField.setSizeFull();
-        modelField.setPlaceholder("Filter");
+                filterRow.getCell(modelColumn).setComponent(modelField);
+                modelField.setSizeFull();
+                modelField.setPlaceholder("Filter");
 
-        // Second filter
-        TextField brandField = new TextField();
-        brandField.addValueChangeListener(event -> dataProvider
-                .addFilter(car -> StringUtils.containsIgnoreCase(
-                        String.valueOf(car.getBrand()), brandField.getValue())));
+                // Second filter
+                TextField brandField = new TextField();
+                brandField.addValueChangeListener(event -> dataProvider
+                                .addFilter(car -> StringUtils.containsIgnoreCase(
+                                                String.valueOf(car.getBrand()), brandField.getValue())));
 
-        brandField.setValueChangeMode(ValueChangeMode.EAGER);
+                brandField.setValueChangeMode(ValueChangeMode.EAGER);
 
-        filterRow.getCell(brandColumn).setComponent(brandField);
-        brandField.setSizeFull();
-        brandField.setPlaceholder("Filter");
+                filterRow.getCell(brandColumn).setComponent(brandField);
+                brandField.setSizeFull();
+                brandField.setPlaceholder("Filter");
 
-        return grid;
-    }
+                return grid;
+        }
 
-    private Component createTitle() {
-        return new H3("Search for Cars");
-    }
-
+        private Component createTitle() {
+                return new H3("Search for Cars");
+        }
 
 };

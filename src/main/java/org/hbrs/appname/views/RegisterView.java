@@ -51,8 +51,6 @@ public class RegisterView extends Div {
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-
-
     private Binder<UserDTOImpl> binder = new Binder(UserDTOImpl.class);
 
     @SuppressWarnings({ "java:S106" })
@@ -65,7 +63,7 @@ public class RegisterView extends Div {
             layout.add(role);
             layout.add(createFormLayout());
             layout.add(createButtonLayout());
-            
+
         } catch (Exception e) {
             System.out.println("Error occurred adding layout");
         }
@@ -76,7 +74,6 @@ public class RegisterView extends Div {
             // Source:
             // https://vaadin.com/docs/flow/binding-data/tutorial-flow-components-binder-beans.html
             binder.bindInstanceFields(layout);
-
 
         } catch (Exception e) {
             System.out.println("Error occurred adding bindings");

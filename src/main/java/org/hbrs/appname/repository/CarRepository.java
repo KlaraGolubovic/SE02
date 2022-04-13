@@ -12,8 +12,10 @@ import java.util.List;
 
 @Component
 /**
- * JPA-Repository für die Verwaltung von Autos (cars). Die Bezeichnung einer Methode
- * bestimmt dabei die Selektionsbedingung (den WHERE-Teil). Der Rückgabewert einer
+ * JPA-Repository für die Verwaltung von Autos (cars). Die Bezeichnung einer
+ * Methode
+ * bestimmt dabei die Selektionsbedingung (den WHERE-Teil). Der Rückgabewert
+ * einer
  * Methode bestimmt den Projectionsbedingung (den SELECT-Teil).
  * Mehr Information über die Entwicklung von Queries in JPA:
  * https://www.baeldung.com/spring-data-jpa-projections
@@ -22,15 +24,15 @@ import java.util.List;
  */
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
-    @Query("  SELECT c.brand, c.model, c.price, u.firstName, u.lastName" +
-            " FROM Car c, User u " +
-            " WHERE  c.userid = u.id ")
-    List<Object[]> findAllCarsAndTheirUsers();
+        @Query("  SELECT c.brand, c.model, c.price, u.firstName, u.lastName" +
+                        " FROM Car c, User u " +
+                        " WHERE  c.userid = u.id ")
+        List<Object[]> findAllCarsAndTheirUsers();
 
-    @Query("  SELECT c.brand, c.model, c.description, c.date, c.phone, c.price " +
-            " FROM Car c ")
-    List<CarDTO> findAllCarsWithMostImportantValues();
+        @Query("  SELECT c.brand, c.model, c.description, c.date, c.phone, c.price " +
+                        " FROM Car c ")
+        List<CarDTO> findAllCarsWithMostImportantValues();
 
-    List<CarDTO> findCarsByDateIsNotNull();
+        List<CarDTO> findCarsByDateIsNotNull();
 
- }
+}

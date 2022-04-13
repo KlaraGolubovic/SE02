@@ -38,13 +38,13 @@ class HellocarApplicationTests {
     @Test
     void testRolesOfUser() {
         Optional<User> wrapper = userRepository.findById(1);
-        if ( wrapper.isPresent() ) {
+        if (wrapper.isPresent()) {
             User user = wrapper.get();
             System.out.println("User: " + user.getLastName());
             List<Rolle> list = user.getRoles();
-            assertEquals(2 , list.size() , "Anzahl der Rollen");
+            assertEquals(2, list.size(), "Anzahl der Rollen");
             Rolle rolle1 = list.get(0);
-            assertEquals("admin" , rolle1.getBezeichhnung() );
+            assertEquals("admin", rolle1.getBezeichhnung());
         }
     }
 
@@ -53,57 +53,57 @@ class HellocarApplicationTests {
         UserDTO personDTO = userRepository.getUserByOccupation("Professor").get(0);
         System.out.println(personDTO.getFirstName());
         assertEquals("Sascha", personDTO.getFirstName());
-        assertEquals(1 , personDTO.getId());
+        assertEquals(1, personDTO.getId());
     }
 
     @Test
     void testUserDTOByPassword() {
-        UserDTO userDTO = userRepository.findUserByUseridAndPassword("sascha" , "abc");
+        UserDTO userDTO = userRepository.findUserByUseridAndPassword("sascha", "abc");
         System.out.println(userDTO.getFirstName());
         assertEquals("Sascha", userDTO.getFirstName());
     }
 
     @Test
     void testUserDTOAndItsRoles() {
-        UserDTO userDTO = userRepository.findUserByUseridAndPassword("sascha" , "abc");
+        UserDTO userDTO = userRepository.findUserByUseridAndPassword("sascha", "abc");
         System.out.println(userDTO.getFirstName());
         assertEquals("Sascha", userDTO.getFirstName());
         List<RolleDTO> list = userDTO.getRoles();
         System.out.println(list.size());
-        assertEquals(2 , list.size());
+        assertEquals(2, list.size());
     }
 
     @Test
     void testPersonLoad() {
         Optional<User> wrapper = userRepository.findById(1);
-        if ( wrapper.isPresent() ) {
+        if (wrapper.isPresent()) {
             User user = wrapper.get();
-            assertEquals("Alda" , user.getLastName());
+            assertEquals("Alda", user.getLastName());
         }
     }
 
     @Test
     void testRoleRepository() {
         List<Rolle> list = roleRepository.findAll();
-        String[] soll = { "admin" , "user" };
+        String[] soll = { "admin", "user" };
         String[] ist = {};
 
         for (Rolle r : list) {
-            System.out.println("Rolle: " + r.getBezeichhnung() );
-            ist = Utils.append( ist , r.getBezeichhnung() );
+            System.out.println("Rolle: " + r.getBezeichhnung());
+            ist = Utils.append(ist, r.getBezeichhnung());
         }
-        assertArrayEquals( soll , ist );
+        assertArrayEquals(soll, ist);
     }
 
     @Test
     void testFindCarsAndTheirUsers() {
         List<Object[]> list = this.carRepository.findAllCarsAndTheirUsers();
-        for (Object[] item: list) {
-            System.out.println("Brand: " + item[0] );
-            System.out.println("Model: " + item[1] );
-            System.out.println("Price: " + item[2] );
-            System.out.println("First Name: " + item[3] );
-            System.out.println("Last Name: " + item[4] );
+        for (Object[] item : list) {
+            System.out.println("Brand: " + item[0]);
+            System.out.println("Model: " + item[1]);
+            System.out.println("Price: " + item[2]);
+            System.out.println("First Name: " + item[3]);
+            System.out.println("Last Name: " + item[4]);
         }
         // Todo: Definition von passenden Assertions
     }
@@ -111,11 +111,11 @@ class HellocarApplicationTests {
     @Test
     void testFindCarsWithMostImportantValues() {
         List<CarDTO> list = this.carRepository.findCarsByDateIsNotNull();
-        for (CarDTO item: list) {
-            System.out.println("Brand: " + item.getBrand() );
-            System.out.println("Model: " + item.getModel() );
-            System.out.println("Price: " + item.getPrice() );
-            System.out.println("Phone: " + item.getPhone() );
+        for (CarDTO item : list) {
+            System.out.println("Brand: " + item.getBrand());
+            System.out.println("Model: " + item.getModel());
+            System.out.println("Price: " + item.getPrice());
+            System.out.println("Phone: " + item.getPhone());
         }
         // Todo: Definition von passenden Assertions
     }
@@ -124,7 +124,7 @@ class HellocarApplicationTests {
     void testFindUserWithJDBC() {
         UserDAO userDAO = new UserDAO();
         try {
-            UserDTO userDTO = userDAO.findUserByUseridAndPassword("sascha" , "abc");
+            UserDTO userDTO = userDAO.findUserByUseridAndPassword("sascha", "abc");
             System.out.println(userDTO.toString());
 
             assertEquals("Sascha", userDTO.getFirstName());

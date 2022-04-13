@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
 
-
 /**
  *
  * @author sascha
@@ -26,7 +25,7 @@ public class JDBCConnection {
 
     public static JDBCConnection getInstance() throws DatabaseLayerException {
 
-        if ( connection == null ) {
+        if (connection == null) {
             connection = new JDBCConnection();
         }
         return connection;
@@ -38,10 +37,9 @@ public class JDBCConnection {
 
     }
 
-
     public void initConnection() throws DatabaseLayerException {
         try {
-            DriverManager.registerDriver( new org.postgresql.Driver() ); 
+            DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException ex) {
             Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,22 +51,21 @@ public class JDBCConnection {
 
         try {
             Properties props = new Properties();
-            props.setProperty("user", "demouser" );
-            props.setProperty("password", "demouser" );
-
+            props.setProperty("user", "demouser");
+            props.setProperty("password", "demouser");
 
             this.conn = DriverManager.getConnection(this.url, props);
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DatabaseLayerException( "Fehler bei Zugriff auf die DB! Sichere Verbindung vorhanden!?" );
+            throw new DatabaseLayerException("Fehler bei Zugriff auf die DB! Sichere Verbindung vorhanden!?");
         }
     }
 
     public Statement getStatement() throws DatabaseLayerException {
 
         try {
-            if ( this.conn.isClosed() ) {
+            if (this.conn.isClosed()) {
                 this.openConnection();
             }
 
@@ -80,9 +77,9 @@ public class JDBCConnection {
 
     }
 
-    public PreparedStatement getPreparedStatement( String sql  ) throws DatabaseLayerException {
+    public PreparedStatement getPreparedStatement(String sql) throws DatabaseLayerException {
         try {
-            if ( this.conn.isClosed() ) {
+            if (this.conn.isClosed()) {
                 this.openConnection();
             }
 
@@ -94,7 +91,7 @@ public class JDBCConnection {
 
     }
 
-    public void closeConnection(){
+    public void closeConnection() {
         try {
             this.conn.close();
         } catch (SQLException ex) {
@@ -103,6 +100,4 @@ public class JDBCConnection {
 
     }
 
-
 }
-

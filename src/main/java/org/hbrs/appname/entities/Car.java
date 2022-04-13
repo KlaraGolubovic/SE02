@@ -6,7 +6,7 @@ import java.util.Objects;
 import javax.persistence.GeneratedValue;
 
 @Entity
-@Table( name ="car" , schema = "carlook" )
+@Table(name = "car", schema = "carlook")
 public class Car {
     private int id;
     private String brand;
@@ -100,8 +100,10 @@ public class Car {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Car car = (Car) o;
         return id == car.id &&
                 Objects.equals(brand, car.brand) &&

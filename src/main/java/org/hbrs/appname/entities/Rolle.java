@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table( name ="rolle" , schema = "carlook" )
+@Table(name = "rolle", schema = "carlook")
 public class Rolle {
     private String bezeichhnung;
     private List<User> users;
@@ -22,8 +22,10 @@ public class Rolle {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Rolle rolle = (Rolle) o;
         return Objects.equals(bezeichhnung, rolle.bezeichhnung);
     }
@@ -33,7 +35,7 @@ public class Rolle {
         return Objects.hash(bezeichhnung);
     }
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER )
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     public List<User> getUsers() {
         return users;
     }
