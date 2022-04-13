@@ -15,13 +15,17 @@ public class UserControl {
 
 
     public void createUser(UserDTOImpl u ) {
-        // Hier könnte man noch die Gültigkeit der Daten überprüfen
-        // check( carDTO );
-
-        //Erzeuge ein neues Car-Entity konsistent über eine Factory
+        
+        
         User user = UserFactory.createUser(u);
-        // Abspeicherung des Entity in die DB
-        this.repository.save( user );
+        
+
+        // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
+        // save()
+        // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
+        
+        repository.save(user);
+
     }
 
 
