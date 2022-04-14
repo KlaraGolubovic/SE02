@@ -1,15 +1,9 @@
 package org.hbrs.appname.views;
 
-import com.vaadin.flow.component.ComponentEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.customfield.CustomField;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -24,64 +18,29 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import org.hbrs.appname.control.ManageCarControl;
 import org.hbrs.appname.control.UserControl;
-import org.hbrs.appname.dtos.RolleDTO;
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.dtos.impl.CarDTOImpl;
-import org.hbrs.appname.dtos.impl.RolleDTOImpl;
+
 import org.hbrs.appname.dtos.impl.UserDTOImpl;
 import org.hbrs.appname.entities.Rolle;
 import org.hbrs.appname.util.Globals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Route(value = Globals.Pages.REGISTER_VIEW, layout = PublicAppView.class)
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private TextField brand = new TextField("Brand of car");
-    private TextField model = new TextField("Model");
-    private TextField description = new TextField("Description");
-    private DatePicker date = new DatePicker("Date of Admission");
-    private TextField price = new TextField("Price");
-
+    
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
-
-
 
     private TextField id = new TextField("id");
     private TextField firstname = new TextField("fn");
     private TextField lastname = new TextField("ln");
 
     private ArrayList<Rolle> roles = new ArrayList<>();
-    
+
     @PropertyId("roles")
     private ComboBox<Rolle> role = new ComboBox<>("roles");
 
@@ -96,7 +55,7 @@ public class RegisterView extends Div {
         roles.add(student);
         roles.add(orga);
         role.setDataProvider(new ListDataProvider<>(roles));
-        
+
         VerticalLayout layout = new VerticalLayout();
         layout.setWidth("80%");
         try {
@@ -136,18 +95,6 @@ public class RegisterView extends Div {
         }
         add(layout);
     }
-    
-    
-    
-
-    
-    
-
-
-
-
-
-
 
     private void clearForm() {
         binder.setBean(new UserDTOImpl());

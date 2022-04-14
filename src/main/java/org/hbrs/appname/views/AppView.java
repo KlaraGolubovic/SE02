@@ -180,14 +180,11 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
         // Value)-Pair übergeben:
         // Key: der sichtbare String des Menu-Items
         // Value: Die UI-Component, die nach dem Klick auf das Menuitem angezeigt wird.
-        Tab[] tabs = new Tab[] { createTab("Show Cars", ShowCarsView.class) };
+        Tab[] tabs = new Tab[] {
+            
+        };
 
-        // Falls er Admin-Rechte hat, sollte der User auch Autos hinzufügen können
-        // (Alternative: Verwendung der Methode 'isUserisAllowedToAccessThisFeature')
-        if (this.authorizationControl.isUserInRole(this.getCurrentUser(), Globals.Roles.ADMIN)) {
-            System.out.println("User is Admin!");
-            tabs = Utils.append(tabs, createTab("Enter Car", EnterCarView.class));
-        }
+        
 
         // ToDo für die Teams: Weitere Tabs aus ihrem Projekt hier einfügen!
 
