@@ -1,40 +1,28 @@
 package org.hbrs.appname.util;
 
-/*
- * The author disclaims copyright to this source code.  In place of
- * a legal notice, here is a blessing:
- * 
- *    May you do good and not evil.
- *    May you find forgiveness for yourself and forgive others.
- *    May you share freely, never taking more than you give.
- *
- */
-
 import java.sql.Types;
 
 import javax.sql.DataSource;
 
 import org.hibernate.dialect.Dialect;
-import org.hibernate.dialect.function.AbstractAnsiTrimEmulationFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.SQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
+import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.dialect.identity.IdentityColumnSupport;
+import org.hbrs.appname.services.db.SQLiteIdentityColumnSupport;
+import org.hibernate.Hibernate;
+import org.hibernate.type.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class SQLiteDialect extends Dialect {
-    private static final String INTEGER = "integer";
-
     public SQLiteDialect() {
-        registerColumnType(Types.BIT, INTEGER);
+        registerColumnType(Types.BIT, "integer");
         registerColumnType(Types.TINYINT, "tinyint");
         registerColumnType(Types.SMALLINT, "smallint");
-        registerColumnType(Types.INTEGER, INTEGER);
+        registerColumnType(Types.INTEGER, "integer");
         registerColumnType(Types.BIGINT, "bigint");
         registerColumnType(Types.FLOAT, "float");
         registerColumnType(Types.REAL, "real");
@@ -50,75 +38,28 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.BINARY, "blob");
         registerColumnType(Types.VARBINARY, "blob");
         registerColumnType(Types.LONGVARBINARY, "blob");
-        // registerColumnType(Types.NULL, "null")
+        // registerColumnType(Types.NULL, "null");
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
-        registerColumnType(Types.BOOLEAN, "boolean");
+        registerColumnType(Types.BOOLEAN, "integer");
 
-        registerFunction("concat", new VarArgsSQLFunction(StandardBasicTypes.STRING, "", "||", ""));
-        registerFunction("mod", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "?1 % ?2"));
-        registerFunction("quote", new StandardSQLFunction("quote", StandardBasicTypes.STRING));
-        registerFunction("random", new NoArgSQLFunction("random", StandardBasicTypes.INTEGER));
-        registerFunction("round", new StandardSQLFunction("round"));
-        registerFunction("substr", new StandardSQLFunction("substr", StandardBasicTypes.STRING));
-        registerFunction("trim", new AbstractAnsiTrimEmulationFunction() {
-            protected SQLFunction resolveBothSpaceTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "trim(?1)");
-            }
-
-            protected SQLFunction resolveBothSpaceTrimFromFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "trim(?2)");
-            }
-
-            protected SQLFunction resolveLeadingSpaceTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "ltrim(?1)");
-            }
-
-            protected SQLFunction resolveTrailingSpaceTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "rtrim(?1)");
-            }
-
-            protected SQLFunction resolveBothTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "trim(?1, ?2)");
-            }
-
-            protected SQLFunction resolveLeadingTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "ltrim(?1, ?2)");
-            }
-
-            protected SQLFunction resolveTrailingTrimFunction() {
-                return new SQLFunctionTemplate(StandardBasicTypes.STRING, "rtrim(?1, ?2)");
-            }
-        });
+        registerFunction("concat", new VarArgsSQLFunction(StringType.INSTANCE, "", "||", ""));
+        registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
+        registerFunction("substr", new StandardSQLFunction("substr", StringType.INSTANCE));
+        registerFunction("substring", new StandardSQLFunction("substr", StringType.INSTANCE));
     }
 
     public boolean supportsIdentityColumns() {
         return true;
     }
 
-    /*
-     * public boolean supportsInsertSelectIdentity() {
-     * return true; // As specify in NHibernate dialect
-     * }
-     */
-
     public boolean hasDataTypeInIdentityColumn() {
         return false; // As specify in NHibernate dialect
     }
 
-    /*
-     * public String appendIdentitySelectToInsert(String insertString) {
-     * return new StringBuffer(insertString.length()+30). // As specify in
-     * NHibernate dialect
-     * append(insertString).
-     * append("; ").append(getIdentitySelectString()).
-     * toString();
-     * }
-     */
-
     public String getIdentityColumnString() {
         // return "integer primary key autoincrement";
-        return INTEGER;
+        return "integer";
     }
 
     public String getIdentitySelectString() {
@@ -146,66 +87,39 @@ public class SQLiteDialect extends Dialect {
         return false;
     }
 
-    public boolean supportsCurrentTimestampSelection() {
-        return true;
-    }
-
-    public boolean isCurrentTimestampSelectStringCallable() {
+    @Override
+    public boolean hasAlterTable() {
         return false;
     }
 
-    public String getCurrentTimestampSelectString() {
-        return "select current_timestamp";
-    }
-
-    public boolean supportsUnionAll() {
-        return true;
-    }
-
-    public boolean hasAlterTable() {
-        return false; // As specify in NHibernate dialect
-    }
-
+    @Override
     public boolean dropConstraints() {
         return false;
     }
 
-    public String getAddColumnString() {
-        return "add column";
-    }
-
-    public String getForUpdateString() {
+    @Override
+    public String getDropForeignKeyString() {
         return "";
     }
 
-    public boolean supportsOuterJoinForUpdate() {
-        return false;
+    @Override
+    public String getAddForeignKeyConstraintString(String cn,
+            String[] fk, String t, String[] pk, boolean rpk) {
+        return "";
     }
 
-    public String getDropForeignKeyString() {
-        throw new UnsupportedOperationException("No drop foreign key syntax supported by SQLiteDialect");
-    }
-
-    public String getAddForeignKeyConstraintString(String constraintName,
-            String[] foreignKey, String referencedTable, String[] primaryKey,
-            boolean referencesPrimaryKey) {
-        throw new UnsupportedOperationException("No add foreign key syntax supported by SQLiteDialect");
-    }
-
+    @Override
     public String getAddPrimaryKeyConstraintString(String constraintName) {
-        throw new UnsupportedOperationException("No add primary key syntax supported by SQLiteDialect");
+        return "";
+    }
+    @Override
+    public IdentityColumnSupport getIdentityColumnSupport() {
+        return new SQLiteIdentityColumnSupport();
     }
 
-    public boolean supportsIfExistsBeforeTableName() {
-        return true;
-    }
-
-    public boolean supportsCascadeDelete() {
-        return false;
-    }
     @Autowired
     Environment env;
-    
+
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
