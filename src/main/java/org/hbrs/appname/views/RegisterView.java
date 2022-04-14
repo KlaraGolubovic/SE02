@@ -20,6 +20,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.PropertyId;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -30,6 +31,7 @@ import org.hbrs.appname.dtos.UserDTO;
 import org.hbrs.appname.dtos.impl.CarDTOImpl;
 import org.hbrs.appname.dtos.impl.RolleDTOImpl;
 import org.hbrs.appname.dtos.impl.UserDTOImpl;
+import org.hbrs.appname.entities.Rolle;
 import org.hbrs.appname.util.Globals;
 
 import java.util.ArrayList;
@@ -40,21 +42,61 @@ import java.util.List;
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
 
-    private TextField id = new TextField("id");
-    private TextField firstname = new TextField("fn");
-    private TextField lastname = new TextField("ln");
 
-    private List<RolleDTO> roles = new ArrayList<>();
-    @PropertyId("roles")
-    private ComboBox<RolleDTOImpl> role = new ComboBox<>("roles");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private TextField brand = new TextField("Brand of car");
+    private TextField model = new TextField("Model");
+    private TextField description = new TextField("Description");
+    private DatePicker date = new DatePicker("Date of Admission");
+    private TextField price = new TextField("Price");
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private Binder<UserDTOImpl> binder = new Binder(UserDTOImpl.class);
+
+
+    private TextField id = new TextField("id");
+    private TextField firstname = new TextField("fn");
+    private TextField lastname = new TextField("ln");
+
+    private ArrayList<Rolle> roles = new ArrayList<>();
+    
+    @PropertyId("roles")
+    private ComboBox<Rolle> role = new ComboBox<>("roles");
+
+    private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
     @SuppressWarnings({ "java:S106" })
     public RegisterView(UserControl userService) {
+        Rolle student = new Rolle();
+        student.setBezeichnung("Student");
+        Rolle orga = new Rolle();
+        orga.setBezeichnung("Student");
+        roles.add(student);
+        roles.add(orga);
+        role.setDataProvider(new ListDataProvider<>(roles));
+        
         VerticalLayout layout = new VerticalLayout();
         layout.setWidth("80%");
         try {
@@ -94,6 +136,18 @@ public class RegisterView extends Div {
         }
         add(layout);
     }
+    
+    
+    
+
+    
+    
+
+
+
+
+
+
 
     private void clearForm() {
         binder.setBean(new UserDTOImpl());

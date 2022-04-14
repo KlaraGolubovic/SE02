@@ -15,13 +15,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+
 
 @SpringBootTest
 class HellocarApplicationTests {
@@ -42,9 +42,9 @@ class HellocarApplicationTests {
             User user = wrapper.get();
             System.out.println("User: " + user.getLastName());
             List<Rolle> list = user.getRoles();
-            assertEquals(2, list.size(), "Anzahl der Rollen");
+            assertEquals(2, list.size(), "Anzahl der Rollen von"+user.getFirstName()+user.getLastName());
             Rolle rolle1 = list.get(0);
-            assertEquals("admin", rolle1.getBezeichhnung());
+            assertEquals("admin", rolle1.getBezeichnung());
         }
     }
 
@@ -89,8 +89,8 @@ class HellocarApplicationTests {
         String[] ist = {};
 
         for (Rolle r : list) {
-            System.out.println("Rolle: " + r.getBezeichhnung());
-            ist = Utils.append(ist, r.getBezeichhnung());
+            System.out.println("Rolle: " + r.getBezeichnung());
+            ist = Utils.append(ist, r.getBezeichnung());
         }
         assertArrayEquals(soll, ist);
     }

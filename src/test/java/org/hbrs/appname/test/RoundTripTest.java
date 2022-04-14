@@ -30,22 +30,18 @@ public class RoundTripTest {
         // save()
         // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
         User user = new User();
-        user.setEmail("test@myserver.de");
+        user.setEmail("testZWEsIdds@myserver.de");
         user.setFirstName("Torben");
         user.setLastName("Michel");
         // und ab auf die DB damit (save!)
-        userRepository.save(user);
+        User userAfterCreate = userRepository.save(user);
 
         // Da die ID auto-generiert wurde, müssen wir uns die erzeugte ID nach dem
         // Abspeichern merken:
-        int idTmp = user.getId();
+        int idTmp = userAfterCreate.getId();
 
         // Schritt 2: R = Read (hier: Auslesen über die Methode find()
-        Optional<User> wrapper = userRepository.findById(idTmp);
-        User userAfterCreate = null;
-        if (wrapper.isPresent()) {
-            userAfterCreate = wrapper.get();
-        }
+        
 
         // Schritt 3: Ass = Assertion: Vergleich der vorhandenen Objekte auch
         // Gleichheit...

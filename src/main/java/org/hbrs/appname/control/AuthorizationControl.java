@@ -19,7 +19,7 @@ public class AuthorizationControl {
         List<RolleDTO> rolleList = user.getRoles();
         // A bit lazy but hey it works ;-)
         for (RolleDTO rolle : rolleList) {
-            if (rolle.getBezeichhnung().equals(role))
+            if (rolle.getBezeichnung().equals(role))
                 return true;
         }
         return false;
@@ -35,7 +35,7 @@ public class AuthorizationControl {
         List<RolleDTO> rolleList = user.getRoles();
         // Check, ob ein Benutzer eine Rolle besitzt:
         for (RolleDTO rolle : rolleList) {
-            if (rolle.getBezeichhnung().equals(role))
+            if (rolle.getBezeichnung().equals(role))
                 // Einfache (!) Kontrolle, ob die Rolle auf ein Feature zugreifen kann
                 if (checkRolleWithFeature(rolle, feature)) {
                     // Check, ob context erfüllt ist, bleibt hier noch aus, kann man nachziehen

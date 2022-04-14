@@ -7,17 +7,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "rolle", schema = "carlook")
 public class Rolle {
-    private String bezeichhnung;
+    private String bezeichnung;
     private List<User> users;
 
     @Id
     @Column(name = "bezeichhnung")
-    public String getBezeichhnung() {
-        return bezeichhnung;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public void setBezeichhnung(String bezeichhnung) {
-        this.bezeichhnung = bezeichhnung;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
     @Override
@@ -27,12 +27,12 @@ public class Rolle {
         if (o == null || getClass() != o.getClass())
             return false;
         Rolle rolle = (Rolle) o;
-        return Objects.equals(bezeichhnung, rolle.bezeichhnung);
+        return Objects.equals(bezeichnung, rolle.bezeichnung);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bezeichhnung);
+        return Objects.hash(bezeichnung);
     }
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
