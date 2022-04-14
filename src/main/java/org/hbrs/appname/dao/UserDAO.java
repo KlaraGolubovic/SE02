@@ -9,6 +9,7 @@ import org.hbrs.appname.dtos.RolleDTO;
 import org.hbrs.appname.dtos.UserDTO;
 import org.hbrs.appname.dtos.impl.UserDTOImpl;
 import org.hbrs.appname.services.db.JDBCConnection;
+import org.hbrs.appname.services.db.SQLiteConnection;
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
 import org.hbrs.appname.util.Globals;
 
@@ -30,7 +31,9 @@ public class UserDAO {
         try {
             Statement statement = null;
             try {
-                statement = JDBCConnection.getInstance().getStatement();
+                statement = SQLiteConnection.getInstance().getStatement();
+
+                // statement = JDBCConnection.getInstance().getStatement();
             } catch (DatabaseLayerException e) {
                 e.printStackTrace();
             }
@@ -85,7 +88,9 @@ public class UserDAO {
             throw e;
 
         } finally {
-            JDBCConnection.getInstance().closeConnection();
+            SQLiteConnection.getInstance().closeConnection();
+
+            // JDBCConnection.getInstance().closeConnection();
         }
     }
 

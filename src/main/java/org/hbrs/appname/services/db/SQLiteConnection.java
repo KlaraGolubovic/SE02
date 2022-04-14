@@ -1,23 +1,21 @@
 package org.hbrs.appname.services.db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
-import org.hbrs.appname.util.SQLiteDialect;
-import org.sqlite.JDBC;
 
-/**
- *
- * @author sascha
- */
-public class JDBCConnection {
+public class SQLiteConnection {
+    
+    private static SQLiteConnection connection = null;
 
-    private static JDBCConnection connection = null;
-
-    private String url = "jdbc:postgresql://dumbo.inf.h-brs.de/demouser";
+    private String url = "jdbc:sqlite:src/main/java/org/hbrs/appname/services/db/local.db";
 
     private Connection conn;
 
@@ -25,26 +23,29 @@ public class JDBCConnection {
 
     private String password = "demouser";
 
-    public static JDBCConnection getInstance() throws DatabaseLayerException {
+    public static SQLiteConnection getInstance() throws DatabaseLayerException {
 
         if (connection == null) {
-            connection = new JDBCConnection();
+            connection = new SQLiteConnection();
         }
         return connection;
 
     }
 
-    private JDBCConnection() throws DatabaseLayerException {
+    private SQLiteConnection() throws DatabaseLayerException {
+
         this.initConnection();
 
     }
 
+    
+
     public void initConnection() throws DatabaseLayerException {
         try {
-            
+
             DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.openConnection();
 
@@ -60,7 +61,7 @@ public class JDBCConnection {
             this.conn = DriverManager.getConnection(this.url, props);
 
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
             throw new DatabaseLayerException("Fehler bei Zugriff auf die DB! Sichere Verbindung vorhanden!?");
         }
     }
@@ -74,7 +75,7 @@ public class JDBCConnection {
 
             return this.conn.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -88,7 +89,7 @@ public class JDBCConnection {
 
             return this.conn.prepareStatement(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
@@ -98,7 +99,7 @@ public class JDBCConnection {
         try {
             this.conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
