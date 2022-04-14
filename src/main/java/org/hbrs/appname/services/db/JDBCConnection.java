@@ -6,8 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
-import org.hbrs.appname.util.SQLiteDialect;
-import org.sqlite.JDBC;
 
 /**
  *
@@ -41,7 +39,6 @@ public class JDBCConnection {
 
     public void initConnection() throws DatabaseLayerException {
         try {
-            
             DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException ex) {
             Logger.getLogger(JDBCConnection.class.getName()).log(Level.SEVERE, null, ex);
