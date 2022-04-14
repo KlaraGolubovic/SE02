@@ -67,11 +67,7 @@ public class AuthorizationControl {
     private String[] getRollesForFeature(String feature) {
         // Da im Framework nur zwei Views unterstützt werden, werden auch diese nur
         // unterschieden
-        if (feature.equals(Globals.Pages.ENTER_CAR)) {
-            return new String[] { Globals.Roles.ADMIN };
-        } else if (feature.equals(Globals.Pages.SHOW_CARS)) {
-            return (new String[] { Globals.Roles.USER, Globals.Roles.ADMIN });
-        }
+        
         return new String[] {};
     }
 

@@ -75,7 +75,7 @@ public class MainView extends VerticalLayout {
         // Die anzuzeigende Teil-Komponente kann man noch individualisieren, je nach
         // Rolle,
         // die ein Benutzer besitzt
-        UI.getCurrent().navigate(Globals.Pages.SHOW_CARS);
+        UI.getCurrent().navigate(Globals.Pages.REGISTER_VIEW);
 
     }
 }
