@@ -17,21 +17,20 @@ import com.vaadin.flow.data.binder.PropertyId;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
 import org.hbrs.academicflow.control.UserControl;
-
-import org.hbrs.academicflow.model.user.dto.UserDTOImpl;
 import org.hbrs.academicflow.model.permission.PermissionGroup;
+import org.hbrs.academicflow.model.user.dto.UserDTOImpl;
 import org.hbrs.academicflow.util.Constants;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Route(value = Constants.Pages.REGISTER_VIEW, layout = PublicAppView.class)
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
 
-    
+
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
@@ -42,19 +41,19 @@ public class RegisterView extends Div {
     private ArrayList<PermissionGroup> roles = new ArrayList<>();
 
     @PropertyId("roles")
-    private ComboBox<PermissionGroup> role = new ComboBox<>("roles");
+    private ComboBox<String> role = new ComboBox<>("roles");
 
     private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
-    @SuppressWarnings({ "java:S106" })
+    @SuppressWarnings({"java:S106"})
     public RegisterView(UserControl userService) {
         PermissionGroup student = new PermissionGroup();
         student.setName("Student");
         PermissionGroup orga = new PermissionGroup();
-        orga.setName("Student");
+        orga.setName("Organisation");
         roles.add(student);
         roles.add(orga);
-        role.setDataProvider(new ListDataProvider<>(roles));
+        role.setDataProvider(new ListDataProvider<>(roles.stream().map(PermissionGroup::getName).collect(Collectors.toList())));
 
         VerticalLayout layout = new VerticalLayout();
         layout.setWidth("80%");
