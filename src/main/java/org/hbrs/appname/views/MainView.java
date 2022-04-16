@@ -11,8 +11,8 @@ import com.vaadin.flow.router.RouteAlias;
 
 import org.hbrs.appname.control.LoginControl;
 import org.hbrs.appname.control.exception.DatabaseUserException;
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.util.Globals;
+import org.hbrs.appname.model.user.dto.UserDTO;
+import org.hbrs.appname.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -59,7 +59,7 @@ public class MainView extends VerticalLayout {
         add(component);
         Button button = new Button(" Not a user yet? Register now! ");
 
-        button.addClickListener(clickEvent -> UI.getCurrent().navigate(Globals.Pages.REGISTER_VIEW));
+        button.addClickListener(clickEvent -> UI.getCurrent().navigate(Constants.Pages.REGISTER_VIEW));
 
         add(button);
         this.setAlignItems(Alignment.CENTER);
@@ -67,7 +67,7 @@ public class MainView extends VerticalLayout {
 
     private void grabAndSetUserIntoSession() {
         UserDTO userDTO = loginControl.getCurrentUser();
-        UI.getCurrent().getSession().setAttribute(Globals.CURRENT_USER, userDTO);
+        UI.getCurrent().getSession().setAttribute(Constants.CURRENT_USER, userDTO);
     }
 
     private void navigateToMainPage() {
@@ -75,7 +75,7 @@ public class MainView extends VerticalLayout {
         // Die anzuzeigende Teil-Komponente kann man noch individualisieren, je nach
         // Rolle,
         // die ein Benutzer besitzt
-        UI.getCurrent().navigate(Globals.Pages.REGISTER_VIEW);
+        UI.getCurrent().navigate(Constants.Pages.REGISTER_VIEW);
 
     }
 }

@@ -1,7 +1,7 @@
 package org.hbrs.appname.test;
 
-import org.hbrs.appname.entities.User;
-import org.hbrs.appname.repository.UserRepository;
+import org.hbrs.appname.model.user.User;
+import org.hbrs.appname.model.user.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

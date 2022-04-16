@@ -1,30 +1,25 @@
 package org.hbrs.appname.control;
 
-import org.hbrs.appname.control.factories.UserFactory;
-import org.hbrs.appname.dtos.impl.UserDTOImpl;
-import org.hbrs.appname.entities.User;
-import org.hbrs.appname.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.hbrs.appname.model.user.UserFactory;
+import org.hbrs.appname.model.user.dto.UserDTO;
+import org.hbrs.appname.model.user.dto.UserDTOImpl;
+import org.hbrs.appname.model.user.User;
+import org.hbrs.appname.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserControl {
+    private final UserRepository repository;
 
-    @Autowired
-    private UserRepository repository;
-
-    public void createUser(UserDTOImpl u) {
-
-        User user = UserFactory.createUser(u);
-
+    public void createUser(UserDTO dto) {
+        User user = UserFactory.createUser(dto);
         // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
         // save()
         // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
-
         repository.save(user);
-
     }
-
-    
-
 }

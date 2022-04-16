@@ -1,24 +1,15 @@
 package org.hbrs.appname.views;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.apache.commons.lang3.StringUtils;
 import org.hbrs.appname.control.BackendControl;
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hbrs.appname.model.user.User;
 
 import java.util.List;
 

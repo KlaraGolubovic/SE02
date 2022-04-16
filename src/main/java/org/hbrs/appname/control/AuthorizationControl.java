@@ -3,8 +3,8 @@ package org.hbrs.appname.control;
 import java.util.Arrays;
 import java.util.List;
 
-import org.hbrs.appname.dtos.RolleDTO;
-import org.hbrs.appname.dtos.UserDTO;
+import org.hbrs.appname.model.permission.dto.PermissionGroupDTO;
+import org.hbrs.appname.model.user.dto.UserDTO;
 
 // @Component
 public class AuthorizationControl {
@@ -14,10 +14,10 @@ public class AuthorizationControl {
      * 
      */
     public boolean isUserInRole(UserDTO user, String role) {
-        List<RolleDTO> rolleList = user.getRoles();
+        List<PermissionGroupDTO> rolleList = user.getGroups();
         // A bit lazy but hey it works ;-)
-        for (RolleDTO rolle : rolleList) {
-            if (rolle.getBezeichnung().equals(role))
+        for (PermissionGroupDTO rolle : rolleList) {
+            if (rolle.getName().equals(role))
                 return true;
         }
         return false;
@@ -30,10 +30,10 @@ public class AuthorizationControl {
      * einem bestimmten Device etc.) angezeigt bekommt
      */
     public boolean isUserisAllowedToAccessThisFeature(UserDTO user, String role, String feature, String[] context) {
-        List<RolleDTO> rolleList = user.getRoles();
+        List<PermissionGroupDTO> rolleList = user.getGroups();
         // Check, ob ein Benutzer eine Rolle besitzt:
-        for (RolleDTO rolle : rolleList) {
-            if (rolle.getBezeichnung().equals(role))
+        for (PermissionGroupDTO rolle : rolleList) {
+            if (rolle.getName().equals(role))
                 // Einfache (!) Kontrolle, ob die Rolle auf ein Feature zugreifen kann
                 if (checkRolleWithFeature(rolle, feature)) {
                     // Check, ob context erfüllt ist, bleibt hier noch aus, kann man nachziehen
@@ -44,7 +44,7 @@ public class AuthorizationControl {
         return false;
     }
 
-    private boolean checkRolleWithFeature(RolleDTO rolle, String feature) {
+    private boolean checkRolleWithFeature(PermissionGroupDTO rolle, String feature) {
         String[] rolles = getRollesForFeature(feature);
         if (rolles.length == 0 || rolles == null)
             return false;

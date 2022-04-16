@@ -20,13 +20,13 @@ import com.vaadin.flow.router.Route;
 
 import org.hbrs.appname.control.UserControl;
 
-import org.hbrs.appname.dtos.impl.UserDTOImpl;
-import org.hbrs.appname.entities.PermissionGroup;
-import org.hbrs.appname.util.Globals;
+import org.hbrs.appname.model.user.dto.UserDTOImpl;
+import org.hbrs.appname.model.permission.PermissionGroup;
+import org.hbrs.appname.util.Constants;
 
 import java.util.ArrayList;
 
-@Route(value = Globals.Pages.REGISTER_VIEW, layout = PublicAppView.class)
+@Route(value = Constants.Pages.REGISTER_VIEW, layout = PublicAppView.class)
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {

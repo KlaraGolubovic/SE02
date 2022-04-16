@@ -1,9 +1,10 @@
-package org.hbrs.appname.entities;
+package org.hbrs.appname.model.permission;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hbrs.appname.model.user.User;
 
 import javax.persistence.*;
 import java.util.List;

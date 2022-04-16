@@ -1,4 +1,4 @@
-package org.hbrs.appname.entities;
+package org.hbrs.appname.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AccessLevel;
+import org.hbrs.appname.model.permission.PermissionGroup;
 
 import javax.persistence.*;
 import java.time.LocalDate;

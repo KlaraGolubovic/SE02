@@ -22,8 +22,8 @@ import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.PWA;
 
 import org.hbrs.appname.control.AuthorizationControl;
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.util.Globals;
+import org.hbrs.appname.model.user.dto.UserDTO;
+import org.hbrs.appname.util.Constants;
 
 import java.util.Optional;
 
@@ -67,7 +67,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
         // gelenkt
         UserDTO userDTO = this.getCurrentUser();
         if (userDTO == null) {
-            UI.getCurrent().navigate(Globals.Pages.LOGIN_VIEW);
+            UI.getCurrent().navigate(Constants.Pages.LOGIN_VIEW);
             return false;
         }
         return true;
@@ -227,7 +227,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     }
 
     private UserDTO getCurrentUser() {
-        return (UserDTO) UI.getCurrent().getSession().getAttribute(Globals.CURRENT_USER);
+        return (UserDTO) UI.getCurrent().getSession().getAttribute(Constants.CURRENT_USER);
     }
 
     @Override
@@ -246,7 +246,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
      */
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         if (getCurrentUser() == null) {
-            beforeEnterEvent.rerouteTo(Globals.Pages.LOGIN_VIEW);
+            beforeEnterEvent.rerouteTo(Constants.Pages.LOGIN_VIEW);
             //ToDo: Hier ggf später erweitern um SomethingWentWrongView
         }
 

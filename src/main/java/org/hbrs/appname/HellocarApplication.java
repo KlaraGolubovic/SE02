@@ -6,9 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 public class HellocarApplication extends SpringBootServletInitializer {
-
     public static void main(String[] args) {
         SpringApplication.run(HellocarApplication.class, args);
     }
-
 }
