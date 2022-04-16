@@ -247,7 +247,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         if (getCurrentUser() == null) {
             beforeEnterEvent.rerouteTo(Constants.Pages.LOGIN_VIEW);
-            //ToDo: Hier ggf später erweitern um SomethingWentWrongView
+            // ToDo: Hier ggf später erweitern um SomethingWentWrongView
         }
 
     }

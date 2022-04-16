@@ -65,7 +65,7 @@ public class AuthorizationControl {
     private String[] getRollesForFeature(String feature) {
         // Da im Framework nur zwei Views unterstützt werden, werden auch diese nur
         // unterschieden
-        
+
         return new String[] {};
     }
 

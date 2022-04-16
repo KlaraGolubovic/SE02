@@ -41,7 +41,6 @@ public class RoundTripTest {
         int idTmp = userAfterCreate.getId();
 
         // Schritt 2: R = Read (hier: Auslesen über die Methode find()
-        
 
         // Schritt 3: Ass = Assertion: Vergleich der vorhandenen Objekte auch
         // Gleichheit...

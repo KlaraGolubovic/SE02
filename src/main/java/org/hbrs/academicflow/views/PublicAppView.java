@@ -17,9 +17,7 @@ import com.vaadin.flow.router.*;
 @JsModule("./styles/shared-styles.js")
 public class PublicAppView extends AppLayout implements BeforeEnterObserver {
 
-    
     private H1 viewTitle;
-    
 
     public PublicAppView() {
         setUpUI();
@@ -84,7 +82,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
      * Views (hier: ShowCarsView und EnterCarView) ab.
      *
      */
-    @SuppressWarnings({"java:S125"})
+    @SuppressWarnings({ "java:S125" })
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         // THIS METHOD STOPS EXECUTION (CONDITIONALLY), WE DO NOT WANT THAT HERE.
         // IN the future maybe: if (REGISTRATION_ENABLED) or other features

@@ -60,20 +60,7 @@ public class User {
     private String userid = "";
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_group",
-            schema = "academic_flow",
-            joinColumns = @JoinColumn(
-                    name = "user_id",
-                    referencedColumnName = "id",
-                    nullable = false
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "group_name",
-                    referencedColumnName = "name",
-                    nullable = false
-            )
-    )
+    @JoinTable(name = "user_group", schema = "academic_flow", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
     private List<PermissionGroup> groups = new ArrayList<>();
 
     @Override
