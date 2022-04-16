@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>org.hbrs.se2.project</groupId>
-    <artifactId>hellocarapp</artifactId> <!-- Place your team name here! -->
+    <artifactId>AldaInnen</artifactId> <!-- Place your team name here! -->
     <version>0.0.1-SNAPSHOT</version>
-    <name>hellocar</name>
+    <name>AcademicFlow</name>
     <description>Demo project for SE-2</description>
     <packaging>war</packaging>
     
@@ -22,20 +22,17 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
             <version>3.11.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,7 +86,13 @@
           <version>5.7.0</version>
           <scope>test</scope>
         </dependency>
-            
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -140,7 +143,7 @@
                       <goal>build-frontend</goal>
                     </goals>
                     <configuration>
-                      <productionMode>true</productionMode>
+                      <productionMode>false</productionMode>
                     </configuration>
                   </execution>
                 </executions>
