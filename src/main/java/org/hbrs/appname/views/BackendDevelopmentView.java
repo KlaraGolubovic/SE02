@@ -64,7 +64,7 @@ public class BackendDevelopmentView extends Div {
                 .setHeader("Last Name");
         grid.addColumn(
                 User::getEmail)
-                .setHeader("e-mail").setWidth("180px");
+                .setHeader("E-Mail").setWidth("180px");
         grid.addColumn(
                 User::getDateOfBirth)
                 .setHeader("Birthdate");
@@ -72,13 +72,12 @@ public class BackendDevelopmentView extends Div {
                 User::getOccupation)
                 .setHeader("Occupation");
 
-        HeaderRow filterRow = grid.appendHeaderRow();
-
+                
         return grid;
     }
 
     private Component createTitle() {
-        return new H3("Search for Cars");
+        return new H3("All Users");
     }
 
 };

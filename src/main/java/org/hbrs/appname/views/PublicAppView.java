@@ -38,9 +38,9 @@ import java.util.Optional;
 @JsModule("./styles/shared-styles.js")
 public class PublicAppView extends AppLayout implements BeforeEnterObserver {
 
-    private Tabs menu;
+    
     private H1 viewTitle;
-    private H1 helloUser;
+    
 
     public PublicAppView() {
         setUpUI();
@@ -69,6 +69,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
 
         viewTitle = new H1();
         viewTitle.setWidthFull();
+        viewTitle.addClassName("leftpad");
         layout.add(viewTitle);
 
         return layout;
