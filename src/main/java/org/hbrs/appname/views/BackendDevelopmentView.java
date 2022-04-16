@@ -60,11 +60,11 @@ public class BackendDevelopmentView extends Div  {
         Grid.Column<User> brandColumn = grid
                 .addColumn(User::getFirstName).setHeader("FirstName");
         Grid.Column<User> modelColumn = grid.addColumn(
-                User::getLastName
+                User::getLastName)
                 .setHeader("LastName");
         Grid.Column<User> descriptionColumn = grid
                 .addColumn(
-                        User::getEmail
+                        User::getEmail)
                 .setHeader("email");
         Grid.Column<User> priceColumn = grid
                 .addColumn(
@@ -73,30 +73,7 @@ public class BackendDevelopmentView extends Div  {
 
         HeaderRow filterRow = grid.appendHeaderRow();
 
-        // First filter
-        TextField modelField = new TextField();
-        modelField.addValueChangeListener(event -> dataProvider.addFilter(
-                car -> StringUtils.containsIgnoreCase(car.getModel(),
-                        modelField.getValue())));
-
-        modelField.setValueChangeMode(ValueChangeMode.EAGER);
-
-        filterRow.getCell(modelColumn).setComponent(modelField);
-        modelField.setSizeFull();
-        modelField.setPlaceholder("Filter");
-
-        // Second filter
-        TextField brandField = new TextField();
-        brandField.addValueChangeListener(event -> dataProvider
-                .addFilter(car -> StringUtils.containsIgnoreCase(
-                        String.valueOf(car.getBrand()), brandField.getValue())));
-
-        brandField.setValueChangeMode(ValueChangeMode.EAGER);
-
-        filterRow.getCell(brandColumn).setComponent(brandField);
-        brandField.setSizeFull();
-        brandField.setPlaceholder("Filter");
-
+      
         return grid;
     }
 
