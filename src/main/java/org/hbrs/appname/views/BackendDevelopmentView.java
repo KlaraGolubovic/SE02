@@ -71,6 +71,7 @@ public class BackendDevelopmentView extends Div {
         grid.addColumn(
                 User::getOccupation)
                 .setHeader("Occupation");
+                grid.appendHeaderRow();
         return grid;
     }
 
