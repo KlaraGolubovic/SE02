@@ -12,7 +12,7 @@
     <groupId>org.hbrs.se2.project</groupId>
     <artifactId>AldaInnen</artifactId> <!-- Place your team name here! -->
     <version>0.0.1-SNAPSHOT</version>
-    <name>appname</name>
+    <name>AcademicFlow</name>
     <description>Demo project for SE-2</description>
     <packaging>war</packaging>
     
