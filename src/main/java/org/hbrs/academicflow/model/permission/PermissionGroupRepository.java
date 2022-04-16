@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PermissionGroupRepository extends JpaRepository<PermissionGroup, Integer> {
+public interface PermissionGroupRepository extends JpaRepository<PermissionGroup, String> {
     @Query("select new org.hbrs.academicflow.model.permission.dto.PermissionGroupDTOImpl(group) from PermissionGroup group where group.name=:name")
     PermissionGroupDTO findPermissionGroupByName(@Param("name") String name);
 }

@@ -15,6 +15,9 @@ public class UserControl {
 
     public void createUser(UserDTO dto) {
         User user = UserFactory.createUser(dto);
+
+        System.out.println(dto);
+
         // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
         // save()
         // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA

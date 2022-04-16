@@ -10,6 +10,7 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,7 +74,7 @@ public class User {
                     nullable = false
             )
     )
-    private List<PermissionGroup> groups;
+    private List<PermissionGroup> groups = new ArrayList<>();
 
     @Override
     public boolean equals(Object obj) {
