@@ -32,21 +32,21 @@ import java.util.List;
 @Route(value = "DEVELOPMENT", layout = PublicAppView.class)
 @PageTitle("Show Everything")
 @CssImport("./styles/views/showcars/show-cars-view.css")
-public class BackendDevelopmentView extends Div  {
+public class BackendDevelopmentView extends Div {
 
     private List<User> personList;
 
-    public BackendDevelopmentView( BackendControl backend ) {
-            addClassName("show-cars-view");
+    public BackendDevelopmentView(BackendControl backend) {
+        addClassName("show-cars-view");
 
-            // Auslesen alle abgespeicherten Autos aus der DB (über das Control)
-            personList = backend.getAllUsers();
+        // Auslesen alle abgespeicherten Autos aus der DB (über das Control)
+        personList = backend.getAllUsers();
 
-            // Titel überhalb der Tabelle
-            add(this.createTitle());
+        // Titel überhalb der Tabelle
+        add(this.createTitle());
 
-            // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
-            add(this.createGridTable());
+        // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
+        add(this.createGridTable());
     }
 
     private Component createGridTable() {
@@ -57,23 +57,23 @@ public class BackendDevelopmentView extends Div  {
                 personList);
         grid.setDataProvider(dataProvider);
 
-        Grid.Column<User> brandColumn = grid
-                .addColumn(User::getFirstName).setHeader("FirstName");
-        Grid.Column<User> modelColumn = grid.addColumn(
+        grid.addColumn(User::getId).setHeader("ID").setWidth("20px");
+        grid.addColumn(User::getFirstName).setHeader("First Name");
+        grid.addColumn(
                 User::getLastName)
-                .setHeader("LastName");
-        Grid.Column<User> descriptionColumn = grid
-                .addColumn(
-                        User::getEmail)
-                .setHeader("email");
-        Grid.Column<User> priceColumn = grid
-                .addColumn(
-                        User::getOccupation)
-                .setHeader("Price");
+                .setHeader("Last Name");
+        grid.addColumn(
+                User::getEmail)
+                .setHeader("e-mail").setWidth("180px");
+        grid.addColumn(
+                User::getDateOfBirth)
+                .setHeader("Birthdate");
+        grid.addColumn(
+                User::getOccupation)
+                .setHeader("Occupation");
 
         HeaderRow filterRow = grid.appendHeaderRow();
 
-      
         return grid;
     }
 
@@ -81,7 +81,4 @@ public class BackendDevelopmentView extends Div  {
         return new H3("Search for Cars");
     }
 
-
 };
-
-
