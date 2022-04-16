@@ -5,7 +5,7 @@ import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
+
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -24,10 +24,7 @@ import com.vaadin.flow.server.PWA;
 import org.hbrs.appname.control.AuthorizationControl;
 import org.hbrs.appname.dtos.UserDTO;
 import org.hbrs.appname.util.Globals;
-import org.hbrs.appname.util.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -181,10 +178,8 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
         // Key: der sichtbare String des Menu-Items
         // Value: Die UI-Component, die nach dem Klick auf das Menuitem angezeigt wird.
         Tab[] tabs = new Tab[] {
-            
-        };
 
-        
+        };
 
         // ToDo für die Teams: Weitere Tabs aus ihrem Projekt hier einfügen!
 
@@ -252,6 +247,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         if (getCurrentUser() == null) {
             beforeEnterEvent.rerouteTo(Globals.Pages.LOGIN_VIEW);
+            //ToDo: Hier ggf später erweitern um SomethingWentWrongView
         }
 
     }

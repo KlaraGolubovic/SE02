@@ -1,34 +1,13 @@
 package org.hbrs.appname.views;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentUtil;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.*;
-import com.vaadin.flow.server.PWA;
-
-import org.hbrs.appname.control.AuthorizationControl;
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.util.Globals;
-import org.hbrs.appname.util.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -105,9 +84,9 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
      * Views (hier: ShowCarsView und EnterCarView) ab.
      *
      */
+    @SuppressWarnings({"java:S125"})
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-
         // THIS METHOD STOPS EXECUTION (CONDITIONALLY), WE DO NOT WANT THAT HERE.
-
+        // IN the future maybe: if (REGISTRATION_ENABLED) or other features
     }
 }

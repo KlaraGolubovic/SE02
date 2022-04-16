@@ -71,8 +71,6 @@ public class BackendDevelopmentView extends Div {
         grid.addColumn(
                 User::getOccupation)
                 .setHeader("Occupation");
-
-                
         return grid;
     }
 
@@ -80,4 +78,4 @@ public class BackendDevelopmentView extends Div {
         return new H3("All Users");
     }
 
-};
+}
