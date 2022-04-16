@@ -2,8 +2,12 @@ package org.hbrs.academicflow.model.user;
 
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
+import org.hbrs.academicflow.model.user.dto.UserDTOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,5 +28,9 @@ public class UserService {
 
     public void deleteUser(String userId) {
         this.repository.deleteUserByUserId(userId);
+    }
+
+    public List<User> findAllUsers() {
+        return this.repository.findAll();
     }
 }

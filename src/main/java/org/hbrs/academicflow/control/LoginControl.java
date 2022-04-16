@@ -1,46 +1,39 @@
 package org.hbrs.academicflow.control;
 
+import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.control.exception.DatabaseUserException;
-import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.model.user.UserService;
+import org.hbrs.academicflow.model.user.dto.UserDTO;
+import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+import java.security.NoSuchAlgorithmException;
+
+@Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LoginControl {
-    @Autowired
-    private UserService service;
+    private final UserService service;
 
-    private UserDTO userDTO = null;
+    private UserDTO currentUser = null;
 
-    public boolean authentificate(String username, String password) throws DatabaseUserException {
-        // Standard: User wird mit Spring JPA ausgelesen (Was sind die Vorteile?)
-        UserDTO tmpUser = this.getUserWithJPA(username, password);
-
-        // Alternative: Auslesen des Users mit JDBC (Was sind die Vorteile bzw.
-        // Nachteile?)
-        // UserDTO tmpUser = this.getUserWithJDBC( username , password );
-
-        if (tmpUser == null) {
-            // ggf. hier ein Loggin einfügen
+    public boolean doAuthenticate(String username, String password) throws DatabaseUserException {
+        final String encrypted;
+        try {
+            encrypted = Encryption.sha256(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
             return false;
         }
-        this.userDTO = tmpUser;
+        final UserDTO user = this.service.findUserByIdAndPassword(username, encrypted);
+        if (user == null) {
+            return false;
+        }
+        this.currentUser = user;
         return true;
     }
 
     public UserDTO getCurrentUser() {
-        return this.userDTO;
-
-    }
-
-    private UserDTO getUserWithJPA(String username, String password) throws DatabaseUserException {
-        UserDTO userTmp;
-        try {
-            userTmp = this.service.findUserByIdAndPassword(username, password);
-        } catch (org.springframework.dao.DataAccessResourceFailureException e) {
-            throw new DatabaseUserException("A failure occurred while trying to connect to database with JPA");
-        }
-        return userTmp;
+        return this.currentUser;
     }
 }
