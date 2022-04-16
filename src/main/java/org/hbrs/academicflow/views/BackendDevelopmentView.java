@@ -27,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Route(value = "DEVELOPMENT", layout = PublicAppView.class)
 @PageTitle("Show Everything")
-@CssImport("./styles/views/showcars/show-cars-view.css")
+@CssImport("./styles/views/backend/show-users-view.css")
 public class BackendDevelopmentView extends Div {
     private final UserService userService;
     private List<User> users = Lists.newCopyOnWriteArrayList();
@@ -49,6 +49,7 @@ public class BackendDevelopmentView extends Div {
         ListDataProvider<User> dataProvider = new ListDataProvider<>(this.users);
         grid.setDataProvider(dataProvider);
         grid.addColumn(User::getId).setHeader("ID").setWidth("20px");
+        grid.addColumn(User::getUserid).setHeader("Username");
         grid.addColumn(User::getFirstName).setHeader("First Name");
 
         grid.addColumn(User::getLastName).setHeader("Last Name");
