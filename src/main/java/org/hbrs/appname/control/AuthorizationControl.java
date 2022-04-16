@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.hbrs.appname.dtos.RolleDTO;
 import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.entities.Rolle;
-import org.hbrs.appname.util.Globals;
 
 // @Component
 public class AuthorizationControl {

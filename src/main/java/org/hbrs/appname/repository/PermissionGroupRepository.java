@@ -1,15 +1,10 @@
 package org.hbrs.appname.repository;
 
-import org.hbrs.appname.dtos.UserDTO;
-import org.hbrs.appname.entities.Rolle;
-import org.hbrs.appname.entities.User;
+import org.hbrs.appname.entities.PermissionGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-@Component
+@Repository
 /**
  * JPA-Repository für die Abfrage der Rollen von registrierten User. Die
  * Bezeichnung einer Methode
@@ -21,6 +16,6 @@ import java.util.List;
  * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
  *
  */
-public interface RolleRepository extends JpaRepository<Rolle, Integer> {
+public interface PermissionGroupRepository extends JpaRepository<PermissionGroup, Integer> {
 
 }

@@ -1,7 +1,11 @@
 package org.hbrs.appname.dtos.impl;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hbrs.appname.dtos.RolleDTO;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class RolleDTOImpl implements RolleDTO {
 
     private String bezeichnung;

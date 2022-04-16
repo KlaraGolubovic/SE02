@@ -18,85 +18,76 @@ import java.util.Objects;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @Entity
-@Table(name = "user", schema = "carlook")
+@Table(name = "user", schema = "academic_flow")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    @Builder.Default private int id = -1;
+    private int id = -1;
 
     @Basic
     @Column(name = "date_of_birth", nullable = false)
-    @Builder.Default
     private LocalDate dateOfBirth = LocalDate.now();
 
     @Basic
     @Column(name = "email", unique = true, nullable = false)
-    @Builder.Default 
     private String email = "";
 
     @Basic
     @Column(name = "first_name", nullable = false)
-    @Builder.Default 
     private String firstName = "";
 
     @Basic
     @Column(name = "last_name", nullable = false)
-    @Builder.Default
     private String lastName = "";
 
     @Basic
-    @Column(name = "occupation", nullable = true)
-    @Builder.Default
+    @Column(name = "occupation")
     private String occupation = "";
 
     @Basic
     @Column(name = "password", nullable = false)
-    @Builder.Default
     private String password = "";
 
     @Basic
-    @Column(name = "phone", nullable = true)
-    @Builder.Default
+    @Column(name = "phone")
     private String phone = "";
 
     @Basic
     @Column(name = "userid", nullable = false)
-    @Builder.Default
     private String userid = "";
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_to_rolle",
-            catalog = "demouser",
-            schema = "carlook",
+            name = "user_group",
+            schema = "academic_flow",
             joinColumns = @JoinColumn(
-                    name = "userid",
+                    name = "user_id",
                     referencedColumnName = "id",
                     nullable = false
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "bezeichnung",
-                    referencedColumnName = "bezeichhnung",
+                    name = "group_name",
+                    referencedColumnName = "name",
                     nullable = false
             )
     )
-    private List<Rolle> roles;
+    private List<PermissionGroup> groups;
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
-        User user = (User) obj;
-        return id == user.id;
+        final User user = (User) obj;
+        return this.id == user.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.id);
     }
 }

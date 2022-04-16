@@ -4,6 +4,7 @@ import org.hbrs.appname.control.exception.DatabaseUserException;
 import org.hbrs.appname.dao.UserDAO;
 import org.hbrs.appname.dtos.UserDTO;
 import org.hbrs.appname.repository.UserRepository;
+import org.hbrs.appname.repository.UserService;
 import org.hbrs.appname.services.db.exceptions.DatabaseLayerException;
 import org.hbrs.appname.util.Globals;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class LoginControl {
 
     @Autowired
-    private UserRepository repository;
+    private UserService service;
 
     private UserDTO userDTO = null;
 
@@ -70,7 +71,7 @@ public class LoginControl {
     private UserDTO getUserWithJPA(String username, String password) throws DatabaseUserException {
         UserDTO userTmp;
         try {
-            userTmp = repository.findUserByUseridAndPassword(username, password);
+            userTmp = this.service.findUserByIdAndPassword(username, password);
         } catch (org.springframework.dao.DataAccessResourceFailureException e) {
             // Analyse und Umwandlung der technischen Errors in 'lesbaren' Darstellungen
             // (ToDo!)

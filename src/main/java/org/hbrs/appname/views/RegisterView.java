@@ -21,7 +21,7 @@ import com.vaadin.flow.router.Route;
 import org.hbrs.appname.control.UserControl;
 
 import org.hbrs.appname.dtos.impl.UserDTOImpl;
-import org.hbrs.appname.entities.Rolle;
+import org.hbrs.appname.entities.PermissionGroup;
 import org.hbrs.appname.util.Globals;
 
 import java.util.ArrayList;
@@ -39,19 +39,19 @@ public class RegisterView extends Div {
     private TextField firstname = new TextField("fn");
     private TextField lastname = new TextField("ln");
 
-    private ArrayList<Rolle> roles = new ArrayList<>();
+    private ArrayList<PermissionGroup> roles = new ArrayList<>();
 
     @PropertyId("roles")
-    private ComboBox<Rolle> role = new ComboBox<>("roles");
+    private ComboBox<PermissionGroup> role = new ComboBox<>("roles");
 
     private Binder<UserDTOImpl> binder = new Binder<>(UserDTOImpl.class);
 
     @SuppressWarnings({ "java:S106" })
     public RegisterView(UserControl userService) {
-        Rolle student = new Rolle();
-        student.setBezeichnung("Student");
-        Rolle orga = new Rolle();
-        orga.setBezeichnung("Student");
+        PermissionGroup student = new PermissionGroup();
+        student.setName("Student");
+        PermissionGroup orga = new PermissionGroup();
+        orga.setName("Student");
         roles.add(student);
         roles.add(orga);
         role.setDataProvider(new ListDataProvider<>(roles));

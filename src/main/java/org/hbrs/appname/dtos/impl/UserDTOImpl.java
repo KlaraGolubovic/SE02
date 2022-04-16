@@ -2,9 +2,13 @@ package org.hbrs.appname.dtos.impl;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hbrs.appname.dtos.RolleDTO;
 import org.hbrs.appname.dtos.UserDTO;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTOImpl implements UserDTO {
 
     private int id;
