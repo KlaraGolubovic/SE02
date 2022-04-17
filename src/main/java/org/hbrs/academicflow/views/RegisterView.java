@@ -33,106 +33,116 @@ import java.security.NoSuchAlgorithmException;
 @PageTitle("Registration")
 @CssImport("./styles/views/entercar/enter-car-view.css")
 public class RegisterView extends Div {
-    private final Button save = new Button("Save");
-    private final Button cancel = new Button("Cancel");
+  private final Button save = new Button("Save");
+  private final Button cancel = new Button("Cancel");
 
-    private final TextField idField = new TextField("Nutzername");
-    private final TextField firstNameField = new TextField("Vorname");
-    private final TextField lastNameField = new TextField("Nachname");
-    private final TextField mailField = new TextField("E-Mail");
-    private final TextField phoneField = new TextField("Telefonnummer");
-    private final TextField passwordField = new TextField("Passwort");
+  private final TextField idField = new TextField("Nutzername");
+  private final TextField firstNameField = new TextField("Vorname");
+  private final TextField lastNameField = new TextField("Nachname");
+  private final TextField mailField = new TextField("E-Mail");
+  private final TextField phoneField = new TextField("Telefonnummer");
+  private final TextField passwordField = new TextField("Passwort");
 
-    @PropertyId("roles")
-    private final ComboBox<String> groupSelector = new ComboBox<>("roles");
+  @PropertyId("roles")
+  private final ComboBox<String> groupSelector = new ComboBox<>("roles");
 
-    private final UserService userService;
-    private final PermissionGroupService groupService;
+  private final UserService userService;
+  private final PermissionGroupService groupService;
 
-    @PostConstruct
-    public void doInitialSetup() {
-        this.groupSelector.setDataProvider(new ListDataProvider<>(groupService.findPermissionGroupNames()));
+  @PostConstruct
+  public void doInitialSetup() {
+    this.groupSelector.setDataProvider(
+        new ListDataProvider<>(groupService.findPermissionGroupNames()));
 
-        VerticalLayout layout = new VerticalLayout();
-        layout.setWidth("80%");
+    VerticalLayout layout = new VerticalLayout();
+    layout.setWidth("80%");
 
-        try {
-            addClassName("register-view");
-            layout.add(doCreateTitle());
-            layout.add(groupSelector);
-            layout.add(doCreateFormLayout());
-            layout.add(doCreateButtonLayout());
-        } catch (Exception e) {
-            System.err.println("Error occurred adding layout");
-        }
-
-        try {
-            doClearForm();
-            cancel.addClickListener(event -> doClearForm());
-            save.addClickListener(event -> {
-                try {
-                    userService.doCreateUser(this.doCreateUser());
-                    Notification.show("User account has been created");
-                    doClearForm();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (Exception e) {
-            System.err.println("Error occurred registering Listeners to Form Buttons");
-        }
-
-        add(layout);
+    try {
+      addClassName("register-view");
+      layout.add(doCreateTitle());
+      layout.add(groupSelector);
+      layout.add(doCreateFormLayout());
+      layout.add(doCreateButtonLayout());
+    } catch (Exception e) {
+      System.err.println("Error occurred adding layout");
     }
 
-    private User doCreateUser() throws NoSuchAlgorithmException {
-        final User user = new User();
-        user.setUserid(this.idField.getValue());
-        user.setFirstName(this.firstNameField.getValue());
-        user.setLastName(this.lastNameField.getValue());
-        user.setPhone(this.phoneField.getValue());
-
-        user.setPassword(Encryption.sha256(this.passwordField.getValue()));
-
-        user.setEmail(this.mailField.getValue());
-        this.groupService.findPermissionGroupByName(this.groupSelector.getValue())
-                .map(Lists::newArrayList)
-                .ifPresent(user::setGroups);
-        return user;
+    try {
+      doClearForm();
+      cancel.addClickListener(event -> doClearForm());
+      save.addClickListener(
+          event -> {
+            try {
+              userService.doCreateUser(this.doCreateUser());
+              Notification.show("User account has been created");
+              doClearForm();
+            } catch (NoSuchAlgorithmException e) {
+              e.printStackTrace();
+            }
+          });
+    } catch (Exception e) {
+      System.err.println("Error occurred registering Listeners to Form Buttons");
     }
 
-    private void doClearForm() {
-        this.idField.clear();
-        this.firstNameField.clear();
-        this.lastNameField.clear();
-        this.groupSelector.clear();
-        this.mailField.clear();
-        this.phoneField.clear();
-        this.passwordField.clear();
-    }
+    add(layout);
+  }
 
-    private Component doCreateTitle() {
-        return new H3("Registration");
-    }
+  private User doCreateUser() throws NoSuchAlgorithmException {
+    final User user = new User();
+    user.setUserid(this.idField.getValue());
+    user.setFirstName(this.firstNameField.getValue());
+    user.setLastName(this.lastNameField.getValue());
+    user.setPhone(this.phoneField.getValue());
 
-    private Component doCreateFormLayout() {
-        FormLayout formLayout = new FormLayout();
-        formLayout.add(idField, firstNameField, lastNameField, groupSelector, mailField, phoneField, passwordField);
-        formLayout.setColspan(idField, 1);
-        formLayout.setColspan(firstNameField, 1);
-        formLayout.setColspan(lastNameField, 1);
-        formLayout.setColspan(mailField, 1);
-        formLayout.setColspan(phoneField, 1);
-        formLayout.setColspan(passwordField, 1);
-        return formLayout;
-    }
+    user.setPassword(Encryption.sha256(this.passwordField.getValue()));
 
-    private Component doCreateButtonLayout() {
-        HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.addClassName("button-layout");
-        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        buttonLayout.add(save);
-        buttonLayout.add(cancel);
-        return buttonLayout;
-    }
+    user.setEmail(this.mailField.getValue());
+    this.groupService
+        .findPermissionGroupByName(this.groupSelector.getValue())
+        .map(Lists::newArrayList)
+        .ifPresent(user::setGroups);
+    return user;
+  }
+
+  private void doClearForm() {
+    this.idField.clear();
+    this.firstNameField.clear();
+    this.lastNameField.clear();
+    this.groupSelector.clear();
+    this.mailField.clear();
+    this.phoneField.clear();
+    this.passwordField.clear();
+  }
+
+  private Component doCreateTitle() {
+    return new H3("Registration");
+  }
+
+  private Component doCreateFormLayout() {
+    FormLayout formLayout = new FormLayout();
+    formLayout.add(
+        idField,
+        firstNameField,
+        lastNameField,
+        groupSelector,
+        mailField,
+        phoneField,
+        passwordField);
+    formLayout.setColspan(idField, 1);
+    formLayout.setColspan(firstNameField, 1);
+    formLayout.setColspan(lastNameField, 1);
+    formLayout.setColspan(mailField, 1);
+    formLayout.setColspan(phoneField, 1);
+    formLayout.setColspan(passwordField, 1);
+    return formLayout;
+  }
+
+  private Component doCreateButtonLayout() {
+    HorizontalLayout buttonLayout = new HorizontalLayout();
+    buttonLayout.addClassName("button-layout");
+    save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    buttonLayout.add(save);
+    buttonLayout.add(cancel);
+    return buttonLayout;
+  }
 }

@@ -17,29 +17,35 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTOImpl implements UserDTO {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private List<PermissionGroupDTO> groups;
+  private int id;
+  private String firstName;
+  private String lastName;
+  private List<PermissionGroupDTO> groups;
 
-    public UserDTOImpl(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.groups = user.getGroups()
-                .stream()
-                .map(PermissionGroup::getName)
-                .map(PermissionGroupDTOImpl::new)
-                .collect(Collectors.toList());
-    }
+  public UserDTOImpl(User user) {
+    this.id = user.getId();
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    this.groups =
+        user.getGroups().stream()
+            .map(PermissionGroup::getName)
+            .map(PermissionGroupDTOImpl::new)
+            .collect(Collectors.toList());
+  }
 
-    @Override
-    public String toString() {
-        return "UserDTOImpl{" +
-                "id=" + id +
-                ", firstname='" + firstName + '\'' +
-                ", lastname='" + lastName + '\'' +
-                ", roles=" + groups +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UserDTOImpl{"
+        + "id="
+        + id
+        + ", firstname='"
+        + firstName
+        + '\''
+        + ", lastname='"
+        + lastName
+        + '\''
+        + ", roles="
+        + groups
+        + '}';
+  }
 }

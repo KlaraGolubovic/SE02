@@ -12,17 +12,20 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query("select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.occupation=:occupation")
-    List<UserDTO> findUsersByOccupation(@Param("occupation") String occupation);
+  @Query(
+      "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.occupation=:occupation")
+  List<UserDTO> findUsersByOccupation(@Param("occupation") String occupation);
 
-    @Query("select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.userid=:userId and user.password=:password")
-    UserDTO findUserByIdAndPassword(@Param("userId") String id, @Param("password") String password);
+  @Query(
+      "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.userid=:userId and user.password=:password")
+  UserDTO findUserByIdAndPassword(@Param("userId") String id, @Param("password") String password);
 
-    @Query("select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.userid=:userId")
-    UserDTO findUserByUserId(@Param("userId") String userId);
+  @Query(
+      "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.userid=:userId")
+  UserDTO findUserByUserId(@Param("userId") String userId);
 
-    @Modifying
-    @Transactional
-    @Query("delete from User user where user.userid=:userId")
-    void deleteUserByUserId(@Param("userId") String userId);
+  @Modifying
+  @Transactional
+  @Query("delete from User user where user.userid=:userId")
+  void deleteUserByUserId(@Param("userId") String userId);
 }

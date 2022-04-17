@@ -14,20 +14,22 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PermissionGroupService {
-    private static final List<PermissionGroup> PERMISSION_GROUPS = Lists.newCopyOnWriteArrayList();
+  private static final List<PermissionGroup> PERMISSION_GROUPS = Lists.newCopyOnWriteArrayList();
 
-    private final PermissionGroupRepository repository;
+  private final PermissionGroupRepository repository;
 
-    @PostConstruct
-    public void loadPermissionGroups() {
-        CompletableFuture.runAsync(() -> PERMISSION_GROUPS.addAll(this.repository.findAll()));
-    }
+  @PostConstruct
+  public void loadPermissionGroups() {
+    CompletableFuture.runAsync(() -> PERMISSION_GROUPS.addAll(this.repository.findAll()));
+  }
 
-    public Optional<PermissionGroup> findPermissionGroupByName(String name) {
-        return PERMISSION_GROUPS.stream().filter(group -> group.getName().equalsIgnoreCase(name)).findFirst();
-    }
+  public Optional<PermissionGroup> findPermissionGroupByName(String name) {
+    return PERMISSION_GROUPS.stream()
+        .filter(group -> group.getName().equalsIgnoreCase(name))
+        .findFirst();
+  }
 
-    public List<String> findPermissionGroupNames() {
-        return PERMISSION_GROUPS.stream().map(PermissionGroup::getName).collect(Collectors.toList());
-    }
+  public List<String> findPermissionGroupNames() {
+    return PERMISSION_GROUPS.stream().map(PermissionGroup::getName).collect(Collectors.toList());
+  }
 }

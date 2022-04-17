@@ -13,27 +13,27 @@ import java.security.NoSuchAlgorithmException;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LoginControl {
-    private final UserService service;
+  private final UserService service;
 
-    private UserDTO currentUser = null;
+  private UserDTO currentUser = null;
 
-    public boolean doAuthenticate(String username, String password) throws DatabaseUserException {
-        final String encrypted;
-        try {
-            encrypted = Encryption.sha256(password);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return false;
-        }
-        final UserDTO user = this.service.findUserByIdAndPassword(username, encrypted);
-        if (user == null) {
-            return false;
-        }
-        this.currentUser = user;
-        return true;
+  public boolean doAuthenticate(String username, String password) throws DatabaseUserException {
+    final String encrypted;
+    try {
+      encrypted = Encryption.sha256(password);
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      return false;
     }
-
-    public UserDTO getCurrentUser() {
-        return this.currentUser;
+    final UserDTO user = this.service.findUserByIdAndPassword(username, encrypted);
+    if (user == null) {
+      return false;
     }
+    this.currentUser = user;
+    return true;
+  }
+
+  public UserDTO getCurrentUser() {
+    return this.currentUser;
+  }
 }

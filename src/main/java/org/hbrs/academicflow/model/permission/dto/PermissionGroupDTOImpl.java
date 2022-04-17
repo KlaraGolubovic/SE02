@@ -13,26 +13,26 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PermissionGroupDTOImpl implements PermissionGroupDTO {
-    private String name;
+  private String name;
 
-    public PermissionGroupDTOImpl(PermissionGroup group) {
-        this.name = group.getName();
-    }
+  public PermissionGroupDTOImpl(PermissionGroup group) {
+    this.name = group.getName();
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
-        final PermissionGroupDTOImpl group = (PermissionGroupDTOImpl) obj;
-        return Objects.equals(this.name, group.name);
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null || this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final PermissionGroupDTOImpl group = (PermissionGroupDTOImpl) obj;
+    return Objects.equals(this.name, group.name);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.name);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.name);
+  }
 }
