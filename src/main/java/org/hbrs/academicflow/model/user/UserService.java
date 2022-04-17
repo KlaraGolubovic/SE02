@@ -6,12 +6,13 @@ import org.hbrs.academicflow.model.user.dto.UserDTOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UserService {
+public class UserService implements Serializable{
     private final UserRepository repository;
 
     public UserDTO findUserByIdAndPassword(String id, String password) {

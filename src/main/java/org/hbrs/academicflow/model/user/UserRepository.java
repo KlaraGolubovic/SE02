@@ -8,10 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> , Serializable {
     @Query("select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where user.occupation=:occupation")
     List<UserDTO> findUsersByOccupation(@Param("occupation") String occupation);
 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class PermissionGroupService {
+public class PermissionGroupService implements Serializable {
     private static final List<PermissionGroup> PERMISSION_GROUPS = Lists.newCopyOnWriteArrayList();
 
     private final PermissionGroupRepository repository;
@@ -21,6 +23,10 @@ public class PermissionGroupService {
     @PostConstruct
     public void loadPermissionGroups() {
         CompletableFuture.runAsync(() -> PERMISSION_GROUPS.addAll(this.repository.findAll()));
+    }
+
+    public List<PermissionGroup> findAll(){
+        return PERMISSION_GROUPS;
     }
 
     public Optional<PermissionGroup> findPermissionGroupByName(String name) {
