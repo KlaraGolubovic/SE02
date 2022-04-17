@@ -23,6 +23,7 @@ import com.vaadin.flow.server.PWA;
 
 import org.hbrs.academicflow.control.AuthorizationControl;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
+import org.hbrs.academicflow.model.user.dto.UserDTOImpl;
 import org.hbrs.academicflow.util.Constants;
 
 import java.util.Optional;
@@ -43,9 +44,12 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     private AuthorizationControl authorizationControl;
 
     public AppView() {
-        if (getCurrentUser() == null) {
-            System.out.println("LOG: In Constructor of App View - No User given!");
+        UserDTO current = getCurrentUser();
+        if (current == null) {
+            System.out.println("LOG: In Constructor of AppView - No User given!");
         } else {
+            System.out.println("LOG: Showing AppView logged in as "+current.getFirstName());
+            //ToDo: decide weather UserDTO should have the UserID String as well.
             setUpUI();
         }
     }
