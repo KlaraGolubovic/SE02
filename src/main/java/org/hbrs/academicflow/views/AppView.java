@@ -33,7 +33,7 @@ import java.util.Optional;
  */
 @CssImport("./styles/views/main/main-view.css")
 @Route("main")
-@PWA(name = "APPNAME", shortName = "APPNAME", enableInstallPrompt = false)
+@PWA(name = "AcademicFlow", shortName = "AcademicFlow", enableInstallPrompt = false)
 @JsModule("./styles/shared-styles.js")
 public class AppView extends AppLayout implements BeforeEnterObserver {
 
@@ -145,8 +145,8 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
         // Hinzufügen des Logos
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "APPNAME logo"));
-        logoLayout.add(new H1("APPNAME"));
+        logoLayout.add(new Image("images/logo.png", "AcademicFlow logo"));
+        logoLayout.add(new H1("AcademicFlow"));
 
         // Hinzufügen des Menus inklusive der Tabs
         layout.add(logoLayout, menu);

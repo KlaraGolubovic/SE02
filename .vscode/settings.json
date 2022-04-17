@@ -15,5 +15,6 @@
             "filePath": "src/main/java/org/hbrs/academicflow/AcademicFlowApplication.java",
             "group": "Default"
         }
-    ]
+    ],
+    "svg.preview.background": "black"
 }
