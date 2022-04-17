@@ -11,6 +11,7 @@ public class Constants {
     public static class Pages {
         public static final String MAIN_VIEW = "";
         public static final String LOGIN_VIEW = "login";
+        public static final String WELCOME_VIEW = "welcome";
         public static final String REGISTER_VIEW = "register";
     }
 
