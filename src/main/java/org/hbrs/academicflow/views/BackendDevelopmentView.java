@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -63,7 +64,7 @@ public class BackendDevelopmentView extends Div {
         grid.setDataProvider(dataProvider);
         grid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
         grid.addColumn((PermissionGroup::getUsers)).setHeader("Number of Users").setWidth("200px");
-        //ToDo: fix this to get the size of list instead of list itself
+        // ToDo: fix this to get the size of list instead of list itself
         return grid;
     }
 
@@ -78,6 +79,8 @@ public class BackendDevelopmentView extends Div {
 
     private Component doCreateUserTable() {
         Grid<User> grid = new Grid<>();
+        grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
         ListDataProvider<User> dataProvider = new ListDataProvider<>(this.users);
         grid.setDataProvider(dataProvider);
         grid.addColumn(User::getId).setHeader("ID").setWidth("20px");

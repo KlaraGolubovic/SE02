@@ -14,6 +14,14 @@
         {
             "filePath": "src/main/java/org/hbrs/academicflow/AcademicFlowApplication.java",
             "group": "Default"
+        },
+        {
+            "filePath": "src/main/java/org/hbrs/academicflow/views/RegisterView.java",
+            "group": "Default"
+        },
+        {
+            "filePath": "src/main/java/org/hbrs/academicflow/views/BackendDevelopmentView.java",
+            "group": "Default"
         }
     ],
     "svg.preview.background": "black"

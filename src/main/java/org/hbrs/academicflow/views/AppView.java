@@ -238,15 +238,9 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     /**
      * Methode wird vor der eigentlichen Darstellung der UI-Components aufgerufen.
      * Hier kann man die finale Darstellung noch abbrechen, wenn z.B. der Nutzer
-     * nicht eingeloggt ist
-     * Dann erfolgt hier ein ReDirect auf die Login-Seite. Eine Navigation (Methode
-     * navigate)
-     * ist hier nicht möglich, da die finale Navigation noch nicht stattgefunden
-     * hat.
-     * Diese Methode in der AppLayout sichert auch den un-authorisierten Zugriff auf
-     * die innerliegenden
-     * Views (hier: ShowCarsView und EnterCarView) ab.
-     *
+     * nicht eingeloggt ist.
+     * Nachzulesen in der Dokumentation von Vaadin ,wie es funktioniert
+     * Nachzulesen in unserer Dokumentation, wie wir es einsetzen
      */
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         if (getCurrentUser() == null) {
