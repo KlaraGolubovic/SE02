@@ -1,15 +1,14 @@
 package org.hbrs.academicflow.model.user.dto;
 
+import java.util.List;
 import org.hbrs.academicflow.model.permission.dto.PermissionGroupDTO;
 
-import java.util.List;
-
 public interface UserDTO {
-    int getId();
+  int getId();
 
-    String getFirstName();
+  String getFirstName();
 
-    String getLastName();
+  String getLastName();
 
-    List<PermissionGroupDTO> getGroups();
+  List<PermissionGroupDTO> getGroups();
 }
