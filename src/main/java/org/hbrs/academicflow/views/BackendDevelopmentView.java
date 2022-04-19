@@ -41,7 +41,6 @@ public class BackendDevelopmentView extends Div {
   private final PermissionGroupService permissionService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final List<PermissionGroup> permissionGroups = Lists.newCopyOnWriteArrayList();
-  private ListDataProvider<User> dataProvider;
   private final TextField idField = new TextField("Nutzername");
   private final TextField firstNameField = new TextField("Vorname");
   private final TextField lastNameField = new TextField("Nachname");
@@ -61,8 +60,7 @@ public class BackendDevelopmentView extends Div {
     lastNameField.setValue("Dumbsen");
     mailField.setValue("dummy@mail.de");
     phoneField.setValue("11778892");
-    passwordField.setValue("SportFan04");
-    dataProvider = new ListDataProvider<>(this.users);
+    passwordField.setValue("SportFan04");;
 
     this.users.addAll(this.userService.findAllUsers());
     this.permissionGroups.addAll(this.permissionService.findAll());
@@ -71,7 +69,6 @@ public class BackendDevelopmentView extends Div {
 
   private void doAddPageLayout() {
     add(this.doCreateUserSection());
-    add(doCreateFormLayout());
     add(this.doCreatePermissionGroupSection());
   }
 
@@ -168,18 +165,15 @@ public class BackendDevelopmentView extends Div {
 
   private Component doCreateUserSection() {
     Div div = new Div();
-    // Titel überhalb der Tabelle
     div.add(new H3("All Users"));
-    // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
     div.add(this.doCreateUserTable());
+    div.add(doCreateFormLayout());
     return div;
   }
 
   private Component doCreateUserTable() {
     userGrid = new Grid<>();
-    userGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
-    userGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
-    userGrid.setDataProvider(this.dataProvider);
+    userGrid.setDataProvider(new ListDataProvider<>(this.users));
     userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
     userGrid.addColumn(User::getUserid).setHeader("Username");
     userGrid.addColumn(User::getFirstName).setHeader("First Name");
@@ -188,6 +182,9 @@ public class BackendDevelopmentView extends Div {
     userGrid.addColumn(User::getDateOfBirth).setHeader("Birthdate");
     userGrid.addColumn(User::getOccupation).setHeader("Occupation");
 
+    userGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+    userGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
+    userGrid.addThemeVariants(GridVariant.MATERIAL_COLUMN_DIVIDERS);
     return userGrid;
   }
 }

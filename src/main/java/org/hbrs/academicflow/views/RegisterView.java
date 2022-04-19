@@ -1,6 +1,5 @@
 package org.hbrs.academicflow.views;
 
-import com.google.common.collect.Lists;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -18,8 +17,11 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
@@ -98,9 +100,14 @@ public class RegisterView extends Div {
     user.setEmail(this.mailField.getValue());
     this.groupService
         .findPermissionGroupByName(this.groupSelector.getValue())
-        .map(Lists::newArrayList)
-        .ifPresent(user::setGroups);
+        .ifPresent((PermissionGroup e) -> setPermissionGroupOntoUser(e, user));
     return user;
+  }
+
+  private void setPermissionGroupOntoUser(PermissionGroup e, User user) {
+    List<PermissionGroup> x = new ArrayList<>();
+    x.add(e);
+    user.setGroups(x);
   }
 
   private void doClearForm() {
