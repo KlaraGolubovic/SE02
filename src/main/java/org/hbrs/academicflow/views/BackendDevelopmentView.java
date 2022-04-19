@@ -3,6 +3,7 @@ package org.hbrs.academicflow.views;
 import com.google.common.collect.Lists;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -10,6 +11,7 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
@@ -48,18 +50,33 @@ public class BackendDevelopmentView extends Div {
   private final TextField passwordField = new TextField("Passwort");
 
   private Grid<User> userGrid = new Grid<>();
-  private final Button save = new Button("Add Dummy User");
+  private final Button save = new Button("Add dummy user");
+  private final Button deletedummies = new Button("Remove all dummy users");
 
   @PostConstruct
   public void doInitialSetup() {
     addClassName("show-users-view");
-    idField.setValue("7");
+    idField.setValue("Username5");
     firstNameField.setValue("Dumbo");
     lastNameField.setValue("Dumbsen");
-    mailField.setValue("dum7@my.de");
+    mailField.setValue("dummy@mail.de");
     phoneField.setValue("11778892");
     passwordField.setValue("SportFan04");
     dataProvider = new ListDataProvider<>(this.users);
+
+    this.users.addAll(this.userService.findAllUsers());
+    this.permissionGroups.addAll(this.permissionService.findAll());
+    doAddPageLayout();
+  }
+
+  private void doAddPageLayout() {
+    add(this.doCreateUserSection());
+    add(doCreateFormLayout());
+    add(this.doCreatePermissionGroupSection());
+  }
+
+  private Component usertableActionDiv() {
+    HorizontalLayout div = new HorizontalLayout();
     save.addClickListener(
         event -> {
           try {
@@ -71,16 +88,32 @@ public class BackendDevelopmentView extends Div {
             e.printStackTrace();
           }
         });
-    this.users.addAll(this.userService.findAllUsers());
-    this.permissionGroups.addAll(this.permissionService.findAll());
-    add(this.doCreateUserSection());
-    add(doCreateFormLayout());
-    add(save);
-    add(this.doCreatePermissionGroupSection());
+    save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+    deletedummies.addClickListener(
+        event -> {
+          List<User> all = userService.findAllUsers();
+          for (User user : all) {
+            if (user.getPhone().equals("11778892")) {
+              userService.deleteUser(user.getUserid());
+            }
+          }
+          if (all.size() > userService.findAllUsers().size()) {
+            Notification.show("Dummy users have been deleted.");
+          } else {
+            Notification.show("No dummy users were found.");
+          }
+          this.refreshUserGridData();
+        });
+
+    deletedummies.getElement().getStyle().set("margin-left", "auto");
+    deletedummies.addThemeVariants(ButtonVariant.LUMO_ERROR);
+    div.add(save);
+    div.add(deletedummies);
+    return div;
   }
 
   private void refreshUserGridData() {
-    //DIESE METHODE MACHT MAGISCHE SACHEN MIT DER TABELLE
+    // DIESE METHODE MACHT MAGISCHE SACHEN MIT DER TABELLE
     this.users.clear();
     this.users.addAll(this.userService.findAllUsers());
     this.userGrid.getDataProvider().refreshAll();
@@ -91,6 +124,8 @@ public class BackendDevelopmentView extends Div {
     formLayout.add(idField, mailField);
     formLayout.setColspan(idField, 1);
     formLayout.setColspan(mailField, 1);
+
+    formLayout.add(usertableActionDiv(), 2);
     return formLayout;
   }
 
