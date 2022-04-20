@@ -27,9 +27,7 @@ public class MainView extends VerticalLayout {
   // ToDo: Add registry as mentioned in #1
   public MainView() {
     setSizeFull();
-
     LoginForm component = new LoginForm();
-
     component.addLoginListener(
         e -> {
           boolean isAuthenticated = false;
@@ -51,12 +49,9 @@ public class MainView extends VerticalLayout {
             component.setError(true);
           }
         });
-
     add(component);
     Button button = new Button("Not a user yet? Register now!");
-
     button.addClickListener(clickEvent -> UI.getCurrent().navigate(Constants.Pages.REGISTER_VIEW));
-
     add(button);
     this.setAlignItems(Alignment.CENTER);
   }
