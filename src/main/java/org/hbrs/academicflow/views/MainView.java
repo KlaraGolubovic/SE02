@@ -53,7 +53,7 @@ public class MainView extends VerticalLayout {
         });
 
     add(component);
-    Button button = new Button(" Not a user yet? Register now! ");
+    Button button = new Button("Not a user yet? Register now!");
 
     button.addClickListener(clickEvent -> UI.getCurrent().navigate(Constants.Pages.REGISTER_VIEW));
 

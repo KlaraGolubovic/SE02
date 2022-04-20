@@ -1,5 +1,5 @@
 # Glossar
-# Begrifflichkeiten:
+# Begrifflichkeit:
 ## Anwender
 
 ## Nutzer
