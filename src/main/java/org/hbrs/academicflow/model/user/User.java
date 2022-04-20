@@ -19,7 +19,7 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @Entity
-@Table(name = "user", schema = "academic_flow")
+@Table(name = "user", schema = "backend")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +61,7 @@ public class User {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "user_group",
-      schema = "academic_flow",
+      schema = "backend",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
       inverseJoinColumns =
           @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
