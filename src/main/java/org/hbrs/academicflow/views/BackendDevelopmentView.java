@@ -37,10 +37,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 @PageTitle("Show Everything")
 @CssImport("./styles/views/backend/show-users-view.css")
 public class BackendDevelopmentView extends Div {
+
+
   private final UserService userService;
   private final PermissionGroupService permissionService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final List<PermissionGroup> permissionGroups = Lists.newCopyOnWriteArrayList();
+
+
+
   private final TextField idField = new TextField("Nutzername");
   private final TextField firstNameField = new TextField("Vorname");
   private final TextField lastNameField = new TextField("Nachname");
@@ -60,8 +65,7 @@ public class BackendDevelopmentView extends Div {
     lastNameField.setValue("Dumbsen");
     mailField.setValue("dummy@mail.de");
     phoneField.setValue("11778892");
-    passwordField.setValue("SportFan04");;
-
+    passwordField.setValue("SportFan04");
     this.users.addAll(this.userService.findAllUsers());
     this.permissionGroups.addAll(this.permissionService.findAll());
     doAddPageLayout();
