@@ -19,9 +19,11 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.PWA;
 import java.util.Optional;
+import javax.annotation.PostConstruct;
 import org.hbrs.academicflow.control.AuthorizationControl;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Constants;
+import org.hbrs.academicflow.util.Logger;
 
 /** The main view is a top-level placeholder for other views. */
 @CssImport("./styles/views/main/main-view.css")
@@ -36,16 +38,19 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
 
   private AuthorizationControl authorizationControl;
 
-  public AppView() {
+  @PostConstruct
+  public void doInitialSetup() {
     UserDTO current = getCurrentUser();
     if (current == null) {
-      System.out.println("LOG: In Constructor of AppView - No User given!");
+      Logger.noUserGiven();
     } else {
-      System.out.println("LOG: Showing AppView logged in as " + current.getFirstName());
+      Logger.userLoggedInMessage(current.getFirstName());
       // ToDo: decide weather UserDTO should have the UserID String as well.
       setUpUI();
     }
   }
+
+  
 
   public void setUpUI() {
     // Anzeige des Toggles über den Drawer
@@ -105,7 +110,6 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     MenuBar bar = new MenuBar();
     bar.addItem("logout", e -> logoutUser());
     topRightPanel.add(bar);
-
     layout.add(topRightPanel);
     return layout;
   }
@@ -135,8 +139,6 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     layout.setAlignItems(FlexComponent.Alignment.STRETCH);
 
     HorizontalLayout logoLayout = new HorizontalLayout();
-
-    // Hinzufügen des Logos
     logoLayout.setId("logo");
     logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
     logoLayout.add(new Image("images/logo.png", "AcademicFlow logo"));
