@@ -4,8 +4,10 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import org.hbrs.academicflow.control.LoginControl;
@@ -27,7 +29,11 @@ public class MainView extends VerticalLayout {
   // ToDo: Add registry as mentioned in #1
   public MainView() {
     setSizeFull();
+    Div blue = new Div();
+    blue.addClassName("backColorBlue");
     LoginForm component = new LoginForm();
+    Element elem = component.getElement();
+    elem.getClassList().add("backColorBlue");
     component.addLoginListener(
         e -> {
           boolean isAuthenticated = false;
@@ -49,7 +55,8 @@ public class MainView extends VerticalLayout {
             component.setError(true);
           }
         });
-    add(component);
+    blue.add(component);
+    add(blue);
     Button button = new Button("Not a user yet? Register now!");
     button.addClickListener(clickEvent -> UI.getCurrent().navigate(Constants.Pages.REGISTER_VIEW));
     add(button);

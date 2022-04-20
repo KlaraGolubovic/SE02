@@ -8,3 +8,13 @@
   margin-bottom: var(--lumo-space-l);
   margin-top: var(--lumo-space-m);
 }
+
+.backColorBlue{
+  background-color: #c0faef;
+}
+.vaadin-login-native-form-wrapper{
+  background-color: #c0faef !important;
+}
+.vaadin-login-form-wrapper{
+  background-color: #c0faef !important;
+}
