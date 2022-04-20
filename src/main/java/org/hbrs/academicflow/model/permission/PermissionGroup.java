@@ -3,6 +3,8 @@ package org.hbrs.academicflow.model.permission;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +24,10 @@ public class PermissionGroup {
       unique = true,
       nullable = false,
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
-  private String name;
+  private String name = "";
 
-  @ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
-  private List<User> users;
+  @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
+  private List<User> users = Lists.newArrayList();
 
   @Override
   public boolean equals(Object obj) {
