@@ -5,7 +5,6 @@ import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
@@ -104,7 +103,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
 
     // Logout-Button am rechts-oberen Rand.
     MenuBar bar = new MenuBar();
-    MenuItem item = bar.addItem("Logout", e -> logoutUser());
+    bar.addItem("logout", e -> logoutUser());
     topRightPanel.add(bar);
 
     layout.add(topRightPanel);
@@ -112,9 +111,12 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
   }
 
   private void logoutUser() {
-    UI ui = this.getUI().get();
-    ui.getSession().close();
-    ui.getPage().setLocation("/");
+    this.getUI()
+        .ifPresent(
+            ui -> {
+              ui.getSession().close();
+              ui.getPage().setLocation("/");
+            });
   }
 
   /**
