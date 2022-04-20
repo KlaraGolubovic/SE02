@@ -162,7 +162,7 @@ public class BackendDevelopmentView extends Div {
         new ListDataProvider<>(this.permissionGroups);
     grid.setDataProvider(dataProviderPG);
     grid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
-    grid.addColumn((PermissionGroup::getUsers)).setHeader("Number of Users").setWidth("200px");
+    grid.addColumn(permissionGroup -> permissionGroup.getUsers().size()).setHeader("Number of Users").setWidth("200px");
     // ToDo: fix this to get the size of list instead of list itself
     return grid;
   }
