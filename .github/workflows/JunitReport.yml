@@ -1,0 +1,21 @@
+name: build and test
+on:
+  push:
+    branches: [ main ]
+    paths: 
+    - 'src/**'
+    - '.github/workflows/JunitReport.yml'
+
+jobs:
+  build:
+    name: Build and Run Junit Reporting Tool
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin' 
+          java-version: '17'
+      - name: JUNIT Test Report Tool
+        uses: JohnMeyerhoff/JunitAnnotations@v1.2.0
+        with:
+          source_dir: './src'
