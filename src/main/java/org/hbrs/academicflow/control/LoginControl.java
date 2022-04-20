@@ -17,14 +17,7 @@ public class LoginControl {
   private UserDTO currentUser = null;
 
   public boolean doAuthenticate(String username, String password) throws DatabaseUserException {
-    final String encrypted;
-    try {
-      encrypted = Encryption.sha256(password);
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
-      return false;
-    }
-    final UserDTO user = this.service.findUserByIdAndPassword(username, encrypted);
+    final UserDTO user = this.service.findUserByIdAndPassword(username, password);
     if (user == null) {
       return false;
     }
