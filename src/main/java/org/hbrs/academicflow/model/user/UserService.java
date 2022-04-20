@@ -2,9 +2,11 @@ package org.hbrs.academicflow.model.user;
 
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
+import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service
@@ -13,7 +15,14 @@ public class UserService {
   private final UserRepository repository;
 
   public UserDTO findUserByIdAndPassword(String id, String password) {
-    return this.repository.findUserByIdAndPassword(id, password);
+    final String encrypted;
+    try {
+      encrypted = Encryption.sha256(password);
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return this.repository.findUserByIdAndPassword(id, encrypted);
   }
 
   public UserDTO findUserById(String id) {
