@@ -21,10 +21,11 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @Entity
 @Table(name = "user", schema = "backend")
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", unique = true, nullable = false)
-  private int id = -1;
+  @Column(name = "user_id", unique = true, nullable = false)
+  private int user_id = -1;
 
   @Basic
   @Column(name = "date_of_birth", nullable = false)
@@ -55,16 +56,16 @@ public class User {
   private String phone = "";
 
   @Basic
-  @Column(name = "userid", nullable = false)
-  private String userid = "";
+  @Column(name = "username", nullable = false)
+  private String username = "";
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "user_group",
       schema = "backend",
-      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
       inverseJoinColumns =
-          @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
+          @JoinColumn(name = "group_name", referencedColumnName = "group_name", nullable = false))
   private List<PermissionGroup> groups = new ArrayList<>();
 
   @Override
@@ -76,11 +77,11 @@ public class User {
       return false;
     }
     final User user = (User) obj;
-    return this.id == user.id;
+    return this.user_id == user.user_id;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+    return Objects.hash(this.user_id);
   }
 }

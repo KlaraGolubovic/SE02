@@ -26,6 +26,9 @@ public class PermissionGroup {
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
   private String name = "";
 
+  @Column(name = "level", nullable = false)
+  private int level = -1;
+
   @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
   private List<User> users = Lists.newArrayList();
 
@@ -38,11 +41,11 @@ public class PermissionGroup {
       return false;
     }
     final PermissionGroup group = (PermissionGroup) obj;
-    return Objects.equals(this.name, group.name);
+    return Objects.equals(this.name, group.name) && this.level == group.level;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.name);
+    return Objects.hash(this.name, this.level);
   }
 }

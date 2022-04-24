@@ -13,10 +13,16 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @NoArgsConstructor
 public class PermissionGroupDTOImpl implements PermissionGroupDTO {
   private String name;
-
+  private int level;
   public PermissionGroupDTOImpl(PermissionGroup group) {
     this.name = group.getName();
+    this.level = group.getLevel();
   }
+
+  public PermissionGroupDTOImpl(String name) {
+    this.name = name;
+  }
+
 
   @Override
   public boolean equals(Object obj) {
@@ -27,11 +33,11 @@ public class PermissionGroupDTOImpl implements PermissionGroupDTO {
       return false;
     }
     final PermissionGroupDTOImpl group = (PermissionGroupDTOImpl) obj;
-    return Objects.equals(this.name, group.name);
+    return Objects.equals(this.name, group.name) && this.level == group.level;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.name);
+    return Objects.hash(this.name, this.level);
   }
 }
