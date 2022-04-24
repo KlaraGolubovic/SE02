@@ -3,10 +3,7 @@ package org.hbrs.academicflow.model.user;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Encryption;
-
-//import org.jetbrains.annotations.Nullable;
-import org.springframework.lang.Nullable;
-
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
