@@ -16,7 +16,8 @@ CREATE TABLE USER (
 );
 
 CREATE TABLE PERMISSION_GROUP(
-	group_name varchar NOT NULL
+	group_name varchar NOT NULL,
+	level int NOT NULL DEFAULT -1
 );
 
 CREATE TABLE USER_GROUP(
