@@ -30,13 +30,13 @@ class UserTests {
     user.setOccupation("STUDENT");
     user.setPassword("StrongPassword");
     user.setPhone("+49 123 456789");
-    user.setUserid(DEMO_USER_ID);
+    user.setUsername(DEMO_USER_ID);
     user.setGroups(Collections.emptyList());
 
     final User result = this.service.doCreateUser(user);
 
     assertNotNull(result);
-    assertEquals(user.getUserid(), result.getUserid());
+    assertEquals(user.getUsername(), result.getUsername());
   }
 
   @Test
@@ -46,6 +46,6 @@ class UserTests {
 
   @Test
   void doTestUserSelection() {
-    assertNull(this.service.findUserById(DEMO_USER_ID));
+    assertNull(this.service.findUserByUsername(DEMO_USER_ID));
   }
 }

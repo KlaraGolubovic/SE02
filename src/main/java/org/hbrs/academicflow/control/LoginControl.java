@@ -17,7 +17,7 @@ public class LoginControl {
   private UserDTO currentUser = null;
 
   public boolean doAuthenticate(String username, String password) throws DatabaseUserException {
-    final UserDTO user = this.service.findUserByIdAndPassword(username, password);
+    final UserDTO user = this.service.findUserByUsernameAndPassword(username, password);
     if (user == null) {
       return false;
     }
