@@ -1,7 +1,9 @@
 package org.hbrs.academicflow.views;
 
 import com.google.common.collect.Lists;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -52,10 +54,12 @@ public class BackendDevelopmentView extends Div {
   private final TextField mailField = new TextField("E-Mail");
   private final TextField phoneField = new TextField("Telefonnummer");
   private final TextField passwordField = new TextField("Passwort");
+  private final TextField pgName = new TextField("Permisson Group name");
 
   private Grid<User> userGrid = new Grid<>();
   private final Button save = new Button("Add dummy user");
   private final Button deletedummies = new Button("Remove all dummy users");
+  private final Button savePG = new Button("Add Permisson Group");
 
   @PostConstruct
   public void doInitialSetup() {
@@ -135,8 +139,34 @@ public class BackendDevelopmentView extends Div {
     // Titel überhalb der Tabelle
     div.add(new H3("All Permission Groups"));
     // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
-    div.add(this.doCreatePermissionGroupTable());
+    Grid<PermissionGroup> permissonGroupTable = this.doCreatePermissionGroupTable();
+    div.add(permissonGroupTable);
+    savePG.addClickListener( event -> {
+      if(!pgName.getValue().equals("")) {
+        PermissionGroup pg = new PermissionGroup();
+        pg.setName(pgName.getValue());
+        permissionService.doCreatePermissionGroup(pg);
+        if (permissionService.findAll().size() > this.permissionGroups.size()) {
+          Notification.show("Permission Group has been created");
+        }else{
+          Notification.show("Permission Group creation failed");
+        }
+      }
+      this.refreshPermissionGroupGridData(permissonGroupTable);
+    });
+    HorizontalLayout hl = new HorizontalLayout();
+    pgName.getElement().getStyle().set("margin-left", "auto");
+    savePG.getElement().getStyle().set("margin-right", "auto");
+    hl.add(pgName, savePG);
+    div.add(hl);
     return div;
+  }
+
+  private void refreshPermissionGroupGridData(Grid<PermissionGroup> permissonGroupTable) {
+    //TODO The table refresch doesn't work!!!
+    this.permissionGroups.clear();
+    this.permissionGroups.addAll(this.permissionService.findAll());
+    permissonGroupTable.getDataProvider().refreshAll();
   }
 
   private User dummyUser() throws NoSuchAlgorithmException {
@@ -156,7 +186,7 @@ public class BackendDevelopmentView extends Div {
     return user;
   }
 
-  private Component doCreatePermissionGroupTable() {
+  private Grid<PermissionGroup> doCreatePermissionGroupTable() {
     Grid<PermissionGroup> grid = new Grid<>();
     ListDataProvider<PermissionGroup> dataProviderPG =
         new ListDataProvider<>(this.permissionGroups);

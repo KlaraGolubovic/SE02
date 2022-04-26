@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserService implements Serializable {
   private final UserRepository repository;
 

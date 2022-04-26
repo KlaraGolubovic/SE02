@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.hbrs.academicflow.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,9 @@ public class PermissionGroupService implements Serializable {
 
   public List<String> findPermissionGroupNames() {
     return PERMISSION_GROUPS.stream().map(PermissionGroup::getName).collect(Collectors.toList());
+  }
+
+  public PermissionGroup doCreatePermissionGroup(PermissionGroup pg) {
+    return this.repository.save(pg);
   }
 }
