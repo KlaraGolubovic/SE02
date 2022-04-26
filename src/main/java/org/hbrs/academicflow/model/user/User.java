@@ -25,7 +25,7 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id", unique = true, nullable = false)
-  private int user_id = -1;
+  private int id = -1;
 
   @Basic
   @Column(name = "date_of_birth", nullable = false)
@@ -77,11 +77,11 @@ public class User {
       return false;
     }
     final User user = (User) obj;
-    return this.user_id == user.user_id;
+    return this.id == user.id;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.user_id);
+    return Objects.hash(this.id);
   }
 }

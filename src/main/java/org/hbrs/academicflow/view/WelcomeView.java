@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;

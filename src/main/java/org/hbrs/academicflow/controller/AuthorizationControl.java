@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.control;
+package org.hbrs.academicflow.controller;
 
 import java.util.Arrays;
 import java.util.List;
