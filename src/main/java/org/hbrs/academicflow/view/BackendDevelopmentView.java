@@ -57,6 +57,7 @@ public class BackendDevelopmentView extends Div {
   private final TextField pgName = new TextField("Permisson Group name");
 
   private Grid<User> userGrid = new Grid<>();
+  private Grid<PermissionGroup> permissionGrid = new Grid<>();
   private final Button save = new Button("Add dummy user");
   private final Button deletedummies = new Button("Remove all dummy users");
   private final Button savePG = new Button("Add Permisson Group");
@@ -91,18 +92,22 @@ public class BackendDevelopmentView extends Div {
 
           } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-          }
+          }catch (IllegalArgumentException e) {
+              System.err.println(e.getMessage());
+            }
         });
     save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     deletedummies.addClickListener(
         event -> {
           List<User> all = userService.findAllUsers();
+          boolean del = false;
           for (User user : all) {
             if (user.getPhone().equals("11778892")) {
+              del = true;
               userService.deleteUser(user.getUsername());
             }
           }
-          if (all.size() > userService.findAllUsers().size()) {
+          if (del) {
             Notification.show("Dummy users have been deleted.");
           } else {
             Notification.show("No dummy users were found.");
@@ -123,6 +128,12 @@ public class BackendDevelopmentView extends Div {
     this.users.addAll(this.userService.findAllUsers());
     this.userGrid.getDataProvider().refreshAll();
   }
+  
+    private void refreshPermissionGroupGridData() {
+      this.permissionGroups.clear();
+      this.permissionGroups.addAll(this.permissionService.findAll());
+      this.permissionGrid.getDataProvider().refreshAll();
+    }
 
   private Component doCreateFormLayout() {
     FormLayout formLayout = new FormLayout();
@@ -136,37 +147,28 @@ public class BackendDevelopmentView extends Div {
 
   private Component doCreatePermissionGroupSection() {
     Div div = new Div();
-    // Titel überhalb der Tabelle
     div.add(new H3("All Permission Groups"));
-    // Hinzufügen der Tabelle (bei Vaadin: ein Grid)
-    Grid<PermissionGroup> permissonGroupTable = this.doCreatePermissionGroupTable();
-    div.add(permissonGroupTable);
+    this.doCreatePermissionGroupTable();
+    div.add(this.permissionGrid);
     savePG.addClickListener( event -> {
       if(!pgName.getValue().equals("")) {
         PermissionGroup pg = new PermissionGroup();
         pg.setName(pgName.getValue());
         permissionService.doCreatePermissionGroup(pg);
-        if (permissionService.findAll().size() > this.permissionGroups.size()) {
-          Notification.show("Permission Group has been created");
-        }else{
-          Notification.show("Permission Group creation failed");
-        }
+        Notification.show("Permission Group has been created");
+        this.refreshPermissionGroupGridData(); 
       }
-      this.refreshPermissionGroupGridData(permissonGroupTable);
+      
     });
-    HorizontalLayout hl = new HorizontalLayout();
     pgName.getElement().getStyle().set("margin-left", "auto");
     savePG.getElement().getStyle().set("margin-right", "auto");
-    hl.add(pgName, savePG);
-    div.add(hl);
+    FormLayout formLayout = new FormLayout();
+    formLayout.add(pgName, savePG);
+    formLayout.setColspan(pgName, 1);
+    formLayout.setColspan(savePG, 1);
+    
+    div.add(formLayout);
     return div;
-  }
-
-  private void refreshPermissionGroupGridData(Grid<PermissionGroup> permissonGroupTable) {
-    //TODO The table refresch doesn't work!!!
-    this.permissionGroups.clear();
-    this.permissionGroups.addAll(this.permissionService.findAll());
-    permissonGroupTable.getDataProvider().refreshAll();
   }
 
   private User dummyUser() throws NoSuchAlgorithmException {
@@ -187,14 +189,11 @@ public class BackendDevelopmentView extends Div {
   }
 
   private Grid<PermissionGroup> doCreatePermissionGroupTable() {
-    Grid<PermissionGroup> grid = new Grid<>();
-    ListDataProvider<PermissionGroup> dataProviderPG =
-        new ListDataProvider<>(this.permissionGroups);
-    grid.setDataProvider(dataProviderPG);
-    grid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
-    grid.addColumn(permissionGroup -> permissionGroup.getUsers().size()).setHeader("Number of Users").setWidth("200px");
+    this.permissionGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));
+    this.permissionGrid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
+    this.permissionGrid.addColumn(permissionGroup -> permissionGroup.getUsers().size()).setHeader("Number of Users").setWidth("200px");
     // ToDo: fix this to get the size of list instead of list itself
-    return grid;
+    return this.permissionGrid;
   }
 
   private Component doCreateUserSection() {
