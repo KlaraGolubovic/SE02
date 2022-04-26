@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.control.exception;
+package org.hbrs.academicflow.controller.exception;
 
 public class DatabaseUserException extends Exception {
   private String reason = null;

@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view;
 
 import com.google.common.collect.Lists;
 import com.vaadin.flow.component.Component;
