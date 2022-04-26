@@ -17,7 +17,7 @@ public class UserService implements Serializable {
   private final UserRepository repository;
 
   @Nullable
-  public UserDTO findUserByUsernameAndPassword(String id, String password) {
+  public UserDTO findUserByUsernameAndPassword(String username, String password) {
     final String encrypted;
     try {
       encrypted = Encryption.sha256(password);
@@ -25,7 +25,7 @@ public class UserService implements Serializable {
       e.printStackTrace();
       return null;
     }
-    return this.repository.findUserByIdAndPassword(id, encrypted);
+    return this.repository.findUserByUsernameAndPassword(username, encrypted);
   }
 
   public UserDTO findUserByUsername(String username) {

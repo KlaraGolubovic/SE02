@@ -178,7 +178,7 @@ public class BackendDevelopmentView extends Div {
   private Component doCreateUserTable() {
     userGrid = new Grid<>();
     userGrid.setDataProvider(new ListDataProvider<>(this.users));
-    userGrid.addColumn(User::getUser_id).setHeader("ID").setWidth("20px");
+    userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
     userGrid.addColumn(User::getUsername).setHeader("Username");
     userGrid.addColumn(User::getFirstName).setHeader("First Name");
     userGrid.addColumn(User::getLastName).setHeader("Last Name");
