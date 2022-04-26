@@ -90,7 +90,7 @@ public class RegisterView extends Div {
 
   private User doCreateUser() throws NoSuchAlgorithmException {
     final User user = new User();
-    user.setUserid(this.idField.getValue());
+    user.setUsername(this.idField.getValue());
     user.setFirstName(this.firstNameField.getValue());
     user.setLastName(this.lastNameField.getValue());
     user.setPhone(this.phoneField.getValue());

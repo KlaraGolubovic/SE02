@@ -95,7 +95,7 @@ public class BackendDevelopmentView extends Div {
           List<User> all = userService.findAllUsers();
           for (User user : all) {
             if (user.getPhone().equals("11778892")) {
-              userService.deleteUser(user.getUserid());
+              userService.deleteUser(user.getUsername());
             }
           }
           if (all.size() > userService.findAllUsers().size()) {
@@ -141,7 +141,7 @@ public class BackendDevelopmentView extends Div {
 
   private User dummyUser() throws NoSuchAlgorithmException {
     final User user = new User();
-    user.setUserid(this.idField.getValue());
+    user.setUsername(this.idField.getValue());
     user.setFirstName(this.firstNameField.getValue());
     user.setLastName(this.lastNameField.getValue());
     user.setPhone(this.phoneField.getValue());
@@ -178,8 +178,8 @@ public class BackendDevelopmentView extends Div {
   private Component doCreateUserTable() {
     userGrid = new Grid<>();
     userGrid.setDataProvider(new ListDataProvider<>(this.users));
-    userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
-    userGrid.addColumn(User::getUserid).setHeader("Username");
+    userGrid.addColumn(User::getUser_id).setHeader("ID").setWidth("20px");
+    userGrid.addColumn(User::getUsername).setHeader("Username");
     userGrid.addColumn(User::getFirstName).setHeader("First Name");
     userGrid.addColumn(User::getLastName).setHeader("Last Name");
     userGrid.addColumn(User::getEmail).setHeader("E-Mail").setWidth("180px");

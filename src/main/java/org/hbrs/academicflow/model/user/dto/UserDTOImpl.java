@@ -16,13 +16,13 @@ import org.hbrs.academicflow.model.user.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTOImpl implements UserDTO {
-  private int id;
+  private int user_id;
   private String firstName;
   private String lastName;
   private List<PermissionGroupDTO> groups;
 
   public UserDTOImpl(User user) {
-    this.id = user.getId();
+    this.user_id = user.getUser_id();
     this.firstName = user.getFirstName();
     this.lastName = user.getLastName();
     this.groups =
@@ -35,8 +35,8 @@ public class UserDTOImpl implements UserDTO {
   @Override
   public String toString() {
     return "UserDTOImpl{"
-        + "id="
-        + id
+        + "user_id="
+        + user_id
         + ", firstname='"
         + firstName
         + '\''
@@ -46,5 +46,10 @@ public class UserDTOImpl implements UserDTO {
         + ", roles="
         + groups
         + '}';
+  }
+
+  @Override
+  public int getId() {
+    return user_id;
   }
 }

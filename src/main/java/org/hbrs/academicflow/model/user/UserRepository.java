@@ -19,16 +19,16 @@ public interface UserRepository extends JpaRepository<User, Integer>, Serializab
 
   @Query(
       "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"
-          + " user.userid=:userId and user.password=:password")
-  UserDTO findUserByIdAndPassword(@Param("userId") String id, @Param("password") String password);
+          + " user.user_id=:user_id and user.password=:password")
+  UserDTO findUserByIdAndPassword(@Param("user_id") String user_id, @Param("password") String password);
 
   @Query(
       "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"
-          + " user.userid=:userId")
-  UserDTO findUserByUserId(@Param("userId") String userId);
+          + " user.username=:username")
+  UserDTO findUserByUsername(@Param("username") String username);
 
   @Modifying
   @Transactional
-  @Query("delete from User user where user.userid=:userId")
-  void deleteUserByUserId(@Param("userId") String userId);
+  @Query("delete from User user where user.username=:username")
+  void deleteUserByUsername(@Param("username") String username);
 }

@@ -17,7 +17,7 @@ public class UserService implements Serializable {
   private final UserRepository repository;
 
   @Nullable
-  public UserDTO findUserByIdAndPassword(String id, String password) {
+  public UserDTO findUserByUsernameAndPassword(String id, String password) {
     final String encrypted;
     try {
       encrypted = Encryption.sha256(password);
@@ -28,16 +28,16 @@ public class UserService implements Serializable {
     return this.repository.findUserByIdAndPassword(id, encrypted);
   }
 
-  public UserDTO findUserById(String id) {
-    return this.repository.findUserByUserId(id);
+  public UserDTO findUserByUsername(String username) {
+    return this.repository.findUserByUsername(username);
   }
 
   public User doCreateUser(User user) {
     return this.repository.save(user);
   }
 
-  public void deleteUser(String userId) {
-    this.repository.deleteUserByUserId(userId);
+  public void deleteUser(String username) {
+    this.repository.deleteUserByUsername(username);
   }
 
   public List<User> findAllUsers() {
