@@ -1,7 +1,17 @@
 # Glossar
 # Begrifflichkeit:
-## Anwender
 
-## Nutzer
+## User
+Ein Nutzer der unsere Anwendung benutzt und ein Konto besitzt.
 
 ## Startseite
+
+## Journey Map
+Eine Visualisierung eines Prozesses durch eine Anwendung,durch die eine Person geht,um ein bestimmtes Ziel zu erreichen.  
+
+## Eva
+Earend Value Analyse um den Fortschritt von Anforderungen zu bewerten.
+
+## Valide
+Registrierung eines Benutzers : keine doppelte E-Mail Adresse, Passwort nach vorgegebenen Standarts...
+

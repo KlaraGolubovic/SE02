@@ -1,8 +1,9 @@
-package org.hbrs.academicflow.control;
+package org.hbrs.academicflow.controller;
 
 import java.security.NoSuchAlgorithmException;
 import lombok.RequiredArgsConstructor;
-import org.hbrs.academicflow.control.exception.DatabaseUserException;
+
+import org.hbrs.academicflow.controller.exception.DatabaseUserException;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Encryption;
