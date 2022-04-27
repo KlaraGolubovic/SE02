@@ -1,9 +1,7 @@
 package org.hbrs.academicflow.view;
 
 import com.google.common.collect.Lists;
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -40,13 +38,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CssImport("./styles/views/backend/show-users-view.css")
 public class BackendDevelopmentView extends Div {
 
-
   private final UserService userService;
   private final PermissionGroupService permissionService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final List<PermissionGroup> permissionGroups = Lists.newCopyOnWriteArrayList();
-
-
 
   private final TextField idField = new TextField("Nutzername");
   private final TextField firstNameField = new TextField("Vorname");
@@ -92,9 +87,18 @@ public class BackendDevelopmentView extends Div {
 
           } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-          }catch (IllegalArgumentException e) {
-              System.err.println(e.getMessage());
+          } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+          } catch (org.springframework.dao.DataIntegrityViolationException die) {
+            System.err.println(die);
+            if (die.getRootCause().getMessage().contains("email")) {
+              Notification.show("Error: email adress already in use: " + this.mailField.getValue());
+
+            } else {
+              Notification.show(
+                  "Error: something that is not the email is restricting user-creation");
             }
+          }
         });
     save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     deletedummies.addClickListener(
@@ -102,7 +106,7 @@ public class BackendDevelopmentView extends Div {
           List<User> all = userService.findAllUsers();
           boolean del = false;
           for (User user : all) {
-            if (user.getPhone().equals("11778892")) {
+            if (user.getPhone().equals("11778892")) { // remove this condition to delete everyone
               del = true;
               userService.deleteUser(user.getUsername());
             }
@@ -128,12 +132,12 @@ public class BackendDevelopmentView extends Div {
     this.users.addAll(this.userService.findAllUsers());
     this.userGrid.getDataProvider().refreshAll();
   }
-  
-    private void refreshPermissionGroupGridData() {
-      this.permissionGroups.clear();
-      this.permissionGroups.addAll(this.permissionService.findAll());
-      this.permissionGrid.getDataProvider().refreshAll();
-    }
+
+  private void refreshPermissionGroupGridData() {
+    this.permissionGroups.clear();
+    this.permissionGroups.addAll(this.permissionService.findAll());
+    this.permissionGrid.getDataProvider().refreshAll();
+  }
 
   private Component doCreateFormLayout() {
     FormLayout formLayout = new FormLayout();
@@ -150,23 +154,23 @@ public class BackendDevelopmentView extends Div {
     div.add(new H3("All Permission Groups"));
     this.doCreatePermissionGroupTable();
     div.add(this.permissionGrid);
-    savePG.addClickListener( event -> {
-      if(!pgName.getValue().equals("")) {
-        PermissionGroup pg = new PermissionGroup();
-        pg.setName(pgName.getValue());
-        permissionService.doCreatePermissionGroup(pg);
-        Notification.show("Permission Group has been created");
-        this.refreshPermissionGroupGridData(); 
-      }
-      
-    });
+    savePG.addClickListener(
+        event -> {
+          if (!pgName.getValue().equals("")) {
+            PermissionGroup pg = new PermissionGroup();
+            pg.setName(pgName.getValue());
+            permissionService.doCreatePermissionGroup(pg);
+            Notification.show("Permission Group has been created");
+            this.refreshPermissionGroupGridData();
+          }
+        });
     pgName.getElement().getStyle().set("margin-left", "auto");
     savePG.getElement().getStyle().set("margin-right", "auto");
     FormLayout formLayout = new FormLayout();
     formLayout.add(pgName, savePG);
     formLayout.setColspan(pgName, 1);
     formLayout.setColspan(savePG, 1);
-    
+
     div.add(formLayout);
     return div;
   }
@@ -191,7 +195,10 @@ public class BackendDevelopmentView extends Div {
   private Grid<PermissionGroup> doCreatePermissionGroupTable() {
     this.permissionGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));
     this.permissionGrid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
-    this.permissionGrid.addColumn(permissionGroup -> permissionGroup.getUsers().size()).setHeader("Number of Users").setWidth("200px");
+    this.permissionGrid
+        .addColumn(permissionGroup -> permissionGroup.getUsers().size())
+        .setHeader("Number of Users")
+        .setWidth("200px");
     // ToDo: fix this to get the size of list instead of list itself
     return this.permissionGrid;
   }
