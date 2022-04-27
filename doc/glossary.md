@@ -1,6 +1,4 @@
 # Glossar
-## **Begrifflichkeiten:**
-
 ## **User**
 Ein Nutzer der unsere Anwendung benutzt und ein Konto besitzt.
 
