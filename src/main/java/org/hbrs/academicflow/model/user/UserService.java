@@ -1,6 +1,8 @@
 package org.hbrs.academicflow.model.user;
 
 import lombok.RequiredArgsConstructor;
+
+import org.hbrs.academicflow.controller.Uservalidation;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Encryption;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +35,11 @@ public class UserService implements Serializable {
   }
 
   public User doCreateUser(User user) {
-    return this.repository.save(user);
+    if(Uservalidation.isValidNewUser(user)){
+      return this.repository.save(user);
+    }
+    throw new IllegalArgumentException("Wrong Email");
+    //TODO: Throw this specifically inside of the validation method
   }
 
   public void deleteUser(String username) {

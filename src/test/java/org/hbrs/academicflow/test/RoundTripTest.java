@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Optional;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserRepository;
+import org.hbrs.academicflow.model.user.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RoundTripTest {
 
   @Autowired private UserRepository userRepository;
+
+  @Autowired private UserService userService;
 
   @Test
   /**
@@ -53,6 +56,22 @@ public class RoundTripTest {
     System.out.println("Wrapper: " + wrapperAfterDelete);
     assertFalse(wrapperAfterDelete.isPresent());
   }
+
+
+@Test
+   void registerWithWrongEmail() {
+
+    // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
+    // save()
+    // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
+    User user = new User();
+    user.setEmail("abc");
+    user.setFirstName("Torben");
+    user.setLastName("Michel");
+    // und ab auf die DB damit (save!)
+    assertThrows(IllegalArgumentException.class, () -> userService.doCreateUser(user));
+  }
+
 
   @AfterEach
   public void deleteUser() {
