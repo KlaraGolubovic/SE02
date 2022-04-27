@@ -23,7 +23,7 @@ Benutzer können sich einloggen<br/><br/>
 • Prozesse durch eindeutige Vollverben ausdrücken: nicht nur einloggen <br/>
 • Normalisierung auflösen: neuer Glossareintrag <br/><br/>
 **W- Fragen:**<br/>
-Wie wird Funktion durchgeführt: UI, Controller, weiter + zurückleiten <br/>
-An wem wird sie durchgeführt: ein Benutzer = unternehmen oder Student einloggen <br/>
-Wann: Wenn ein Unternehmen Mitarbeiter braucht, Student nach Stellenanzeigen suchen möchte <br/>
-Wie oft: unendlich
+- Wie wird Funktion durchgeführt: UI, Controller, weiter + zurückleiten <br/>
+- An wem wird sie durchgeführt: ein Benutzer = unternehmen oder Student einloggen <br/>
+- Wann: Wenn ein Unternehmen Mitarbeiter braucht, Student nach Stellenanzeigen suchen möchte <br/>
+- Wie oft: unendlich
