@@ -64,9 +64,9 @@ public class User {
       name = "user_group",
       schema = "backend",
       joinColumns =
-          @JoinColumn(name = "user", referencedColumnName = "user_id", nullable = false),
+          @JoinColumn(name = "relation_user", referencedColumnName = "user_id", nullable = false),
       inverseJoinColumns =
-          @JoinColumn(name = "group", referencedColumnName = "group_name", nullable = false))
+          @JoinColumn(name = "relation_group", referencedColumnName = "group_name", nullable = false))
   private List<PermissionGroup> groups = new ArrayList<>();
 
   @Override
