@@ -20,13 +20,13 @@ import org.hbrs.academicflow.model.user.User;
 public class PermissionGroup {
   @Id
   @Column(
-      name = "name",
+      name = "group_name",
       unique = true,
       nullable = false,
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
   private String name = "";
 
-  @Column(name = "level", nullable = false)
+  @Column(name = "group_level", nullable = false)
   private int level = -1;
 
   @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
