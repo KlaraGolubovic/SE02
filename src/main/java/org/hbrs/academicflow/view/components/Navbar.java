@@ -2,7 +2,6 @@ package org.hbrs.academicflow.view.components;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -43,10 +42,10 @@ public class Navbar extends Div {
 
     // Logout-Button am rechts-oberen Rand.
     MenuBar bar = new MenuBar();
-    //MenuItem item = bar.addItem("Logout", e -> logoutUser());
+    // MenuItem item = bar.addItem("Logout", e -> logoutUser());
     topRightPanel.add(bar);
 
     layout.add(topRightPanel);
     return layout;
-    }
+  }
 }

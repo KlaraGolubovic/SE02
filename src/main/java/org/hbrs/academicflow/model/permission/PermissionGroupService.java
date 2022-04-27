@@ -36,4 +36,8 @@ public class PermissionGroupService implements Serializable {
   public List<String> findPermissionGroupNames() {
     return PERMISSION_GROUPS.stream().map(PermissionGroup::getName).collect(Collectors.toList());
   }
+
+  public PermissionGroup doCreatePermissionGroup(PermissionGroup pg) {
+    return this.repository.save(pg);
+  }
 }

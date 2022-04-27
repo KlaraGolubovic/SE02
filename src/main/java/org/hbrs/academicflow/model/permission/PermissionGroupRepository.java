@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PermissionGroupRepository extends JpaRepository<PermissionGroup, String> ,Serializable {
+public interface PermissionGroupRepository
+    extends JpaRepository<PermissionGroup, String>, Serializable {
   @Query(
       "select new org.hbrs.academicflow.model.permission.dto.PermissionGroupDTOImpl(group) from"
           + " PermissionGroup group where group.name=:name")

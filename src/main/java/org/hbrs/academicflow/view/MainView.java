@@ -10,7 +10,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-
 import org.hbrs.academicflow.controller.LoginControl;
 import org.hbrs.academicflow.controller.exception.DatabaseUserException;
 import org.hbrs.academicflow.model.user.dto.UserDTO;

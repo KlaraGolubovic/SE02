@@ -1,10 +1,9 @@
 package org.hbrs.academicflow.model.permission;
 
+import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
-
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
