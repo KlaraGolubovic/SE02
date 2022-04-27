@@ -26,6 +26,7 @@ public class WelcomeView extends Div {
 
   @PropertyId("roles")
   private final ComboBox<String> groupSelector = new ComboBox<>("roles");
+
   private final PermissionGroupService groupService;
 
   @PostConstruct

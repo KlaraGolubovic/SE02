@@ -57,9 +57,8 @@ public class RoundTripTest {
     assertFalse(wrapperAfterDelete.isPresent());
   }
 
-
-@Test
-   void registerWithWrongEmail() {
+  @Test
+  void registerWithWrongEmail() {
 
     // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
     // save()
@@ -71,7 +70,6 @@ public class RoundTripTest {
     // und ab auf die DB damit (save!)
     assertThrows(IllegalArgumentException.class, () -> userService.doCreateUser(user));
   }
-
 
   @AfterEach
   public void deleteUser() {

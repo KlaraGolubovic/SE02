@@ -14,6 +14,7 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 public class PermissionGroupDTOImpl implements PermissionGroupDTO {
   private String name;
   private int level;
+
   public PermissionGroupDTOImpl(PermissionGroup group) {
     this.name = group.getName();
     this.level = group.getLevel();
@@ -22,7 +23,6 @@ public class PermissionGroupDTOImpl implements PermissionGroupDTO {
   public PermissionGroupDTOImpl(String name) {
     this.name = name;
   }
-
 
   @Override
   public boolean equals(Object obj) {

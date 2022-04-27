@@ -79,7 +79,7 @@ public class RegisterView extends Div {
               doClearForm();
             } catch (NoSuchAlgorithmException e) {
               e.printStackTrace();
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
               System.err.println(e.getMessage());
             }
           });
