@@ -1,10 +1,10 @@
-DROP TABLE public.USER CASCADE CONSTRAINT;
-DROP TABLE public.PERMISSION_GROUP CASCADE CONSTRAINT;
-DROP TABLE public.USER_GROUP CASCADE CONSTRAINT;
-DROP TABLE public.PROFILE CASCADE CONSTRAINT;
-DROP TABLE public.JOB_AD CASCADE CONSTRAINT;
+DROP TABLE if exists public.user CASCADE;
+DROP table if exists public.PERMISSION_GROUP CASCADE;
+DROP table if exists public.USER_GROUP CASCADE;
+DROP table if exists public.PROFILE CASCADE;
+DROP table if exists public.JOB_AD CASCADE;
 CREATE TABLE public.USER (
-    user_id int NOT NULL,
+    user_id serial NOT null,
     date_of_birth date NOT NULL,
 	email varchar NOT NULL,
 	first_name varchar NOT NULL,
