@@ -133,12 +133,6 @@ public class BackendDevelopmentView extends Div {
     this.userGrid.getDataProvider().refreshAll();
   }
 
-  private void refreshPermissionGroupGridData() {
-    this.permissionGroups.clear();
-    this.permissionGroups.addAll(this.permissionService.findAll());
-    this.permissionGrid.getDataProvider().refreshAll();
-  }
-
   private Component doCreateFormLayout() {
     FormLayout formLayout = new FormLayout();
     formLayout.add(idField, mailField);
@@ -159,9 +153,14 @@ public class BackendDevelopmentView extends Div {
           if (!pgName.getValue().equals("")) {
             PermissionGroup pg = new PermissionGroup();
             pg.setName(pgName.getValue());
-            permissionService.doCreatePermissionGroup(pg);
-            Notification.show("Permission Group has been created");
-            this.refreshPermissionGroupGridData();
+            PermissionGroup newpg = permissionService.doCreatePermissionGroup(pg);
+            if (newpg == null) {
+              Notification.show("Permission Group could not be created");
+            } else {
+              Notification.show("Permission Group has been created");
+              this.permissionGroups.add(pg);
+              this.permissionGrid.getDataProvider().refreshAll();
+            }
           }
         });
     pgName.getElement().getStyle().set("margin-left", "auto");
