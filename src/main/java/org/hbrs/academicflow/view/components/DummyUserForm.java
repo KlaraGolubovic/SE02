@@ -1,20 +1,9 @@
 package org.hbrs.academicflow.view.components;
 
-import java.security.NoSuchAlgorithmException;
-
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.textfield.TextField;
-
-import org.hbrs.academicflow.model.user.User;
-import org.hbrs.academicflow.model.user.UserRepository;
-
 import com.google.common.collect.Lists;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -24,13 +13,9 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
@@ -182,5 +167,4 @@ public class DummyUserForm extends Div {
     phoneField.setValue("11778892");
     passwordField.setValue("SportFan04");
   }
-
 }
