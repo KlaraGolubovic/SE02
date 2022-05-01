@@ -34,8 +34,8 @@ CREATE TABLE backend.USER_GROUP(
 CREATE TABLE backend.profile (
 	profile_id int NOT NULL,
 	user_id int NOT NULL,
-	describtion varchar NULL,
-	adress varchar NOT NULL,
+	description varchar NULL,
+	address varchar NOT NULL,
 	docs bytea NULL,
 	CONSTRAINT profile_pk PRIMARY KEY (profile_id),
 	CONSTRAINT profile_fk FOREIGN KEY (user_id) REFERENCES backend."user"(user_id)
