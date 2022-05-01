@@ -1,13 +1,13 @@
 # Glossar
-## **User**
+## User
 Ein Nutzer der unsere Anwendung benutzt und ein Konto besitzt.
 
-## **Journey Map**
+## Journey Map
 Eine Visualisierung eines Prozesses durch eine Anwendung,durch die eine Person geht,um ein bestimmtes Ziel zu erreichen.  
 
-## **Eva**
+## Eva
 Earned Value Analyse um den Fortschritt von Anforderungen zu bewerten.
 
-## **Valide**
+## Valide
 Registrierung eines Benutzers : keine doppelte E-Mail Adresse, Passwort nach vorgegebenen Standards...
 
