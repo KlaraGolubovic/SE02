@@ -27,6 +27,10 @@ public class PermissionGroupService implements Serializable {
     return PERMISSION_GROUPS;
   }
 
+  public List<PermissionGroup> findAllUncached() {
+    return this.repository.findAll();
+  }
+
   public Optional<PermissionGroup> findPermissionGroupByName(String name) {
     return PERMISSION_GROUPS.stream()
         .filter(group -> group.getName().equalsIgnoreCase(name))

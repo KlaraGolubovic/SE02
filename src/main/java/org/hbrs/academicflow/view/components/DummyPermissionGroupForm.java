@@ -29,26 +29,34 @@ public class DummyPermissionGroupForm extends Div {
   private final TextField pgName = new TextField("Permisson Group name");
   private Grid<PermissionGroup> permissionGrid = new Grid<>();
   private final Button savePG = new Button("Add Permisson Group");
-  
+
   public Component doCreatePermissionGroupSection() {
     Div div = new Div();
     div.add(new H3("All Permission Groups"));
-    this.doCreatePermissionGroupTable();
     div.add(this.permissionGrid);
+    this.permissionGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));
+    this.permissionGrid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
+    this.permissionGrid
+        .addColumn(permissionGroup -> permissionGroup.getUsers().size())
+        .setHeader("Number of Users")
+        .setWidth("200px");
     savePG.addClickListener(
         event -> {
-          if (!pgName.getValue().equals("")) {
-            PermissionGroup pg = new PermissionGroup();
-            pg.setName(pgName.getValue());
-            PermissionGroup newpg = permissionService.doCreatePermissionGroup(pg);
-            if (newpg == null) {
-              Notification.show("Permission Group could not be created");
-            } else {
-              Notification.show("Permission Group has been created");
-              this.permissionGroups.add(pg);
-              this.permissionGrid.getDataProvider().refreshAll();
-            }
+          String name = pgName.getValue();
+          if (name.equals("")) {
+            Notification.show("Name cannot be empty.");
+            return;
           }
+          if (nameConflict(name)) {
+            Notification.show(
+                "Permission Group could not be created. " + name + " is already in use.");
+            return;
+          }
+          PermissionGroup pg = new PermissionGroup();
+          pg.setName(pgName.getValue());
+          permissionService.doCreatePermissionGroup(pg);
+          Notification.show("Permission Group has been created");
+          refreshTableData();
         });
     pgName.getElement().getStyle().set("margin-left", "auto");
     savePG.getElement().getStyle().set("margin-right", "auto");
@@ -58,17 +66,19 @@ public class DummyPermissionGroupForm extends Div {
     formLayout.setColspan(savePG, 1);
 
     div.add(formLayout);
+    refreshTableData();
     return div;
   }
 
-  private Grid<PermissionGroup> doCreatePermissionGroupTable() {
-    this.permissionGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));
-    this.permissionGrid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
-    this.permissionGrid
-        .addColumn(permissionGroup -> permissionGroup.getUsers().size())
-        .setHeader("Number of Users")
-        .setWidth("200px");
-    // ToDo: fix this to get the size of list instead of list itself
-    return this.permissionGrid;
+  private boolean nameConflict(String groupName) {
+    return permissionGroups.stream().anyMatch(group -> group.getName().equals(groupName));
+    // anyMatch for Conflict could also be noneMatch for OK
   }
+
+  private void refreshTableData() {
+    this.permissionGroups.clear();
+    this.permissionGroups.addAll(this.permissionService.findAllUncached());
+    this.permissionGrid.getDataProvider().refreshAll();
+  }
+
 }
