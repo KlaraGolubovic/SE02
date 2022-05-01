@@ -22,6 +22,10 @@
         {
             "filePath": "src/main/java/org/hbrs/academicflow/views/BackendDevelopmentView.java",
             "group": "Default"
+        },
+        {
+            "filePath": "src/main/java/org/hbrs/academicflow/view/BackendDevelopmentView.java",
+            "group": "Default"
         }
     ],
     "svg.preview.background": "black"

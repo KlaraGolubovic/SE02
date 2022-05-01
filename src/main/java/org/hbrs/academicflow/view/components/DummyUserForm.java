@@ -21,8 +21,11 @@ import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+@Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@ComponentScan(basePackages = {"org.hbrs.academicflow.model.permission","org.hbrs.academicflow.model.user"})
 public class DummyUserForm extends Div {
 
   private Grid<User> userGrid = new Grid<>();
@@ -36,7 +39,7 @@ public class DummyUserForm extends Div {
   private final TextField phoneField = new TextField("Telefonnummer");
   private final TextField passwordField = new TextField("Passwort");
 
-  private UserService userService;
+  private final UserService userService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final PermissionGroupService permissionService;
 
