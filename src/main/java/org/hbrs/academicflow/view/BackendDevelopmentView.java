@@ -29,9 +29,7 @@ import org.hbrs.academicflow.view.components.DummyUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Darstellung einer Tabelle (bei Vaadin: ein Grid) zur Anzeige von Autos. Hier wurden nur
- * grundlegende Elemente verarbeitet. Weitere Optionen (z.B. weitere Filter-Möglichkeiten) kann man
- * hier entnehmen: https://vaadin.com/components/vaadin-grid/java-examples/header-and-footer
+ * https://vaadin.com/components/vaadin-grid/java-examples/header-and-footer
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Route(value = "DEVELOPMENT", layout = PublicAppView.class)
@@ -41,23 +39,20 @@ public class BackendDevelopmentView extends Div {
 
   private final PermissionGroupService permissionService;
   private final List<PermissionGroup> permissionGroups = Lists.newCopyOnWriteArrayList();
-
   private final TextField pgName = new TextField("Permisson Group name");
   private Grid<PermissionGroup> permissionGrid = new Grid<>();
   private final Button savePG = new Button("Add Permisson Group");
-  
   private final UserService userService;
-  
-private DummyUserForm duf;
+  private DummyUserForm duf;
+
   @PostConstruct
   public void doInitialSetup() {
-    duf = new DummyUserForm(permissionService,userService);
+    duf = new DummyUserForm(permissionService, userService);
     addClassName("show-users-view");
     this.permissionGroups.addAll(this.permissionService.findAll());
     add(duf.doCreateUserSection());
     add(this.doCreatePermissionGroupSection());
   }
-
 
   private Component doCreatePermissionGroupSection() {
     Div div = new Div();
@@ -89,7 +84,6 @@ private DummyUserForm duf;
     div.add(formLayout);
     return div;
   }
-
 
   private Grid<PermissionGroup> doCreatePermissionGroupTable() {
     this.permissionGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));

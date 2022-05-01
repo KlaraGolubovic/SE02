@@ -38,44 +38,58 @@ import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class DummyUserForm extends Div{
-    
+public class DummyUserForm extends Div {
+
   private Grid<User> userGrid = new Grid<>();
-  private final Button save = new Button("Add dummy user");
+
   private final Button deletedummies = new Button("Remove all dummy users");
-  
+
   private final TextField idField = new TextField("Nutzername");
   private final TextField firstNameField = new TextField("Vorname");
   private final TextField lastNameField = new TextField("Nachname");
   private final TextField mailField = new TextField("E-Mail");
   private final TextField phoneField = new TextField("Telefonnummer");
   private final TextField passwordField = new TextField("Passwort");
-  
+
   private UserService userService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final PermissionGroupService permissionService;
 
-@PostConstruct
-  public void doInitialSetup() {
-    addClassName("show-users-view");
-    idField.setValue("Username5");
-    firstNameField.setValue("Dumbo");
-    lastNameField.setValue("Dumbsen");
-    mailField.setValue("dummy@mail.de");
-    phoneField.setValue("11778892");
-    passwordField.setValue("SportFan04");
-    this.users.addAll(this.userService.findAllUsers());
+  public DummyUserForm(PermissionGroupService p, UserService u) {
+    this.permissionService = p;
+    this.userService = u;
   }
 
-  private User dummyUser() throws NoSuchAlgorithmException {
+  public Component doCreateUserSection() {
+    addClassName("show-users-view");
+    setInitialValues();
+    Div div = new Div();
+    div.add(new H3("All Users"));
+    // -----------------------------------------------
+    div.add(this.doCreateUserTable());
+
+    // ----------------------------
+    FormLayout formLayout = new FormLayout();
+    formLayout.add(idField, mailField);
+    formLayout.setColspan(idField, 1);
+    formLayout.setColspan(mailField, 1);
+    // ------------------------------------------
+    HorizontalLayout actions = new HorizontalLayout();
+    actions.add(saveDummyUserButton());
+    actions.add(deletedummiesButton());
+    formLayout.add(actions, 2);
+    div.add(formLayout);
+    this.refreshUserGridData();
+    return div;
+  }
+
+  private User userFromFormValues() throws NoSuchAlgorithmException {
     final User user = new User();
     user.setUsername(this.idField.getValue());
     user.setFirstName(this.firstNameField.getValue());
     user.setLastName(this.lastNameField.getValue());
     user.setPhone(this.phoneField.getValue());
-
     user.setPassword(Encryption.sha256(this.passwordField.getValue()));
-
     user.setEmail(this.mailField.getValue());
     this.permissionService
         .findPermissionGroupByName("student")
@@ -84,15 +98,6 @@ public class DummyUserForm extends Div{
     return user;
   }
 
-
-  public Component doCreateUserSection() {
-    Div div = new Div();
-    div.add(new H3("All Users"));
-    div.add(this.doCreateUserTable());
-    div.add(doCreateFormLayout());
-    this.refreshUserGridData();
-    return div;
-  }
   private void refreshUserGridData() {
     // DIESE METHODE MACHT MAGISCHE SACHEN MIT DER TABELLE
     this.users.clear();
@@ -117,22 +122,36 @@ public class DummyUserForm extends Div{
     return userGrid;
   }
 
-  private Component doCreateFormLayout() {
-    FormLayout formLayout = new FormLayout();
-    formLayout.add(idField, mailField);
-    formLayout.setColspan(idField, 1);
-    formLayout.setColspan(mailField, 1);
-
-    formLayout.add(usertableActionDiv(), 2);
-    return formLayout;
+  private Component deletedummiesButton() {
+    deletedummies.addClickListener(
+        event -> {
+          List<User> all = userService.findAllUsers();
+          boolean del = false;
+          for (User user : all) {
+            if (user.getPhone().equals("11778892")) { // remove this condition to delete everyone
+              del = true;
+              userService.deleteUser(user.getUsername());
+            }
+          }
+          if (del) {
+            Notification.show("Dummy users have been deleted.");
+          } else {
+            Notification.show("No dummy users were found.");
+          }
+          this.refreshUserGridData();
+        });
+    deletedummies.getElement().getStyle().set("margin-left", "auto");
+    deletedummies.addThemeVariants(ButtonVariant.LUMO_ERROR);
+    return deletedummies;
   }
-  
-  private Component usertableActionDiv() {
-    HorizontalLayout div = new HorizontalLayout();
+
+  @SuppressWarnings("java:S106")
+  private Component saveDummyUserButton() {
+    Button save = new Button("Add dummy user");
     save.addClickListener(
         event -> {
           try {
-            userService.doCreateUser(this.dummyUser());
+            userService.doCreateUser(this.userFromFormValues());
             Notification.show("User account has been created");
             this.refreshUserGridData();
 
@@ -152,36 +171,16 @@ public class DummyUserForm extends Div{
           }
         });
     save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-    deletedummies.addClickListener(
-        event -> {
-          List<User> all = userService.findAllUsers();
-          boolean del = false;
-          for (User user : all) {
-            if (user.getPhone().equals("11778892")) { // remove this condition to delete everyone
-              del = true;
-              userService.deleteUser(user.getUsername());
-            }
-          }
-          if (del) {
-            Notification.show("Dummy users have been deleted.");
-          } else {
-            Notification.show("No dummy users were found.");
-          }
-          this.refreshUserGridData();
-        });
-
-    deletedummies.getElement().getStyle().set("margin-left", "auto");
-    deletedummies.addThemeVariants(ButtonVariant.LUMO_ERROR);
-    div.add(save);
-    div.add(deletedummies);
-    return div;
+    return save;
   }
 
-  public DummyUserForm(PermissionGroupService permissionService2, UserService userService2) {
-    this.permissionService = permissionService2;
-    this.userService = userService2;
+  private void setInitialValues() {
+    idField.setValue("Username5");
+    firstNameField.setValue("Dumbo");
+    lastNameField.setValue("Dumbsen");
+    mailField.setValue("dummy@mail.de");
+    phoneField.setValue("11778892");
+    passwordField.setValue("SportFan04");
   }
 
-
-  
 }
