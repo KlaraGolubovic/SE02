@@ -33,6 +33,19 @@ public class JobAd {
     @Column(name = "loaction", nullable = false)
     private String location = "";
 
+/*
+    @OneToOne
+    @JoinColumn(name = "comp_user_id")
+    private CompUser compUser;
+*/
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof JobAd)) {
+            return false;
+        }
+        JobAd other = (JobAd) obj;
+        return this.job_id == other.job_id;
+    }
     
 
 
