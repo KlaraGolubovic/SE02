@@ -39,10 +39,6 @@ class UserTests {
     assertEquals(user.getUsername(), result.getUsername());
   }
 
-  @Test
-  void doTestUserDeletion() {
-    assertDoesNotThrow(() -> this.service.deleteUser(DEMO_USER_ID));
-  }
 
   @Test
   void doTestUserSelection() {
