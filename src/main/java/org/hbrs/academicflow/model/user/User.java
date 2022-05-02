@@ -22,6 +22,7 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @Table(name = "user", schema = "backend")
 public class User {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id", unique = true, nullable = false)
@@ -79,6 +80,7 @@ public class User {
     final User user = (User) obj;
     return this.user_id == user.user_id;
   }
+
 
   @Override
   public int hashCode() {

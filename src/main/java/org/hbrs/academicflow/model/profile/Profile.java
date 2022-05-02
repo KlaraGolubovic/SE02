@@ -1,5 +1,7 @@
 package org.hbrs.academicflow.model.profile;
 
+import org.hbrs.academicflow.model.user.User;
+
 import java.sql.Blob;
 import javax.persistence.*;
 
@@ -11,9 +13,10 @@ public class Profile {
     @Column(name = "profile_id", unique = true, nullable = false)
     private int profile_id = -1;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "user", schema = "public", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false))
-    private int user_id = -1;
+    @OneToOne
+ //   @JoinTable(name = "user", schema = "public", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false))
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Basic
     @Column(name = "description", nullable = true)
@@ -23,7 +26,8 @@ public class Profile {
     @Column(name = "address", nullable = true)
     private String address = "";
 
+    @Lob
     @Basic
     @Column(name = "docs", nullable = true)
-    private Blob docs = null;
+    private Blob docs = null ;
 }
