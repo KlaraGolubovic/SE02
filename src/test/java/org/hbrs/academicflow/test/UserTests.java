@@ -20,7 +20,7 @@ class UserTests {
   private final UserService service;
 
   @Test
-  void doTestUserCreation() {
+  void doTestUserCreationAndDeletion() {
     final User user = new User();
     user.setDateOfBirth(LocalDate.now());
     final int mailId = ThreadLocalRandom.current().nextInt(1000);
@@ -37,11 +37,10 @@ class UserTests {
 
     assertNotNull(result);
     assertEquals(user.getUsername(), result.getUsername());
-  }
-
-
-  @Test
-  void doTestUserSelection() {
+    // Delete
+    assertDoesNotThrow(() -> this.service.deleteUser(DEMO_USER_ID));
+    // Check if deleted
     assertNull(this.service.findUserByUsername(DEMO_USER_ID));
   }
+
 }
