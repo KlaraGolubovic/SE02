@@ -19,7 +19,7 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @Entity
-@Table(name = "user", schema = "backend")
+@Table(name = "user", schema = "public")
 public class User {
 
 

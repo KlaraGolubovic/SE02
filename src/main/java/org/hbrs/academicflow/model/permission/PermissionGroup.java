@@ -16,7 +16,7 @@ import org.hbrs.academicflow.model.user.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "permission_group", schema = "backend")
+@Table(name = "permission_group", schema = "public")
 public class PermissionGroup {
   @Id
   @Column(
