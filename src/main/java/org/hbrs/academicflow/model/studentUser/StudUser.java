@@ -4,14 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hbrs.academicflow.model.permission.PermissionGroup;
-import org.hbrs.academicflow.model.studentPermission.StudPermissionGroup;
 import org.hbrs.academicflow.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -19,7 +15,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "studentUser", schema = "public")
+@Table(name = "student_user", schema = "public")
 public class StudUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

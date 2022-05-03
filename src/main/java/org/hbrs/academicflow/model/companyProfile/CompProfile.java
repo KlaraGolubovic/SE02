@@ -8,7 +8,7 @@ import javax.persistence.*;
 import org.hbrs.academicflow.model.companyUser.CompUser;
 
 @Entity
-@Table(name = "profile", schema = "public")
+@Table(name = "comp_profile", schema = "public")
 public class CompProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
