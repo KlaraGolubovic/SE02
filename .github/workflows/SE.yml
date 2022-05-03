@@ -19,7 +19,7 @@ jobs:
         with:
           input_dir: "doc/proxyUscrum/"
           image_import: "images"
-          output_dir: "doc/Pdf/proxyUscrum/"
+          output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: true
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: "ProxyAndScrum"
-          path: "doc/Pdf/proxyUscrum/"
+          path: "doc/Pdf/"
 
   quality:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
         with:
           input_dir: "doc/qualityManager/"
           image_import: "images"
-          output_dir: "doc/Pdf/qualityManager/"
+          output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: true
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: "quality"
-          path: "doc/Pdf/qualityManager/"
+          path: "doc/Pdf/"
   doc:
     runs-on: ubuntu-latest
     timeout-minutes: 5
