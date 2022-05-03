@@ -67,8 +67,8 @@ public class StudUser {
                     referencedColumnName = "stud_user_id",
                     nullable = false),
             inverseJoinColumns = @JoinColumn( // FK2 other (StudPermissionGroup)
-                    name = "name",
-                    referencedColumnName = "name",
+                    name = "group_name",
+                    referencedColumnName = "group_name",
                     nullable = false)
     )
     List<PermissionGroup> groups = new ArrayList<>();
