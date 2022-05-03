@@ -1,33 +1,39 @@
-# **Personas für unser Unternehmen**
+# Personas für unser Unternehmen
 
-## **Persona Nr. 1**
+## Persona Nr. 1
 
-**Repräsentant für:**  Unternehmen<br/>
-**Name:** Irgendwas GmbH<br/>
-**Land:** Deutschland<br/>
-**Unternehmensart:** Software-Unternehmen<br/>
-**Größe:** ca. 1000 Mitarbeiter<br/>
-**Standort:** Köln<br/>
-**Gesuchte Fähigkeiten:** Software-Entwickler:In<br/>
-**Anspruch an Stellenanzeige:** mind. 4. Fachsemester<br/>
-**Gewünschte Arbeitsstunde pro Woche:** 20 h<br/>
+**Repräsentant für**:  Unternehmen <br/> 
+**Name**: Irgendwas GmbH<br/> 
+**Land**: Deutschland<br/> 
+**Unternehmensart**: Software-Unternehmen<br/> 
+**Größe**: ca. 1000 Mitarbeiter<br/> 
+**Standort**: Köln<br/> 
+**Ziele des Benutzers**: geeigneten Studierenden für eingestellte Stellenanzeige anwerben<br/> 
+**Verhaltensmuster und Vorgehensweise**: Recruiter sucht auf Plattform, wartet auf Anfragen hinsichtlich passender Stellenanzeige<br/> 
+**Gesuchte Fähigkeiten**: Software-EntwicklerIn<br/> 
+**Anspruch an Stellenanzeige**: mind. 4. Fachsemester<br/> 
+**Gewünschte Arbeitsstunde pro Woche**: 20 h
+<br/> 
 
-<br/>
+*“Ich möchte für mein Unternehmen einen Studierenden finden, welcher 20 Stunden die Woche als Software-Entwickler:In arbeitet. Mir ist wichtig, dass der Studierende mit dem Betriebssystem Linux vertraut ist und sich gerne an unseren kommenden Projekten beteiligt. Gerne nehmen wir auch Studierende an, die in unserem Unternehmen ihr Seminar- oder Bachelor/Masterarbeit“ schreiben möchten.”*
+<br/> 
+## Persona Nr. 2
 
-## **Persona Nr. 2**
+**Repräsentant für**: Studierende<br/> 
+**Name**: Lucy Günter<br/> 
+**Alter**: 22<br/> 
+**Land**: Deutschland<br/> 
+**Studiengang**: Informatik<br/> 
+**Fachsemester**: 2<br/> 
+**Fachliche Ausbildung**: abgeschlossene Mittlere Reife<br/> 
+**Jobsuche**: Werkstudentenjob <br/> 
+**Standort**: Köln<br/> 
+**Vorhandene Fähigkeiten**: Programmieren, Modellieren in Use Case und UML Klassendiagrammen<br/> 
+**Gewünschte Arbeitsstunden**: mind. 15 h<br/> 
+**Erfahrung**: Minijob als Webanwendungsentwicklerin<br/> 
+**Verhaltensmuster und Vorgehensweise**: Lucy sucht schon seit einer Woche auf unserer Plattform und verbringt am Tag etwa 10 Minuten auf der Anwendung
 
-**Repräsentant für:** Studierende<br/>
-**Name:** Lucy Günter<br/>
-**Alter:** 22<br/>
-**Land:** Deutschland<br/>
-**Studiengang:** Informatik<br/>
-**Fachsemester:** 2<br/>
-**Jobsuche:** Werkstudentenjob <br/>
-**Standort:** Köln<br/>
-**Vorhandene Fähigkeiten:** Programmieren, Modellieren <br/>
-**Gewünschte Arbeitsstunden:** mind, 15 h<br/>
-**Erfahrung:** Minijob als Webanwendungsentwicklerin<br/>
-**Erwartungen:** Sie sucht ein Job indem sie viel Programmieren kann. Sie kann etwa 3 Tage die Woche für insgesamt 15h arbeiten. Gerne würde sie sich auf das Testen und Schreiben von Anwendungen konzentrieren. 
+*“Ich suche einen Job in dem ich viel Programmieren kann. Am liebsten würde ich etwa 3 Tage die Woche für insgesamt 15 Stunden arbeiten und dabei mich auf das Schreiben und Testen der Anwendung konzentrieren.”*
 
 
 
