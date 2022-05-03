@@ -11,6 +11,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
@@ -29,6 +30,13 @@ public class DummyPermissionGroupForm extends Div {
   private final TextField pgName = new TextField("Permisson Group name");
   private Grid<PermissionGroup> permissionGrid = new Grid<>();
   private final Button savePG = new Button("Add Permisson Group");
+
+  @PostConstruct
+  private void doPostConstruct() {
+
+    pgName.getElement().getStyle().set("margin-left", "auto");
+    savePG.getElement().getStyle().set("margin-right", "auto");
+  }
 
   public Component doCreatePermissionGroupSection() {
     Div div = new Div();
@@ -58,8 +66,6 @@ public class DummyPermissionGroupForm extends Div {
           Notification.show("Permission Group has been created");
           refreshTableData();
         });
-    pgName.getElement().getStyle().set("margin-left", "auto");
-    savePG.getElement().getStyle().set("margin-right", "auto");
     FormLayout formLayout = new FormLayout();
     formLayout.add(pgName, savePG);
     formLayout.setColspan(pgName, 1);

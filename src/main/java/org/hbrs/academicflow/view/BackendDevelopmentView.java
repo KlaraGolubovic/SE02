@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.view.components.DummyPermissionGroupForm;
 import org.hbrs.academicflow.view.components.DummyUserForm;
+import org.hbrs.academicflow.view.components.VerticalSpacerGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -19,15 +20,16 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"org.hbrs.academicflow.view.components"})
 public class BackendDevelopmentView extends Div {
 
- private final DummyUserForm duf;
- private final DummyPermissionGroupForm dpgf;
+  private final DummyUserForm duf;
+  private final DummyPermissionGroupForm dpgf;
 
   @PostConstruct
   public void doInitialSetup() {
-    
     addClassName("show-users-view");
     add(duf.doCreateUserSection());
+    VerticalSpacerGenerator vsg = new VerticalSpacerGenerator("2em");
+    add(vsg.newVerticalSpacer());
     add(dpgf.doCreatePermissionGroupSection());
+    add(vsg.newVerticalSpacer());
   }
-
 }
