@@ -1,13 +1,12 @@
 package org.hbrs.academicflow.model.companyUser;
 
-import lombok.*;
-import org.hbrs.academicflow.model.permission.PermissionGroup;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
+import lombok.*;
+import org.hbrs.academicflow.model.permission.PermissionGroup;
 
 @NoArgsConstructor
 @Builder
@@ -60,7 +59,11 @@ public class CompUser {
   @JoinTable(
       name = "user_group",
       schema = "public",
-      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
+      joinColumns =
+          @JoinColumn(
+              name = "company_user_id",
+              referencedColumnName = "company_user_id",
+              nullable = false),
       inverseJoinColumns =
           @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
   private List<PermissionGroup> groups = new ArrayList<>();

@@ -63,7 +63,7 @@ public class User {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "user_group",
-      schema = "backend",
+      schema = "public",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
       inverseJoinColumns =
           @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
