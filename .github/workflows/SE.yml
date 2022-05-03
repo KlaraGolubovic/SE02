@@ -26,7 +26,7 @@ jobs:
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: "Documentation"
+          name: "ProxyAndScrum"
           path: "doc/Pdf/proxyUscrum/"
 
   quality:
@@ -45,7 +45,7 @@ jobs:
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: "Documentation"
+          name: "quality"
           path: "doc/Pdf/qualityManager/"
   doc:
     runs-on: ubuntu-latest
