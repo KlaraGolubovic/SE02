@@ -15,14 +15,20 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@ComponentScan(
+    basePackages = {"org.hbrs.academicflow.model.permission", "org.hbrs.academicflow.model.user"})
 public class DummyUserForm extends Div {
 
   private Grid<User> userGrid = new Grid<>();
@@ -36,7 +42,7 @@ public class DummyUserForm extends Div {
   private final TextField phoneField = new TextField("Telefonnummer");
   private final TextField passwordField = new TextField("Passwort");
 
-  private UserService userService;
+  private final UserService userService;
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final PermissionGroupService permissionService;
 
@@ -45,6 +51,11 @@ public class DummyUserForm extends Div {
     this.userService = u;
   }
 
+  @PostConstruct
+  private void doPostConstruct() {
+
+    deletedummies.getElement().getStyle().set("margin-left", "auto");
+  }
   public Component doCreateUserSection() {
     addClassName("show-users-view");
     setInitialValues();
@@ -125,7 +136,6 @@ public class DummyUserForm extends Div {
           }
           this.refreshUserGridData();
         });
-    deletedummies.getElement().getStyle().set("margin-left", "auto");
     deletedummies.addThemeVariants(ButtonVariant.LUMO_ERROR);
     return deletedummies;
   }

@@ -27,6 +27,7 @@ import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Constants;
 import org.hbrs.academicflow.util.Encryption;
+import org.hbrs.academicflow.view.layouts.PublicAppView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
