@@ -39,8 +39,7 @@ public class WelcomeView extends Div {
     layout.add(doCreateTitle());
     add(layout);
     UserDTO user = (UserDTO) UI.getCurrent().getSession().getAttribute(Constants.CURRENT_USER);
-    layout.add(new H3(user.getFirstName()));
-    layout.add(new H3(user.getLastName()));
+    layout.add(new H3(user.getFirstName()+ " " +user.getLastName()));
   }
 
   private Component doCreateTitle() {
