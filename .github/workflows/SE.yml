@@ -26,5 +26,5 @@ jobs:
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: 'Exercises'
+          name: 'Documentation'
           path: 'doc/Pdf/'
