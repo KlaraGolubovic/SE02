@@ -6,9 +6,9 @@ import org.hbrs.academicflow.model.permission.dto.PermissionGroupDTO;
 public interface UserDTO {
   int getId();
 
-  String getFirstName();
+  String getUsername();
 
-  String getLastName();
+  String getEmail();
 
   List<PermissionGroupDTO> getGroups();
 }

@@ -29,32 +29,12 @@ public class User {
   private int user_id = -1;
 
   @Basic
-  @Column(name = "date_of_birth", nullable = false)
-  private LocalDate dateOfBirth = LocalDate.now();
-
-  @Basic
   @Column(name = "email", unique = true, nullable = false)
   private String email = "";
 
   @Basic
-  @Column(name = "first_name", nullable = false)
-  private String firstName = "";
-
-  @Basic
-  @Column(name = "last_name", nullable = false)
-  private String lastName = "";
-
-  @Basic
-  @Column(name = "occupation")
-  private String occupation = "";
-
-  @Basic
   @Column(name = "password", nullable = false)
   private String password = "";
-
-  @Basic
-  @Column(name = "phone")
-  private String phone = "";
 
   @Basic
   @Column(name = "username", nullable = false)

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.studentPermission.StudPermissionGroup;
+import org.hbrs.academicflow.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,7 +21,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "studentUser", schema = "public")
 public class StudUser {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stud_user_id", unique = true, nullable = false)
@@ -43,35 +43,12 @@ public class StudUser {
     private String lastName = "";
 
     @Basic
-    @Column(name = "occupation", nullable = true)
-    private String occupation = "";
-
-    @Basic
-    @Column(name = "password", nullable = false)
-    private String password = "";
-
-    @Basic
     @Column(name = "phone", unique = true, nullable = true)
     private String phone = "";
 
-    @Basic
-    @Column(name = "username", unique = true, nullable = false)
-    private String username = "";
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_group", // Name der Zwischentabelle: ToDo: tbd: zwei Zwischentabellen permission_student und company_group ?
-            schema = "public",
-            joinColumns = @JoinColumn( // FK1 owner (StudUser)
-                    name = "stud_user_id",
-                    referencedColumnName = "stud_user_id",
-                    nullable = false),
-            inverseJoinColumns = @JoinColumn( // FK2 other (StudPermissionGroup)
-                    name = "group_name",
-                    referencedColumnName = "group_name",
-                    nullable = false)
-    )
-    List<PermissionGroup> groups = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Override
     public boolean equals(Object obj) {

@@ -4,7 +4,6 @@ import lombok.*;
 import org.hbrs.academicflow.model.companyUser.CompUser;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @NoArgsConstructor
