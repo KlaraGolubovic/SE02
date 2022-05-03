@@ -1,14 +1,22 @@
 package org.hbrs.academicflow.model.studentUser;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hbrs.academicflow.model.permission.PermissionGroup;
+import org.hbrs.academicflow.model.studentPermission.StudPermissionGroup;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "studentUser", schema = "public")
 public class StudUser {
@@ -50,6 +58,20 @@ public class StudUser {
     @Column(name = "username", unique = true, nullable = false)
     private String username = "";
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_group", // Name der Zwischentabelle: ToDo: tbd: zwei Zwischentabellen permission_student und company_group ?
+            schema = "public",
+            joinColumns = @JoinColumn( // FK1 owner (StudUser)
+                    name = "stud_user_id",
+                    referencedColumnName = "stud_user_id",
+                    nullable = false),
+            inverseJoinColumns = @JoinColumn( // FK2 other (StudPermissionGroup)
+                    name = "name",
+                    referencedColumnName = "name",
+                    nullable = false)
+    )
+    List<PermissionGroup> groups = new ArrayList<>();
 
     @Override
     public boolean equals(Object obj) {
