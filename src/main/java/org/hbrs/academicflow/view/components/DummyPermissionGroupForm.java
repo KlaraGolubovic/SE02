@@ -17,28 +17,30 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@ComponentScan(
-    basePackages = {"org.hbrs.academicflow.model.permission", "org.hbrs.academicflow.model.user"})
+@Scope(value = "prototype")
 public class DummyPermissionGroupForm extends Div {
 
   private final PermissionGroupService permissionService;
   private final List<PermissionGroup> permissionGroups = Lists.newCopyOnWriteArrayList();
   private final TextField pgName = new TextField("Permisson Group name");
-  private Grid<PermissionGroup> permissionGrid = new Grid<>();
+  private final Grid<PermissionGroup> permissionGrid = new Grid<>();
   private final Button savePG = new Button("Add Permisson Group");
 
   @PostConstruct
   private void doPostConstruct() {
+    addClassName("show-users-view");
+    this.add(this.doCreatePermissionGroupSection());
 
     pgName.getElement().getStyle().set("margin-left", "auto");
     savePG.getElement().getStyle().set("margin-right", "auto");
   }
 
-  public Component doCreatePermissionGroupSection() {
+  private Component doCreatePermissionGroupSection() {
     Div div = new Div();
     div.add(new H3("All Permission Groups"));
     div.add(this.permissionGrid);

@@ -23,15 +23,15 @@ import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@ComponentScan(
-    basePackages = {"org.hbrs.academicflow.model.permission", "org.hbrs.academicflow.model.user"})
+@Scope(value = "prototype")
 public class DummyUserForm extends Div {
 
-  private Grid<User> userGrid = new Grid<>();
+  private final Grid<User> userGrid = new Grid<>();
 
   private final Button deletedummies = new Button("Remove all dummy users");
 
@@ -46,17 +46,16 @@ public class DummyUserForm extends Div {
   private final List<User> users = Lists.newCopyOnWriteArrayList();
   private final PermissionGroupService permissionService;
 
-  public DummyUserForm(PermissionGroupService p, UserService u) {
-    this.permissionService = p;
-    this.userService = u;
-  }
 
   @PostConstruct
   private void doPostConstruct() {
 
     deletedummies.getElement().getStyle().set("margin-left", "auto");
+    this.add(doCreateUserSection());
+    this.refreshUserGridData();
   }
-  public Component doCreateUserSection() {
+
+  private Component doCreateUserSection() {
     addClassName("show-users-view");
     setInitialValues();
     Div div = new Div();
@@ -75,7 +74,6 @@ public class DummyUserForm extends Div {
     actions.add(deletedummiesButton());
     formLayout.add(actions, 2);
     div.add(formLayout);
-    this.refreshUserGridData();
     return div;
   }
 
@@ -102,7 +100,6 @@ public class DummyUserForm extends Div {
   }
 
   private Component doCreateUserTable() {
-    userGrid = new Grid<>();
     userGrid.setDataProvider(new ListDataProvider<>(this.users));
     userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
     userGrid.addColumn(User::getUsername).setHeader("Username");

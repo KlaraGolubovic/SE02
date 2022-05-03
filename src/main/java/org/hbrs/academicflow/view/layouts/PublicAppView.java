@@ -51,6 +51,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
 
   @Override
   protected void afterNavigation() {
+    
     super.afterNavigation();
 
     // Setzen des aktuellen Names des Tabs
