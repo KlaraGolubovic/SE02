@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Constants;
+import org.hbrs.academicflow.view.layouts.AppView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

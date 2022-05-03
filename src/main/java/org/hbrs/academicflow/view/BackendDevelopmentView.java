@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.view.components.DummyPermissionGroupForm;
 import org.hbrs.academicflow.view.components.DummyUserForm;
 import org.hbrs.academicflow.view.components.VerticalSpacerGenerator;
+import org.hbrs.academicflow.view.layouts.PublicAppView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -25,6 +26,7 @@ public class BackendDevelopmentView extends Div {
 
   @PostConstruct
   public void doInitialSetup() {
+    this.removeAll();
     addClassName("show-users-view");
     add(duf.doCreateUserSection());
     VerticalSpacerGenerator vsg = new VerticalSpacerGenerator("2em");
