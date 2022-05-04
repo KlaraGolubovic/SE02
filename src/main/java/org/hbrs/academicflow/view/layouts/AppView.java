@@ -44,7 +44,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     if (current == null) {
       Logger.noUserGiven();
     } else {
-      Logger.userLoggedInMessage(current.getFirstName());
+      Logger.userLoggedInMessage("VORNAME");
       // ToDo: decide weather UserDTO should have the UserID String as well.
       setUpUI();
     }
@@ -220,7 +220,8 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
   }
 
   private String getCurrentNameOfUser() {
-    return getCurrentUser().getFirstName();
+    return "PAULUS MAXIMUS TESTUS";
+    //return getCurrentUser().getFirstName();
   }
 
   private UserDTO getCurrentUser() {

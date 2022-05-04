@@ -6,23 +6,20 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.provider.ListDataProvider;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
+import org.hbrs.academicflow.model.studentUser.StudUser;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
-import org.hbrs.academicflow.util.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -77,18 +74,19 @@ public class DummyUserForm extends Div {
     return div;
   }
 
-  private User userFromFormValues() throws NoSuchAlgorithmException {
-    final User user = new User();
-    user.setUsername(this.idField.getValue());
+  private StudUser userFromFormValues() throws NoSuchAlgorithmException {
+    final StudUser user = new StudUser();
+    //user.setUser(this.idField.getValue());
+    //todo: make sure we can create a user here
+    /*this.permissionService
+        .findPermissionGroupByName("student")
+        .map(Lists::newArrayList)
+        .ifPresent(user::setGroups);*/
+    //user.setPassword(Encryption.sha256(this.passwordField.getValue()));
     user.setFirstName(this.firstNameField.getValue());
     user.setLastName(this.lastNameField.getValue());
     user.setPhone(this.phoneField.getValue());
-    user.setPassword(Encryption.sha256(this.passwordField.getValue()));
     user.setEmail(this.mailField.getValue());
-    this.permissionService
-        .findPermissionGroupByName("student")
-        .map(Lists::newArrayList)
-        .ifPresent(user::setGroups);
     return user;
   }
 
@@ -100,18 +98,19 @@ public class DummyUserForm extends Div {
   }
 
   private Component doCreateUserTable() {
-    userGrid.setDataProvider(new ListDataProvider<>(this.users));
+   /* userGrid.setDataProvider(new ListDataProvider<>(this.users));
     userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
     userGrid.addColumn(User::getUsername).setHeader("Username");
+    userGrid.addColumn(User::getEmail).setHeader("E-Mail").setWidth("180px");
+    
     userGrid.addColumn(User::getFirstName).setHeader("First Name");
     userGrid.addColumn(User::getLastName).setHeader("Last Name");
-    userGrid.addColumn(User::getEmail).setHeader("E-Mail").setWidth("180px");
     userGrid.addColumn(User::getDateOfBirth).setHeader("Birthdate");
     //userGrid.addColumn(User::getOccupation).setHeader("Occupation");
 
     userGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     userGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
-    userGrid.addThemeVariants(GridVariant.MATERIAL_COLUMN_DIVIDERS);
+    userGrid.addThemeVariants(GridVariant.MATERIAL_COLUMN_DIVIDERS);*/
     return userGrid;
   }
 
@@ -121,7 +120,8 @@ public class DummyUserForm extends Div {
           List<User> all = userService.findAllUsers();
           boolean del = false;
           for (User user : all) {
-            if (user.getPhone().equals("11778892")) { // remove this condition to delete everyone
+            if (user.getEmail()
+                .equals("dummy@mail.de")) { // remove this condition to delete everyone
               del = true;
               userService.deleteUser(user.getUsername());
             }
@@ -143,9 +143,12 @@ public class DummyUserForm extends Div {
     save.addClickListener(
         event -> {
           try {
-            userService.doCreateUser(this.userFromFormValues());
+            //userService.doCreateUser(this.userFromFormValues());
             Notification.show("User account has been created");
             this.refreshUserGridData();
+            if(this.idField == null){
+              throw new NoSuchAlgorithmException();
+            }
 
           } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

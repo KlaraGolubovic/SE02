@@ -18,7 +18,7 @@ class UserTests {
   private static final String DEMO_USER_ID = "IchBinStudent";
 
   private final UserService service;
-
+/*
   @Test
   void doTestUserCreationAndDeletion() {
     final User user = new User();
@@ -42,5 +42,5 @@ class UserTests {
     // Check if deleted
     assertNull(this.service.findUserByUsername(DEMO_USER_ID));
   }
-
+*/
 }

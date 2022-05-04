@@ -12,11 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>, Serializable {
-  @Query(
-      "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"
-          + " user.occupation=:occupation")
-  List<UserDTO> findUsersByOccupation(@Param("occupation") String occupation);
-
+ 
   @Query(
       "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"
           + " user.username=:username and user.password=:password")

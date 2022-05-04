@@ -25,7 +25,7 @@ public class PermissionGroup {
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
   private String name = "";
 
-  @Column(name = "group_level", nullable = false)
+  @Column(name = "level", nullable = false)
   private int level = -1;
 
   @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)

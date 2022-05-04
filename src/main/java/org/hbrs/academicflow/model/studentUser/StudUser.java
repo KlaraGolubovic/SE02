@@ -1,6 +1,8 @@
 package org.hbrs.academicflow.model.studentUser;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +15,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
+@Builder
+@Setter(AccessLevel.PUBLIC)
 @Entity
 @Table(name = "student_user", schema = "public")
 public class StudUser {

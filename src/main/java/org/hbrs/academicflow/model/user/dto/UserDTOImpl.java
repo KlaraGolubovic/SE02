@@ -22,7 +22,7 @@ public class UserDTOImpl implements UserDTO {
   private List<PermissionGroupDTO> groups;
 
   public UserDTOImpl(User user) {
-    this.user_id = user.getUser_id();
+    this.user_id = user.getId();
     this.username = user.getUsername();
     this.email = user.getEmail();
     this.groups =

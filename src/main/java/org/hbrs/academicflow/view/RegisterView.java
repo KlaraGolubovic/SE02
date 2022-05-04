@@ -23,6 +23,7 @@ import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.hbrs.academicflow.model.permission.PermissionGroup;
 import org.hbrs.academicflow.model.permission.PermissionGroupService;
+import org.hbrs.academicflow.model.studentUser.StudUser;
 import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Constants;
@@ -94,16 +95,18 @@ public class RegisterView extends Div {
   private User doCreateUser() throws NoSuchAlgorithmException {
     final User user = new User();
     user.setUsername(this.idField.getValue());
-    user.setFirstName(this.firstNameField.getValue());
-    user.setLastName(this.lastNameField.getValue());
-    user.setPhone(this.phoneField.getValue());
-
+   
     user.setPassword(Encryption.sha256(this.passwordField.getValue()));
 
     user.setEmail(this.mailField.getValue());
     this.groupService
         .findPermissionGroupByName(this.groupSelector.getValue())
         .ifPresent((PermissionGroup e) -> setPermissionGroupOntoUser(e, user));
+    StudUser studentOfNewUser = new StudUser();    
+    studentOfNewUser.setFirstName(this.firstNameField.getValue());
+    studentOfNewUser.setLastName(this.lastNameField.getValue());
+    studentOfNewUser.setPhone(this.phoneField.getValue());
+    studentOfNewUser.setUser(user);
     return user;
   }
 
