@@ -107,7 +107,7 @@ public class DummyUserForm extends Div {
     userGrid.addColumn(User::getLastName).setHeader("Last Name");
     userGrid.addColumn(User::getEmail).setHeader("E-Mail").setWidth("180px");
     userGrid.addColumn(User::getDateOfBirth).setHeader("Birthdate");
-    userGrid.addColumn(User::getOccupation).setHeader("Occupation");
+    //userGrid.addColumn(User::getOccupation).setHeader("Occupation");
 
     userGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     userGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
