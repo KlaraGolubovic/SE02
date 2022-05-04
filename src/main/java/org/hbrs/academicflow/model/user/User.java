@@ -19,8 +19,9 @@ import org.hbrs.academicflow.model.permission.PermissionGroup;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @Entity
-@Table(name = "user", schema = "backend")
+@Table(name = "user", schema = "public")
 public class User {
+
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,32 +29,12 @@ public class User {
   private int id = -1;
 
   @Basic
-  @Column(name = "date_of_birth", nullable = false)
-  private LocalDate dateOfBirth = LocalDate.now();
-
-  @Basic
   @Column(name = "email", unique = true, nullable = false)
   private String email = "";
 
   @Basic
-  @Column(name = "first_name", nullable = false)
-  private String firstName = "";
-
-  @Basic
-  @Column(name = "last_name", nullable = false)
-  private String lastName = "";
-
-  @Basic
-  @Column(name = "occupation")
-  private String occupation = "";
-
-  @Basic
   @Column(name = "password", nullable = false)
   private String password = "";
-
-  @Basic
-  @Column(name = "phone")
-  private String phone = "";
 
   @Basic
   @Column(name = "username", nullable = false)
@@ -62,9 +43,8 @@ public class User {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "user_group",
-      schema = "backend",
-      joinColumns =
-          @JoinColumn(name = "relation_user", referencedColumnName = "user_id", nullable = false),
+      schema = "public",
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
       inverseJoinColumns =
           @JoinColumn(
               name = "relation_group",
@@ -83,6 +63,7 @@ public class User {
     final User user = (User) obj;
     return this.id == user.id;
   }
+
 
   @Override
   public int hashCode() {
