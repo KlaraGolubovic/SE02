@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view.layouts;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -51,6 +51,7 @@ public class PublicAppView extends AppLayout implements BeforeEnterObserver {
 
   @Override
   protected void afterNavigation() {
+    
     super.afterNavigation();
 
     // Setzen des aktuellen Names des Tabs

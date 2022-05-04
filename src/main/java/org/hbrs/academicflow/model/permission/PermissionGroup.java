@@ -1,10 +1,9 @@
 package org.hbrs.academicflow.model.permission;
 
+import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
-
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +19,13 @@ import org.hbrs.academicflow.model.user.User;
 public class PermissionGroup {
   @Id
   @Column(
-      name = "name",
+      name = "group_name",
       unique = true,
       nullable = false,
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
   private String name = "";
 
-  @Column(name = "level", nullable = false)
+  @Column(name = "group_level", nullable = false)
   private int level = -1;
 
   @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)

@@ -19,8 +19,9 @@ public interface UserRepository extends JpaRepository<User, Integer>, Serializab
 
   @Query(
       "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"
-          + " user.user_id=:user_id and user.password=:password")
-  UserDTO findUserByIdAndPassword(@Param("user_id") String user_id, @Param("password") String password);
+          + " user.username=:username and user.password=:password")
+  UserDTO findUserByUsernameAndPassword(
+      @Param("username") String username, @Param("password") String password);
 
   @Query(
       "select new org.hbrs.academicflow.model.user.dto.UserDTOImpl(user) from User user where"

@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -27,6 +27,7 @@ import org.hbrs.academicflow.model.user.User;
 import org.hbrs.academicflow.model.user.UserService;
 import org.hbrs.academicflow.util.Constants;
 import org.hbrs.academicflow.util.Encryption;
+import org.hbrs.academicflow.view.layouts.PublicAppView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -79,6 +80,8 @@ public class RegisterView extends Div {
               doClearForm();
             } catch (NoSuchAlgorithmException e) {
               e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+              System.err.println(e.getMessage());
             }
           });
     } catch (Exception e) {

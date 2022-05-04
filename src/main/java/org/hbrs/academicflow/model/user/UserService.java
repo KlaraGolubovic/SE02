@@ -1,23 +1,23 @@
 package org.hbrs.academicflow.model.user;
 
+import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.hbrs.academicflow.controller.Uservalidation;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Encryption;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserService implements Serializable {
   private final UserRepository repository;
 
   @Nullable
-  public UserDTO findUserByUsernameAndPassword(String id, String password) {
+  public UserDTO findUserByUsernameAndPassword(String username, String password) {
     final String encrypted;
     try {
       encrypted = Encryption.sha256(password);
@@ -25,7 +25,7 @@ public class UserService implements Serializable {
       e.printStackTrace();
       return null;
     }
-    return this.repository.findUserByIdAndPassword(id, encrypted);
+    return this.repository.findUserByUsernameAndPassword(username, encrypted);
   }
 
   public UserDTO findUserByUsername(String username) {
@@ -33,7 +33,11 @@ public class UserService implements Serializable {
   }
 
   public User doCreateUser(User user) {
-    return this.repository.save(user);
+    if (Uservalidation.isValidNewUser(user)) {
+      return this.repository.save(user);
+    }
+    throw new IllegalArgumentException("Wrong Email");
+    // TODO: Throw this specifically inside of the validation method
   }
 
   public void deleteUser(String username) {

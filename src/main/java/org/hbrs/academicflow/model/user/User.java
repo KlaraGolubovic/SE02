@@ -26,7 +26,7 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_id", unique = true, nullable = false)
-  private int user_id = -1;
+  private int id = -1;
 
   @Basic
   @Column(name = "email", unique = true, nullable = false)
@@ -46,7 +46,10 @@ public class User {
       schema = "public",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
       inverseJoinColumns =
-          @JoinColumn(name = "group_name", referencedColumnName = "name", nullable = false))
+          @JoinColumn(
+              name = "relation_group",
+              referencedColumnName = "group_name",
+              nullable = false))
   private List<PermissionGroup> groups = new ArrayList<>();
 
   @Override
@@ -58,12 +61,12 @@ public class User {
       return false;
     }
     final User user = (User) obj;
-    return this.user_id == user.user_id;
+    return this.id == user.id;
   }
 
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.user_id);
+    return Objects.hash(this.id);
   }
 }

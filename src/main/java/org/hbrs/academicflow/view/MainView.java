@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
@@ -7,11 +7,11 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import org.hbrs.academicflow.control.LoginControl;
-import org.hbrs.academicflow.control.exception.DatabaseUserException;
+import javax.annotation.PostConstruct;
+import org.hbrs.academicflow.controller.LoginControl;
+import org.hbrs.academicflow.controller.exception.DatabaseUserException;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,7 @@ public class MainView extends VerticalLayout {
     Div blue = new Div();
     blue.addClassName("backColorBlue");
     LoginForm component = new LoginForm();
-    Element elem = component.getElement();
-    elem.getClassList().add("backColorBlue");
+    component.getElement().getClassList().add("backColorBlue");
     component.addLoginListener(
         e -> {
           boolean isAuthenticated = false;

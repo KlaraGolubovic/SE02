@@ -1,4 +1,4 @@
-package org.hbrs.academicflow.views;
+package org.hbrs.academicflow.view.layouts;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -20,7 +20,7 @@ import com.vaadin.flow.router.*;
 import com.vaadin.flow.server.PWA;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
-import org.hbrs.academicflow.control.AuthorizationControl;
+import org.hbrs.academicflow.controller.AuthorizationControl;
 import org.hbrs.academicflow.model.user.dto.UserDTO;
 import org.hbrs.academicflow.util.Constants;
 import org.hbrs.academicflow.util.Logger;
@@ -49,8 +49,6 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
       setUpUI();
     }
   }
-
-  
 
   public void setUpUI() {
     // Anzeige des Toggles über den Drawer

@@ -31,3 +31,4 @@ build/
 !**/src/test/**/build/
 package-lock.json
 .DS_Store
+bin/

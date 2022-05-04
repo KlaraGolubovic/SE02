@@ -12,6 +12,6 @@ public class Logger {
   }
 
   public static void userLoggedInMessage(String alias) {
-  System.out.println("LOG: Showing AppView logged in as " + alias);
-}
+    System.out.println("LOG: Showing AppView logged in as " + alias);
+  }
 }
