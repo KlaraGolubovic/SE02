@@ -10,25 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  proxyUscrum:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v2
-      - uses: JohnMeyerhoff/markdown-to-pdf@devel
-        with:
-          input_dir: "doc/proxyUscrum/"
-          image_import: "images"
-          output_dir: "doc/Pdf/"
-          theme: ".github/workflows/SE.css"
-          highlight_theme: ".github/workflows/Codetheme.css"
-          table_of_contents: false
-          extend_default_theme: true
-      - uses: actions/upload-artifact@v2
-        with:
-          name: "ProxyAndScrum"
-          path: "doc/Pdf/"
-
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -43,9 +24,72 @@ jobs:
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: false
           extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/diagram/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/programming/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/proxyUscrum/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/scrumMaster/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/tests/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/usability/MockUp"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/usability/"
+          image_import: "images"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SE.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: "quality"
+          name: "all"
           path: "doc/Pdf/"
   doc:
     runs-on: ubuntu-latest
