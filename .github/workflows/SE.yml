@@ -22,7 +22,7 @@ jobs:
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
-          table_of_contents: true
+          table_of_contents: false
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
@@ -41,7 +41,7 @@ jobs:
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
-          table_of_contents: true
+          table_of_contents: false
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
@@ -54,12 +54,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
-          input_dir: "doc/"
+          input_dir: "doc/*"
           image_import: "images"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
-          table_of_contents: true
+          table_of_contents: false
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
