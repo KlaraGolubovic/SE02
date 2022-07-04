@@ -3,10 +3,16 @@
     page-break-before: never;
   }
 
-  .h1+.table {
+  table {
     @page {
       size: landscape;
     }
+  }
+}
+
+:has(table) {
+  @page {
+    size: landscape;
   }
 }
 
