@@ -10,6 +10,9 @@ Alle (MockUp's + AcademicFlow)
 
 #### Verdichtete Informationen (Verwendung von Tabellen)
 
+Uns war wichtig, dass gleiche Daten auf gleiche Art dargestellt werden. 
+Tabellenform wurde nur in der Liveversion beim Einblick in die Bewerbungen genutzt.
+
 Verwendet von den Mock Up's(AcademicFlow) :
 
 Log-In (Mock UP) <br/>
@@ -31,7 +34,10 @@ Registrierung (AcadamicFlow)<br/>
 Anmeldung (AcadamicFlow)<br/>
 
 
-#### Strukturelle Wiederholung (Einheitliche Navigation, Coorporate Design, Home Button)
+#### Strukturelle Wiederholung (Einheitliche Navigation, Corporate Design, Home Button)
+
+Sehr wichtig um unser CI hervorzuheben und den user nicht zu verwirren.
+Navigationsleiste + Header + Logo welches auf die Startseite verlinkt.
 
 Verwendet von den Mock Up's(AcademicFlow) :
 
@@ -39,29 +45,29 @@ Alle (MockUp's + AcademicFlow)
 
 #### Statusanzeige (Statusanzeige/ Fortschrittsanzeige)
 
+Auf Seiten wo wir es für nötig empfunden haben wurden entsprechende Notifications erstellt.
+
 Verwendet von den Mock Up's(AcademicFlow) :
 
-Fehlt (z.B. Registrierung, Einloggen, Bewerbung abschicken)
+Abmelden, Falsch Beworben etc..
 
 #### Rückkehr an einen sicheren Ort (Verwendung von UNDO und REDO, Home-Button)
 
 Verwendet von den Mock Up's(AcademicFlow) :
 
-Bei Registrierung fehlt klarer Back Button (AcadamicFlow)
+Logo bringt User immer auf Startseite
 
-Alle Mock Up's haben Back Button
+Navigationsmenü ist immer sichtbar
 
-AcademicFlow verwendet UNDO und REDO implizit durch den Browser
-
-AcademicFlow nutzt Firmen Logo als Navigation zurück zur Wilkommensseite
+Sonst Browser Back/Forward Buttons (AcadamicFlow)
 
 #### Unterstützung des Benutzers bei Fehlerfällen
 
 Verwendet von den Mock Up's(AcademicFlow) :
 
-Aussagekräftige Fehlermeldung für den Benutzer fehlt (MockUp's + AcademicFlow)
+Fehlermeldungen fehlen bei Mockup
 
-Rote Markierung bei fehlender Information, fehlenden Daten. Nur nach dem Wechsel des Textfeldes wird das Feld rot (AcademicFlow)
+Bei AcademicFlow ist bei nötigen Eingabefeldern implementiert dass diese Rot werden wenn eine falsche oder keine Eingabe stattgefunden hat
 
 #### Hilfe und Dokumentation
  
@@ -75,48 +81,6 @@ Verwendet von den Mock Up's(AcademicFlow) :
 
 Fehlt (Mock Up's)
 Eingaben werden während der Eingabe evaluiert (AcademicFlow)
-
-
-
-## Noch fehlende Mock-Up's & Funktionen
-
-Fortschrittsanzeige : Download Balken <br/>
-
-Verständlich formulierte Fehlernachrichten, keine Einwegsituation : was soll getan werden ?
-
-Eingaben werden unmittelbar nach oder während der Eingabe validiert
-
-## Mock Up's Test
-
-Fehlt 
-z.B. automatischer Akzeptanztest für Benutzerschnittstellen
-(mit Selenium IDE)
-
-## Code anpassen
-
-Felder in sinnvolle Reihenfolge (x)<br/>
-Sinnvolle Namen (x)<br/>
-Einheitliche Schrift/-größen, Farben (x)<br/>
-Corporate Design anpassen (x)<br/>
-
-## Evaluierung 
-
-Ablauf : 
-
-wann : 24.06.2022 / ab 15:00 Uhr
-
-wer + was : Sophie + Thomas planen Evaluierung
-
-wer + was : Marcel erstellt SUS- Fragebögen zum ausdrucken
-
-wer + was : Usability Experten (Sophie + Fiona) führen Evaluierung durch
-
-wie : definieren von 3 Zielgruppen (in der HBRS z.B. Studierwerkstatt ausfindig machen) + Evaluierung durchführen.
-Nach Thinking Aloud Methode dokumentieren.
-
-benötigt :Thinking Aloud Protokoll + SUS Fragebogen
-
-Done (x)
 
 
 

@@ -64,5 +64,28 @@ Ich klicke auf den Button "Stellenanzeigen suchen" und gelange damit auf eine Se
 <br/>
 
 ### **Nachbedingung**
-Sobald ich zurück in die Listenansicht geklickt wird, gelangt der Studierende an die Stelle der Liste, wo er zuletzt aufgehört hat zu suchen.
+Sobald zurück in die Listenansicht geklickt wird, gelangt der Studierende an die Stelle der Liste, wo er zuletzt aufgehört hat zu suchen.
 <br/><br/>
+
+## **Szenario 7: Als Student kann ich nach Stellenanzeigen suchen (Studierendensicht)**
+### **Vorbedingung**
+Der Studierende ist eingeloggt und auf der Jobanzeigenseite
+### **Normaler Ablauf:**
+Ich sehe diverse Stellenanzeigen von Unternehmen. Ich kann in dem Suchfeld nach einer Stellenanzeige suchen. Dafür gebe ich ein Stichwort in das Feld ein und drücke auf den Button "suchen". Finde ich eine passende Anzeige kann ich diese im Detail angucken.
+<br/>
+
+### **Nachbedingung**
+Möchte ich mein Suchstichwort ändern, weil keine passende Anzeige für mich dabei war, so gebe ich ein neues Stichwort ein und drücke wieder auf "suchen".
+<br/><br/>
+
+## **Szenario 8: Als Student kann ich Unternehmen bewerten (Studierendensicht)**
+### **Vorbedingung**
+Der Studierende ist eingeloggt und auf der Jobanzeigenseite
+### **Normaler Ablauf:**
+Wenn ich ein Unternehmen bewerten will, klicke ich zuerst auf den Button "Profil von (Unternehmen)". Dort wird mir eine genaue Beschreibung des Unternehmens angezeigt (Unternehmensprofil). Zusätzlich ist darunter ein Button "Jetzt Bewertung verfassen". Wenn ich auf den klicke, kann ich das Unternehmen mit Sternen von 1 (sehr schlecht) - 5 (sehr gut) und einem Kommentar bewerten. Danach drücke ich auf den Button "Bewertung absenden", um meine Bewertung abzuschließen.
+<br/>
+
+### **Nachbedingung**
+Habe ich ein Unternehmen bewertet, so sehe ich die durchschnittliche Berwertung in Sternen. Zusätzlich wird angezeigt, wie viele Benutzer ein Unternehmen bewertet haben.
+<br/><br/>
+

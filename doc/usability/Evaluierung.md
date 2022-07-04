@@ -9,18 +9,34 @@
 | Experte           | 24 * 2,5 = 60%   |
 | **Durchschnitt**  | **71,875%**      |
 
-### Interpretation :
+### Interpretation der Ergebnisse:
+- Werte über 80% deuten auf eine gute bis exzellente Usability hin.
+- Werte zwischen 60% und 80% sind als grenzwertig bis gut zu interpretieren.
+- Werte unter 60% sind Hinweise auf erhebliche Usability-Probleme.
 
-Werte über 80 % deuten auf eine gute bis exzellente Usability hin.
+**&rarr; Die Usability wird von Benutzern als gut wahrgenommen. Es gibt noch Unklarheiten, welche die Nutzung der Software erschweren. Sie ist aber soweit verständlich aufgebaut.**
 
-Werte zwischen 60% und 80% sind als grenzwertig bis gut zu interpretieren.
+## Fazit Evaluierung :
+**positiv:**
+- Das Corporate Design(die einheitliche Gestaltung)
+- Der verständliche Aufbau (Gute Navigation; Klar, wo man sich befindet)
+- Logo = Navigation zur Startseite
+- "Sprint-Ziele wurden erreicht"
 
-Die Usability wird von Benutzern als gut wahrgenommen. Es gibt noch Unklarheiten, welche die Nutzung der Software erschweren. Sie ist  aber soweit verständlich aufgebaut.
+**negativ:**
+- Fehlende bzw. noch nicht funktionierende Funktionen (z.B. Email Bestätigung). Fehlende Calls to Action.
+- Zum Beispiel:
+  - Es gibt keinen Durchstieg in die Website nach der Anmeldung
+  - Die Registrierung war unverständlich, da nicht gekennzeichnet wurde, dass man erst die Rolle angeben muss.
+  - Es gibt keine klaren Fehlermeldungen
+  - Es ist unklar, dass "Nachricht schreiben" bei der Stellenanzeige das Bewerben ist. Wo kann man den Lebenslauf etc. hochladen?
 
+---
+# Evaluierung Protokolle
 
-## Studentin 1 (Normaler Benutzer)
-### 24.06.2022 , 13:53 Uhr
-#### Bemerkungen :
+### Studentin 1 (Normaler Benutzer)
+#### 24.06.2022 , 13:53 Uhr
+##### Bemerkungen :
 - Passwort ist bei Registrierung sichtbar.
 - Kein Hinweis auf Registrierung abgeschlossen.
 - Zu wenig Stellenanzeigen in der Demo
@@ -32,9 +48,9 @@ Die Usability wird von Benutzern als gut wahrgenommen. Es gibt noch Unklarheiten
 - Nach dem Bewerben sollte es eine Belohnung für den Bewerber geben.
 - Man sollte beim Eingang einer Bewerbung eine Benachrichtigung erhalten.
 
-## Student 2 (Anfänger)
-### 24.06.2022 , 15:05 Uhr
-#### Bemerkungen :
+### Student 2 (Anfänger)
+#### 24.06.2022 , 15:05 Uhr
+##### Bemerkungen :
 - Text "Hilfe für Flüchtlinge" auch auf Deutsch und auf Englisch zur Verfügung stellen, damit es für alle Nutzenden verständlich ist.
 - Nicht schlüssig, dass man erst die Rolle angeben muss, bevor man gewisse Felder ausfüllen kann.
 - Pflichtfelder sind nicht als solche markiert.
@@ -51,9 +67,9 @@ Die Usability wird von Benutzern als gut wahrgenommen. Es gibt noch Unklarheiten
 - Man kann sich nur 1x pro Stellenanzeige bewerben.
 - Abgeschickte Bewerbungen kann man als Student nicht einsehen.
 
-## Student 3 (Experte)
-### 24.06.2022 , 15:50 Uhr
-#### Bemerkungen :
+### Student 3 (Experte)
+#### 24.06.2022 , 15:50 Uhr
+##### Bemerkungen :
 - Student möchte sich registrieren/Job suchen
 - Rollen auf Englisch. Die Rollenauswahl sollte nach oben.
 - Das Passwort ist bei der Eingabe während der Registrierung sichtbar, außerdem sollte das Passwort bestätigt werden.
@@ -71,39 +87,11 @@ Die Usability wird von Benutzern als gut wahrgenommen. Es gibt noch Unklarheiten
   - Die gegebene Beschreibung(Fließtext) ist nicht gut leserlich.
   - Mit klaren Überschriften arbeiten.
   - Eine Bewerbung ist in der Regel ein Bewerbungsschreiben und der Lebenslauf. Warum kann ich hier nur eine Nachricht schreiben?
-  - 2 Felder Bewerbungsschreiben (??)
   - Es sollte ein Feld zum Hochladen vom Lebenslauf und sonstigen Referenzen geben.
 - Mehr Infos:
   - Jedes Unternehmen kann aussuchen, wie das Bewerbungsverfahren abläuft. (Fragebogen, Test, persönliches Gespräch..)
   - Die Bewerbungsübersicht ist übersichtlich.
-  - Es wird nicht angezeigt, dass man klicken kann. Hover Elemente z.B. wird nicht angezeigt, dass man diese klicken kann. (???)
-  - Möglichkeit diese(Bewerbungen?) wieder löschen kann. (???)
-- Es wird nicht angezeigt, dass man klicken (?)
+  - Es sollte angezeigt/ markiert werden, dass wenn man auf eine bereits geschriebene Bewerbung, auf der Seite "meine Bewerbungen" klickt, man auf eine Seite weitergeleitet wird, auf der man die Bewerbung einsehen kann. 
+  - Es wäre toll, wenn man die Möglichkeit hätte, eine bereits geschriebene Bewerbung wieder zu löschen
 - Bild auf *Mein Profil* gut. Generell mehr mit Bildern arbeiten und weniger mit Text.
 
-
-## Fazit Evaluierung :
-
-#### positiv: <br/> 
-
-Das Corporate Design(die einheitliche Gestaltung) <br/> 
-
-Der verständliche Aufbau (Gute Navigation; Klar, wo man sich befindet) <br/> 
-
-Logo = Navigation zur Startseite <br/> 
-
-"Sprint-Ziele wurden erreicht"
-
-#### negativ:
-
-Fehlende / noch nicht funktionierende Funktionen (z.B. Email Bestätigung). Fehlende Calls to Action.
-
-Zum Beispiel:
-
-Es gibt keinen Durchstieg in die Website nach der Anmeldung
-
-Die Registrierung war unverständlich, da nicht gekennzeichnet wurde, dass man erst die Rolle angeben muss.
-
-Es gibt keine klaren Fehlermeldungen
-
-Unklar, dass "Nachricht schreiben" bei der Stellenanzeige das Bewerben ist. Wo kann man den Lebenslauf etc. hochladen?

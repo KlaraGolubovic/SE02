@@ -4,7 +4,7 @@
 
 ![smart](../images/entrepreneur-2326419_1280.jpeg)
 **Repräsentant für**:  Unternehmen <br/> 
-**Name**: Irgendwas GmbH<br/> 
+**Name**: OrgaPaul <br/> 
 **Land**: Deutschland - zusätzlich gesamte Adresse<br/> 
 **Unternehmensart**: Software-Unternehmen - steht in der Beschreibung<br/> 
 **Größe**: ca. 1000 Mitarbeiter - Beschreibung <br/> 
@@ -21,7 +21,7 @@
 ## Persona Nr. 2
 ![smart](../images/woman-4702060_1280.webp)
 **Repräsentant für**: Studierende<br/> 
-**Name**: Lucy Günter - im Profil als Vorname & Nachname<br/> 
+**Name**: Laura Günter - im Profil als Vorname & Nachname<br/> 
 **Alter**: 22 - bei Regristrierung als Geburtsdatum ?<br/> 
 **Land**: Deutschland - zusätzlich die ganze Adresse angebbar <br/> 
 **Studiengang**: Informatik<br/> 

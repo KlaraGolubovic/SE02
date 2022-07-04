@@ -44,7 +44,7 @@ Stelle in der Reihenfolge mit ``@Order(7)`` an stelle x (hier 7) zu fixieren.
 ## Abhängigkeiten
 
 Einige Frontend-Tests sind bereits mit Junit und Mockito abgedeckt.
-Mokito hat hier teilweise spezifische Bestimmungen, welche
+Mockito hat hier teilweise spezifische Bestimmungen, welche
 Klasse mit welchem Label als "Tab" generiert werden soll.
 Wenn ein Neuer Menüpunkt
 im [AppView](../../src/main/java/org/hbrs/academicflow/view/common/layouts/AppView.java)-Layout
@@ -57,7 +57,7 @@ jedoch einen Fehler auslösen, wenn er fehlerhaft ist.
 
 # Spring und Löschungen
 
-Wennn es in einem ``@SpringBootTest`` zu einer Löschung kommt, muss
+Wenn es in einem ``@SpringBootTest`` zu einer Löschung kommt, muss
 dieser Test mit der Annotation ``@Transactional`` versehen werden.
 Nur dann weiß Spring, dass der Test einen Transaktions-Service bekommt.
 Dieses Feature ist bei Spring nicht sonderlich gut dokumentiert,
