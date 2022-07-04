@@ -43,12 +43,12 @@ kompatibel einfach "gezogen".
   - Pipelines sind eine Art von Workflows, die eine Reihe von Aktionen ausführen.
 ## Vorgegebene Pipeline
 - Jenkins auf
-  [SEPP Jenkins](https://sepp-jenkins.inf.h-brs.de/job/Alda-innen/) ist der sogenannte Runner.<br/>
+  [SEPP Jenkins](https://sepp-jenkins.inf.h-brs.de/job/Alda-innen/) ist der sogenannte Runner.
 - SonarQube auf
   [SonarQube](https://sepp-sonar.inf.h-brs.de/dashboard?id=Alda-innen)
 stellt die Qualität des Source-Codes sicher und zeigt diverse Metriken.
 - Sofern die Pipeline erfolgreich abgeschlossen wurde, wird ein Tomcat deployment des in der Pipeline
-  erstellten Warfiles auf dem [CD Host](http://sepp-test.inf.h-brs.de:8080/AldaInnen-0.0.1-SNAPSHOT/) gestartet.<br/>
+  erstellten Warfiles auf dem [CD Host](http://sepp-test.inf.h-brs.de:8080/AldaInnen-0.0.1-SNAPSHOT/) gestartet.
 
 
 # Finden von Elementen

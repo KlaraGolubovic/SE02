@@ -44,16 +44,11 @@ Stelle in der Reihenfolge mit ``@Order(7)`` an stelle x (hier 7) zu fixieren.
 ## Abhängigkeiten
 
 Einige Frontend-Tests sind bereits mit Junit und Mockito abgedeckt.
-Mockito hat hier teilweise spezifische Bestimmungen, welche
-Klasse mit welchem Label als "Tab" generiert werden soll.
-Wenn ein Neuer Menüpunkt
-im [AppView](../../src/main/java/org/hbrs/academicflow/view/common/layouts/AppView.java)-Layout
-erstellt wird, muss im zugehörigen Junit-Test ein
-``when(...).thenReturn(...)``-Statement erstellt werden.
-Dieses Statement sorgt dafür, dass für einen erwarteten
-Aufruf der Tab-Util Methoden der Aufruf gelingt, wenn er
-erwartungsgemäß aufgerufen wird. Derselbe Aufruf wird dann
-jedoch einen Fehler auslösen, wenn er fehlerhaft ist.
+Mockito hat hier teilweise spezifische Bestimmungen, welche Klasse mit welchem Label als "Tab" generiert werden soll.
+Wenn ein Neuer Menüpunkt im [AppView](../../src/main/java/org/hbrs/academicflow/view/common/layouts/AppView.java)-Layout
+erstellt wird, muss im zugehörigen Junit-Test ein ``when(...).thenReturn(...)``-Statement erstellt werden.
+Dieses Statement sorgt dafür, dass für einen erwarteten Aufruf der Tab-Util Methoden der Aufruf gelingt, wenn er erwartungsgemäß aufgerufen wird.
+Derselbe Aufruf wird dann jedoch einen Fehler auslösen, wenn er fehlerhaft ist.
 
 # Spring und Löschungen
 

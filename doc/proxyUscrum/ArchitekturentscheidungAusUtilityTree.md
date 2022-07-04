@@ -12,11 +12,10 @@ Usability
 
 Die Daten, welche bei der Registrierung eingetragen wurden sind in der Datenbank gespeichert und es wurde eine E-Mail zur Bestätigung an den Benutzer geschickt.
 
-### Implications for Implemenation
+### Implications for Implementation
 
-Verwendung eines Frameworks wie z.B. Vaadin <br/>
-<br/>
-<br/>
+Verwendung eines Frameworks wie z.B. Vaadin 
+
 
 ### Szenario :
 
@@ -38,9 +37,6 @@ Durch die Technologie JavaScript wird die Serverlast bei hohen Zugriffszahlen in
 Eine Erhöhung der Ressourcen (z.B. CPU und RAM) ist sowohl server- als auch
 clientseitig nicht notwendig, was die Skalierbarkeit garantiert fördert
 
-### Implications for Implemenation
-
+### Implications for Implementation
 Verwendung eines Frameworks wie z.B. Vaadin
 
-
-  

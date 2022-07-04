@@ -10,7 +10,7 @@
 **Größe**: ca. 1000 Mitarbeiter - Beschreibung <br/> 
 **Standort**: Köln<br/> 
 **Ziele des Benutzers**: geeigneten Studierenden für eingestellte Stellenanzeige anwerben<br/> 
-**Verhaltensmuster und Vorgehensweise**: Recruiter sucht auf Plattform, wartet auf Anfragen hinsichtlich passender Stellenanzeige - Stellenbeschreibeung<br/> 
+**Verhaltensmuster und Vorgehensweise**: Recruiter sucht auf Plattform, wartet auf Anfragen hinsichtlich passender Stellenanzeige - Stellenbeschreibung<br/> 
 **Gesuchte Fähigkeiten**: Software-EntwicklerIn - eventuell als Kategorie angeben<br/> 
 **Anspruch an Stellenanzeige**: mind. 4. Fachsemester<br/> 
 **Gewünschte Arbeitsstunde pro Woche**: 20 h - sollte sichtbar für Studenten sein
@@ -22,7 +22,7 @@
 ![smart](../images/woman-4702060_1280.webp)
 **Repräsentant für**: Studierende<br/> 
 **Name**: Laura Günter - im Profil als Vorname & Nachname<br/> 
-**Alter**: 22 - bei Regristrierung als Geburtsdatum ?<br/> 
+**Alter**: 22 - bei Registrierung als Geburtsdatum ?<br/> 
 **Land**: Deutschland - zusätzlich die ganze Adresse angebbar <br/> 
 **Studiengang**: Informatik<br/> 
 **Fachsemester**: 2<br/> 
