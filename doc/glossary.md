@@ -10,6 +10,7 @@ Ein Benutzerkonto ist ein Konto, das einem Nutzer zugeordnet ist.
 Es kann diesem Nutzer durch einen Benutzernamen zugeordnet werden, beim
 [Einloggen](#einloggen) kann ein Nutzer sich mit seinem Passwort authentifizieren.
 
+
 ## Journey Map
 
 Eine Visualisierung eines Prozesses durch eine Anwendung, durch die eine Person geht,um ein
