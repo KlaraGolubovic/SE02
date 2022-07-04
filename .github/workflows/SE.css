@@ -2,6 +2,11 @@
   h1:not(:first-of-type) {
     page-break-before: never;
   }
+
+  @page {
+    size: landscape
+  }
+
 }
 
 table colgroup col {
