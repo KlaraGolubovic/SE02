@@ -19,3 +19,4 @@
 | Hr. Barum-Maier      | Gedächtnisprotokoll                          | keine weitere Rücksprache                                               | DB-Admin                                                                             | DAO- & Repository Pattern, Roundtrip-Tests durchführen, in PostgreSQL-DB abspeichern                                                        | 2                            | O + H               |
 | Hr. Kalters          | Admin der HBRS                               | für weitere Rückfragen kontaktierbar bzw. der Mitarbeiter               | Admin der HBRS                                                                       | Deployment nur für HBRS Netzwerke & nicht manuell, Code aus Vaadin-Tutorials benutzen, internes GitLab benutzen                             | 3                            | S + H               | 
 
+
