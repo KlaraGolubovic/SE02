@@ -1,15 +1,7 @@
 ﻿**Ziele nach SMART**
 
-![](Aspose.Words.953583bc-2677-44bf-826e-655d09b48b5a.001.png)
-
-
-
-
-
 
 ![smart](../images/bildSmart.png)
-
-
 
 ## Ziele
 Unser Unternehmen "Academic Flow" bietet eine Plattform als Jobbörse für Studierende und Unternehmen. Unternehmen haben dort die Chance passende studentische Mitarbeiter zu finden und Studierende können demnach bei der Jobsuche auf Stellenanzeigen von Unternehmen eingehen. 

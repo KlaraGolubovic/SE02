@@ -18,7 +18,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/qualityManager/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -27,7 +27,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/programming/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -36,7 +36,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/proxyUscrum/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -45,7 +45,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/scrumMaster/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -54,7 +54,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/tests/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -63,7 +63,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/usability/MockUp"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -72,7 +72,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/usability/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
@@ -85,7 +85,7 @@ jobs:
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/"
-          image_import: "images"
+          image_import: "images/"
           output_dir: "doc/Pdf/"
           theme: ".github/workflows/SE.css"
           highlight_theme: ".github/workflows/Codetheme.css"
