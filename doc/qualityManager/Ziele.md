@@ -18,4 +18,3 @@ Unser Unternehmen "Academic Flow" bietet eine Plattform als Jobbörse für Studi
 
 **Terminierbar:** Das Mock-Up für den ersten Entwurf sollte bis Ablauf des Probemonats (24.05.2022) stehen. Die einzelnen Aufgaben der Umsetzung sollten bis zum jeweiligen Sprint Review fertig und überarbeitet sein. 
 
-

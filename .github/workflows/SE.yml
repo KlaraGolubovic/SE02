@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  quality:
+  vertical:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -78,10 +78,6 @@ jobs:
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: false
           extend_default_theme: true
-      - uses: actions/upload-artifact@v2
-        with:
-          name: "standard"
-          path: "doc/Pdf/"
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/"
@@ -93,11 +89,11 @@ jobs:
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: "Documentation"
+          name: "standard"
           path: "doc/Pdf/"
-  doc:
+  landscape:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v2
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
