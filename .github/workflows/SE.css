@@ -3,10 +3,9 @@
     page-break-before: never;
   }
 
-  h1+table {
+  .h1+.table {
     @page {
       size: landscape;
-
     }
   }
 }
