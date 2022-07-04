@@ -80,13 +80,8 @@ jobs:
           extend_default_theme: true
       - uses: actions/upload-artifact@v2
         with:
-          name: "all"
+          name: "standard"
           path: "doc/Pdf/"
-  doc:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v2
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
           input_dir: "doc/"
@@ -99,4 +94,22 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: "Documentation"
+          path: "doc/Pdf/"
+  doc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: JohnMeyerhoff/markdown-to-pdf@devel
+        with:
+          input_dir: "doc/querformat/"
+          image_import: "images/"
+          output_dir: "doc/Pdf/"
+          theme: ".github/workflows/SEquerformat.css"
+          highlight_theme: ".github/workflows/Codetheme.css"
+          table_of_contents: false
+          extend_default_theme: true
+      - uses: actions/upload-artifact@v2
+        with:
+          name: "landscape"
           path: "doc/Pdf/"

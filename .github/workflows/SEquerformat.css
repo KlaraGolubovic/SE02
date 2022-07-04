@@ -3,18 +3,12 @@
     page-break-before: never;
   }
 
-  table {
-    @page {
-      size: landscape;
-    }
+  @page {
+    size: landscape;
   }
 }
 
-:has(table) {
-  @page {
-    size: landscape;
-  }       
-}
+
 
 table colgroup col {
   width: auto !important;
