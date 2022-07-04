@@ -44,15 +44,6 @@ jobs:
           extend_default_theme: true
       - uses: JohnMeyerhoff/markdown-to-pdf@devel
         with:
-          input_dir: "doc/scrumMaster/"
-          image_import: "images/"
-          output_dir: "doc/Pdf/"
-          theme: ".github/workflows/SE.css"
-          highlight_theme: ".github/workflows/Codetheme.css"
-          table_of_contents: false
-          extend_default_theme: true
-      - uses: JohnMeyerhoff/markdown-to-pdf@devel
-        with:
           input_dir: "doc/tests/"
           image_import: "images/"
           output_dir: "doc/Pdf/"
