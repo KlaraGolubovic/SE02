@@ -3,8 +3,11 @@
     page-break-before: never;
   }
 
-  @page {
-    size: landscape
+  h1+table {
+    @page {
+      size: landscape;
+
+    }
   }
 }
 
