@@ -1,0 +1,9 @@
+
+@import "./main-view.css";
+
+
+
+  button#button, input[type=button]{
+    background-color: var(--branding-yellow-accent) !important;
+    color: var(--branding-clean-white) !important;
+  }

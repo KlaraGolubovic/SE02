@@ -1,0 +1,36 @@
+@import "./main-view.css";
+
+.outer {
+  /*
+  this.setWidth("95%");
+  //this.getStyle().set("border", "2px solid var(--branding-dark-blue)");
+  this.getStyle().set("padding", "10px");
+  this.getStyle().set("border-radius", "2px"); */
+  background: var(--branding-light-blue);
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+
+
+.search-advertisements-view {
+  display: block;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: 0 var(--lumo-space-l);
+}
+
+.search-advertisements-view.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#first {
+  width: 40%;
+  text-align: center;
+}
+
+#second {
+  text-align: center;
+}

@@ -1,24 +1,19 @@
 package org.hbrs.academicflow.util;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Encryption {
-  public static String sha256(String base) throws NoSuchAlgorithmException {
-    final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    final byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
-    final StringBuilder hexString = new StringBuilder();
-    for (byte value : hash) {
-      final String hex = Integer.toHexString(0xff & value);
-      if (hex.length() == 1) {
-        hexString.append('0');
-      }
-      hexString.append(hex);
-    }
-    return hexString.toString();
+public final class Encryption {
+
+  public static String sha256(String value) {
+    return DigestUtils.sha256Hex(value);
+  }
+
+  // a method which encodes images in base64
+  public static byte[] encodeImage(byte[] image) {
+    return Base64.encode(image);
   }
 }

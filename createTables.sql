@@ -1,15 +1,15 @@
 DROP TABLE public.USER CASCADE;
 DROP TABLE public.PERMISSION_GROUP CASCADE;
 DROP TABLE public.USER_GROUP CASCADE;
-DROP TABLE public.PROFILE CASCADE;
 DROP TABLE public.JOB_AD CASCADE;
-drop table public.comp_user CASCADE;
-drop table public.stud_user CASCADE;
-drop table public.comp_profile CASCADE;
-drop table public.stud_profile CASCADE;
+DROP TABLE public.company_user CASCADE;
+DROP TABLE public.student_user CASCADE;
+DROP TABLE public.company_profile CASCADE;
+DROP TABLE public.student_profile CASCADE;
+DROP TABLE public.apply CASCADE;
 
 CREATE TABLE public.USER (
-    user_id int NOT NULL,
+    user_id SERIAL NOT NULL,
 	email varchar NOT NULL,
 	password varchar NOT NULL,
 	username varchar NOT null,
@@ -20,7 +20,7 @@ CREATE TABLE public.USER (
 CREATE TABLE public.PERMISSION_GROUP(
 	group_name varchar NOT NULL,
 	level int NOT NULL DEFAULT -1,
-	constraint permission_group_pk PRIMARY KEY(group_name)
+	CONSTRAINT permission_group_pk PRIMARY KEY(group_name)
 );
 
 CREATE TABLE public.USER_GROUP(
@@ -31,50 +31,50 @@ CREATE TABLE public.USER_GROUP(
 	CONSTRAINT user_group_group_name_fk FOREIGN KEY (group_name) REFERENCES public.PERMISSION_GROUP(group_name)
 );
 
-CREATE TABLE public.comp_user (
-	comp_user_id int NOT NULL,
+CREATE TABLE public.company_user (
+	company_user_id SERIAL NOT NULL,
 	user_id int not null,
 	name varchar not null,
 	phone varchar,
-	CONSTRAINT comp_user_pk PRIMARY key(comp_user_id),
-	CONSTRAINT comp_user_fk FOREIGN key(user_id) REFERENCES public.user(user_id)
+	CONSTRAINT company_user_pk PRIMARY key(company_user_id),
+	CONSTRAINT company_user_fk FOREIGN key(user_id) REFERENCES public.user(user_id)
 );
 
-CREATE TABLE public.stud_user (
-	stud_user_id int NOT NULL,
+CREATE TABLE public.student_user (
+	student_user_id SERIAL NOT NULL,
 	user_id int not null,
 	date_of_birth date not null,
 	first_name varchar not null,
 	last_name varchar not null,
 	phone varchar,
-	CONSTRAINT stud_user_pk PRIMARY key(stud_user_id),
-	CONSTRAINT stud_user_fk FOREIGN key(user_id) REFERENCES public.user(user_id)
+	CONSTRAINT student_user_pk PRIMARY key(student_user_id),
+	CONSTRAINT student_user_fk FOREIGN key(user_id) REFERENCES public.user(user_id)
 );
 
 
-CREATE TABLE public.comp_profile (
-	comp_profile_id int NOT NULL,
-	comp_user_id int NOT NULL,
+CREATE TABLE public.company_profile (
+	company_profile_id SERIAL NOT NULL,
+	company_user_id int NOT NULL,
 	description varchar NULL,
 	address varchar NOT NULL,
-	docs bytea,
-	CONSTRAINT comp_profile_pk PRIMARY KEY (comp_profile_id),
-	CONSTRAINT comp_profile_fk FOREIGN KEY (comp_user_id) REFERENCES public.comp_user(comp_user_id)
+	image int, -- index: Auswahl von 5 Bildern aus einer Liste.
+	CONSTRAINT company_profile_pk PRIMARY KEY (company_profile_id),
+	CONSTRAINT company_profile_fk FOREIGN KEY (company_user_id) REFERENCES public.company_user(company_user_id)
 );
 
-CREATE TABLE public.stud_profile (
-	stud_profile_id int NOT NULL,
-	stud_user_id int NOT NULL,
+CREATE TABLE public.student_profile (
+	student_profile_id SERIAL NOT NULL,
+	student_user_id int NOT NULL,
 	description varchar NULL,
 	address varchar NOT NULL,
-	docs bytea,
-	CONSTRAINT stud_profile_pk PRIMARY KEY (stud_profile_id),
-	CONSTRAINT stud_profile_fk FOREIGN KEY (stud_user_id) REFERENCES public.stud_user(stud_user_id)
+	image int, -- index: Auswahl von 5 Bildern aus einer Liste.
+	CONSTRAINT student_profile_pk PRIMARY KEY (student_profile_id),
+	CONSTRAINT student_profile_fk FOREIGN KEY (student_user_id) REFERENCES public.student_user(student_user_id)
 );
 
 CREATE TABLE public.JOB_AD(
-	job_ad_id int NOT NULL,
-	comp_profile_id int NOT null,
+	job_ad_id SERIAL NOT NULL,
+	company_user_id int NOT null,
 	title varchar NOT NULL,
 	description varchar,
 	deadline date,
@@ -82,5 +82,16 @@ CREATE TABLE public.JOB_AD(
 	location varchar NOT NULL,
 	remote boolean NOT null,
 	CONSTRAINT job_ad_id_pk PRIMARY KEY (job_ad_id),
-	CONSTRAINT comp_job_ad_fk FOREIGN key (comp_profile_id) REFERENCES public.comp_profile(comp_profile_id)
+	CONSTRAINT company_job_ad_fk FOREIGN key (company_user_id) REFERENCES public.company_user(company_user_id)
 );
+
+CREATE TABLE public.apply(
+	apply_id SERIAL NOT NULL,
+	student_user_id int NOT NULL,
+	job_ad_id int NOT NULL,
+	applyed date NOT NULL,
+	CONSTRAINT apply_id_pk PRIMARY KEY (apply_id),
+	CONSTRAINT apply_id_job_ad_id_uk UNIQUE (student_user_id, job_ad_id),
+	CONSTRAINT apply_student_user_id_fk FOREIGN KEY (student_user_id) REFERENCES public.student_user(student_user_id),
+	CONSTRAINT apply_job_ad_id_fk FOREIGN KEY (job_ad_id) REFERENCES public.JOB_AD(job_ad_id)
+)

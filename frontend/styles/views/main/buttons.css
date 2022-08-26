@@ -1,0 +1,6 @@
+@import "./main-view.css";
+
+#registerFormSubmit {
+    background-color: var(--branding-yellow-accent);
+    color: var(--branding-clean-white);
+}

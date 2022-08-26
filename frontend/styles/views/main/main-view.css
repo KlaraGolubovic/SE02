@@ -1,48 +1,185 @@
+:root {
+  /* Corporate Design*/
+  --branding-background-light: #fff7fa;
+  --branding-background-green: #f1f1e6;
+  --branding-text-color: #001122;
+  --branding-yellow-accent: #d4a418;
+  --branding-dark-blue: #004b97;
+  --branding-medium-blue: #547bce;
+  --branding-light-blue: #e7efff;
+  --branding-clean-white: #ffffff;
+}
+
+drawer #main-drawer-left > tabs {
+  background-color: var(--branding-light-blue) !important;
+  background: var(--branding-light-blue) !important;
+}
+
+html {
+  --lumo-font-family: Baloo2, Helvetica, sans-serif;
+  --lumo-primary-text-color: var(--branding-text-color);
+  --lumo-primary-color: var(--branding-medium-blue);
+  --lumo-primary-color-50pct: var(--branding-medium-blue);
+  --lumo-primary-color-10pct: var(--branding-light-blue);
+  --_lumo-button-color: var(--branding-dark-blue);
+  --_lumo-button-primary-background-color: var(--branding-yellow-accent);
+  /*--lumo-header-text-color: var(--branding-background-light); Titel: Log In
+  
+  --lumo-primary-contrast-color: var(--branding-background-light); nix
+  */
+  --lumo-base-color: var(--branding-background-light);
+  -_lumo-text-field-overflow-mask-image: linear-gradient(to left, transparent, #000 0.25em);
+  -webkit-mask-image: none !important;
+}
+
+
+vaadin-login-form-wrapper {
+  background-color: #f1f1e6;
+}
+
+vaadin-text-field-input-0 {
+  background-color: var(--branding-background-green);
+  color: var(--branding-background-green);
+}
+
+vaadin-text-field#input {
+  -webkit-mask-image: none;
+  background: var(--branding-background-light);
+  color: var(--branding-background-green);
+}
+vaadin-text-field-container {
+  -webkit-mask-image: none;
+  background-color: var(--branding-background-light);
+  color: var(--branding-background-green);
+}
+@font-face {
+  font-family: "Alegreya Sans";
+  src: url('fonts/AlegreyaSansSC-Light.ttf');
+}
+
+@font-face {
+  font-family: "Alegreya Sans Light";
+  src: url('fonts/AlegreyaSans-Light.ttf');
+}
+
+* :not(h1,h2) {
+  font-family: 'Alegreya Sans Light', sans-serif;
+}
+
+h2 {
+  text-align: left;
+}
+
 #header {
   height: var(--lumo-size-xl);
   box-shadow: var(--lumo-box-shadow-s);
+  background-color: var(--branding-light-blue);
+  padding-left: var(--lumo-space-m);
+  padding-right: var(--lumo-space-m);
 }
-#header vaadin-avatar {
+
+#header .vaadin-avatar {
   margin-left: auto;
   margin-right: var(--lumo-space-m);
 }
-vaadin-app-layout[dir='rtl'] #header vaadin-avatar {
-  margin-left: var(--lumo-space-m);
+
+.vaadin-app-layout[dir='rtl'] #header .vaadin-avatar {
+  margin-left: var(--lumo-space-s);
   margin-right: auto;
 }
+
 #header h1 {
+  font-family: 'Alegreya Sans SC', sans-serif;
   font-size: var(--lumo-font-size-l);
   margin: 0;
+  color: var(--branding-dark-blue);
 }
+
+h1 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+h2 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+
 .leftpad {
   padding-left: 4px;
 }
+
 #logo {
   box-sizing: border-box;
   box-shadow: inset 0 -1px var(--lumo-contrast-10pct);
   padding: var(--lumo-space-s) var(--lumo-space-m);
+  background-color: var(--branding-light-blue);
 }
+
+#logo:hover {
+  cursor: pointer;
+}
+
+[part="input-field"] {
+  background-color: #b31d28!important;
+  color: var(--branding-background-green);
+}
+
 #logo img {
   height: calc(var(--lumo-size-l) * 1.5);
 }
+
 #logo h1 {
   font-size: var(--lumo-font-size-xl);
   font-weight: 600;
   margin: 0 var(--lumo-space-s);
 }
 
-vaadin-tab {
+.vaadin-tab {
   font-size: var(--lumo-font-size-s);
   height: var(--lumo-size-l);
   font-weight: 600;
-  color: var(--lumo-body-text-color);
+  color: var(--branding-text-color);
 }
 
-vaadin-tab:hover {
-  background-color: var(--lumo-contrast-5pct);
+.vaadin-tab:hover {
+  background-color: var(--branding-yellow-accent);
 }
 
-vaadin-tab[selected] {
-  background-color: var(--lumo-primary-color-10pct);
-  color: var(--lumo-primary-text-color);
+.vaadin-tab[selected] {
+  background-color: var(--branding-medium-blue);
+  color: var(--branding-text-color);
+}
+
+div {
+  /* background-color: var(--branding-background-green);*/
+  width: 100% - var(--lumo-space-s);
+  padding-left: var(--lumo-space-s);
+  padding-right: var(--lumo-space-s);
+}
+
+.landing {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-size: cover;
+  padding: 0px 20px;
+
+}
+
+.profile-picture {
+  border: 2px solid var(--branding-dark-blue);
+  align-self: center!important;
+  alignment: center!important;
+  align-items: center!important;
+  width: 10vw;
+}
+.companyPic {
+  border: 2px solid var(--branding-dark-blue);
+  width: 8vw;
+}
+
+p {
+  text-align: left;
 }

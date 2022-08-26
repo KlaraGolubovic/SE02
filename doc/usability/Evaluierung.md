@@ -94,3 +94,4 @@
   - Es sollte angezeigt/ markiert werden, dass wenn man auf eine bereits geschriebene Bewerbung, auf der Seite "meine Bewerbungen" klickt, man auf eine Seite weitergeleitet wird, auf der man die Bewerbung einsehen kann. 
   - Es wäre toll, wenn man die Möglichkeit hätte, eine bereits geschriebene Bewerbung wieder zu löschen
 - Bild auf *Mein Profil* gut. Generell mehr mit Bildern arbeiten und weniger mit Text.
+

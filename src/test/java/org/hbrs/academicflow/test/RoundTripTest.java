@@ -1,78 +1,94 @@
 package org.hbrs.academicflow.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.Optional;
-import org.hbrs.academicflow.model.studentUser.StudUser;
-import org.hbrs.academicflow.model.studentUser.StudUserRepository;
-import org.hbrs.academicflow.model.user.UserService;
-import org.junit.jupiter.api.AfterEach;
+import java.time.Instant;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hbrs.academicflow.control.student.StudentService;
+import org.hbrs.academicflow.control.user.UserService;
+import org.hbrs.academicflow.model.student.user.Student;
+import org.hbrs.academicflow.model.student.user.StudentRepository;
+import org.hbrs.academicflow.model.user.User;
+import org.hbrs.academicflow.util.Encryption;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@Slf4j
 @SpringBootTest
-public class RoundTripTest {
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
+class RoundTripTest {
 
-  @Autowired private StudUserRepository userRepository;
+  private static final String DEFAULT_LAST_NAME = "Michel";
+  private static final String DEFAULT_FIRST_NAME = "Torben";
+  private static final String DEFAULT_USER_NAME = "VogelBanane";
+  private static final String DEFAULT_MAIL = "paul200@myserver.de";
+  private final UserService userService;
+  private final StudentService studentService;
+  private final StudentRepository studentRepository;
 
-  @Autowired private UserService userService;
-
-  @Test
-  /**
-   * Round Triping Test mit einer einfachen Strecke (C-R-Ass-D). Dieses Muster für Unit-Tests wird
-   * in der Vorlesung SE-2 eingeführt (Kapitel 6).
-   */
-  void createReadAndDeleteAUser() {
-
-    // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
-    // save()
-    // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
-    StudUser user = new StudUser();
-    user.setEmail("testZWEsIdds@myserver.de");
-    user.setFirstName("Torben");
-    user.setLastName("Michel");
-    // und ab auf die DB damit (save!)
-    StudUser userAfterCreate = userRepository.save(user);
-
-    // Da die ID auto-generiert wurde, müssen wir uns die erzeugte ID nach dem
-    // Abspeichern merken:
-    int idTmp = userAfterCreate.getStud_user_id();
-
-    // Schritt 2: R = Read (hier: Auslesen über die Methode find()
-
-    // Schritt 3: Ass = Assertion: Vergleich der vorhandenen Objekte auch
-    // Gleichheit...
-    assertEquals("Michel", userAfterCreate.getLastName());
-    assertEquals("Torben", userAfterCreate.getFirstName());
-    // ... sowie auf Identität
-    assertNotSame(user, userAfterCreate);
-
-    // Schritt 4: D = Deletion, also Löschen des Users, um Datenmüll zu vermeiden
-    userRepository.deleteById(idTmp);
-    // Schritt 4.1: Wir sind vorsichtig und gucken, ob der User wirklich gelöscht
-    // wurde ;-)
-    Optional<StudUser> wrapperAfterDelete = userRepository.findById(idTmp);
-    System.out.println("Wrapper: " + wrapperAfterDelete);
-    assertFalse(wrapperAfterDelete.isPresent());
+  @BeforeEach
+  void cleanUp() {
+    int deletedUsers = 0;
+    int deletedStudents = 0;
+    User user = this.userService.findUserByEmail(DEFAULT_MAIL);
+    if (user != null) {
+      final Student student = this.studentService.findStudentByUserID(user.getId());
+      if (student != null) {
+        this.studentRepository.deleteById(student.getId());
+        deletedStudents++;
+      }
+      deletedUsers++;
+      this.userService.deleteById(user.getId());
+    }
+    log.info("Total deletions User={} and Student={}", deletedUsers, deletedStudents);
   }
 
   @Test
-  void registerWithWrongEmail() {
-
-    // Schritt 1: C = Create (hier: Erzeugung und Abspeicherung mit der Method
-    // save()
-    // Anlegen eines Users. Eine ID wird automatisch erzeugt durch JPA
-    StudUser user = new StudUser();
-    user.setEmail("abc");
-    user.setFirstName("Torben");
-    user.setLastName("Michel");
-    // und ab auf die DB damit (save!)
-    //assertThrows(IllegalArgumentException.class, () -> userService.doCreateUser(user));
-  }
-
-  @AfterEach
-  public void deleteUser() {
-    // Hier könnte man nach einem RoundTrip die DB noch weiter bereinigen
+  void createReadAndDeleteStudent() {
+    // Start: user creation
+    final User rawUser = assertDoesNotThrow(
+        () -> User.builder().username(DEFAULT_USER_NAME).email(DEFAULT_MAIL)
+            .password(Encryption.sha256("VogelSpass03")).build());
+    User userTry;
+    try {
+      userTry = this.userService.createUser(rawUser);
+    } catch (Exception e) {
+      userTry = null;
+    }
+    final User user = userTry;
+    if (user == null) {
+      fail("User was NULL!");
+      return;
+    }
+    // End: user creation
+    // Start: student creation
+    final Student rawStudent = Student.builder().firstName(DEFAULT_FIRST_NAME)
+        .lastName(DEFAULT_LAST_NAME).dateOfBirth(Instant.now()).user(user).build();
+    final Student student = this.studentRepository.save(rawStudent);
+    assertNotNull(student);
+    // End: student creation
+    // Start: assertions
+    assertNotNull(user.getEmail());
+    assertEquals(DEFAULT_MAIL, user.getEmail());
+    assertEquals(DEFAULT_USER_NAME, user.getUsername());
+    assertEquals(DEFAULT_FIRST_NAME, student.getFirstName());
+    assertEquals(DEFAULT_LAST_NAME, student.getLastName());
+    // End: assertions
+    // Start: delete previously created data
+    final Student toDelete = this.studentService.findStudentByUserID(user.getId());
+    if (toDelete != null) {
+      this.studentRepository.deleteById(toDelete.getId());
+    }
+    this.userService.deleteByUsername(user.getUsername());
+    // End: delete previously created data
+    assertNull(this.userService.findByUsername(user.getUsername()));
+    assertNull(this.studentService.findStudentByUserID(user.getId()));
   }
 }

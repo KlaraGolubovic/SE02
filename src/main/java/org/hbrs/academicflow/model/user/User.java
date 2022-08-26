@@ -1,56 +1,81 @@
 package org.hbrs.academicflow.model.user;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.*;
-import lombok.AccessLevel;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hbrs.academicflow.model.common.BaseEntity;
 import org.hbrs.academicflow.model.permission.PermissionGroup;
+import org.jetbrains.annotations.NotNull;
 
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
-@Setter(AccessLevel.PUBLIC)
+@Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "user", schema = "public")
-public class User {
+@Table(
+    name = "user",
+    schema = "public",
+    indexes = {
+        @Index(name = "idx_username", columnList = "username"),
+        @Index(name = "idx_email", columnList = "email"),
+    },
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_username", columnNames = "username"),
+        @UniqueConstraint(name = "uk_email", columnNames = "email"),
+    })
+// uniqueconstraint makes sure a username is unique
+public class User extends BaseEntity {
 
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id", unique = true, nullable = false)
-  private int id = -1;
-
-  @Basic
-  @Column(name = "email", unique = true, nullable = false)
+  @NotNull
+  @Builder.Default
+  @Column(name = "email", nullable = false)
   private String email = "";
-
-  @Basic
+  @NotNull
+  @Builder.Default
   @Column(name = "password", nullable = false)
   private String password = "";
-
-  @Basic
+  @NotNull
+  @Builder.Default
   @Column(name = "username", nullable = false)
   private String username = "";
-
+  @NotNull
+  @Builder.Default
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "user_group",
       schema = "public",
-      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false),
+      joinColumns =
+      @JoinColumn(
+          name = "user_id",
+          referencedColumnName = "id",
+          nullable = false,
+          foreignKey = @ForeignKey(name = "fk_user_id")),
       inverseJoinColumns =
-          @JoinColumn(
-              name = "relation_group",
-              referencedColumnName = "group_name",
-              nullable = false))
-  private List<PermissionGroup> groups = new ArrayList<>();
+      @JoinColumn(
+          name = "group_id",
+          referencedColumnName = "id",
+          nullable = false,
+          foreignKey = @ForeignKey(name = "fk_group_id")))
+  private Set<PermissionGroup> groups = new HashSet<>();
+
+  public void addPermissionGroup(PermissionGroup group) {
+    this.groups.add(group);
+  }
 
   @Override
   public boolean equals(Object obj) {
@@ -60,13 +85,21 @@ public class User {
     if (obj == null || this.getClass() != obj.getClass()) {
       return false;
     }
+    if (!super.equals(obj)) {
+      return false;
+    }
     final User user = (User) obj;
-    return this.id == user.id;
+    if (!this.email.equals(user.email)) {
+      return false;
+    }
+    return this.username.equals(user.username);
   }
-
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+    int result = super.hashCode();
+    result = 31 * result + this.email.hashCode();
+    result = 31 * result + this.username.hashCode();
+    return result;
   }
 }
