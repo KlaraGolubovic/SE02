@@ -78,7 +78,7 @@ jobs:
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: false
           extend_default_theme: true
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: "standard"
           path: "doc/Pdf/"
@@ -96,7 +96,7 @@ jobs:
           highlight_theme: ".github/workflows/Codetheme.css"
           table_of_contents: false
           extend_default_theme: true
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: "landscape"
           path: "doc/Pdf/"
