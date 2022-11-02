@@ -11,7 +11,7 @@ Instant.now(); // Gibt uns die aktuelle Systemzeit in Millisekunden.
 Alle Buttons werden mit der Util-Klasse erstellt.
 
 Die Klasse org.hbrs.academicflow.view.common.components.LabeledButtonCollection ist eine
-Klasse, mit welcher man standardisierte Butons erstellen kann.
+Klasse, mit welcher man standardisierte Buttons erstellen kann.
 <!-- Kleines Beispiel --> 
 Zum Beispiel kann man einen Button wie folgt anlegen:
 

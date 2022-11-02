@@ -4,7 +4,6 @@
         "vscjava.vscode-java-pack",
         "yzhang.markdown-all-in-one",
         "ban.spellright",
-        "gabrielbb.vscode-lombok",
         "ilkka.google-java-format"
     ]
 }
