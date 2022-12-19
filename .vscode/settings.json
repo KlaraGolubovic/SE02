@@ -1,68 +1,62 @@
 {
-    "spellright.language": [
-        "en",
-        "de"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ],
-    
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "favorites.resources": [
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/AcademicFlowApplication.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/views/RegisterView.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/views/BackendDevelopmentView.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "frontend/styles/views/main/main-view.css",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/view/layouts/PublicAppView.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/resources/application.properties",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/util/Constants.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src\\main\\java\\org\\hbrs\\academicflow\\view\\routes\\AdvertisementView.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "frontend\\styles\\views\\main\\advertisements.css",
-            "group": "Default"
-        },
-        {
-            "filePath": "src\\main\\java\\org\\hbrs\\academicflow\\view\\routes\\advertisement\\component\\VisibleAd.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/test/java/org/hbrs/academicflow/test/entity/PermissionTest.java",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/control/advertisement",
-            "group": "Default"
-        },
-        {
-            "filePath": "src/main/java/org/hbrs/academicflow/model/location/ManualLocationBuilder.java",
-            "group": "Default"
-        }
-    ],
-    "svg.preview.background": "black"
+  "spellright.language": ["en", "de"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "favorites.resources": [
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/AcademicFlowApplication.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/views/RegisterView.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/views/BackendDevelopmentView.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "frontend/styles/views/main/main-view.css",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/view/layouts/PublicAppView.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/resources/application.properties",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/util/Constants.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src\\main\\java\\org\\hbrs\\academicflow\\view\\routes\\AdvertisementView.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "frontend\\styles\\views\\main\\advertisements.css",
+      "group": "Default"
+    },
+    {
+      "filePath": "src\\main\\java\\org\\hbrs\\academicflow\\view\\routes\\advertisement\\component\\VisibleAd.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/test/java/org/hbrs/academicflow/test/entity/PermissionTest.java",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/control/advertisement",
+      "group": "Default"
+    },
+    {
+      "filePath": "src/main/java/org/hbrs/academicflow/model/location/ManualLocationBuilder.java",
+      "group": "Default"
+    }
+  ],
+  "svg.preview.background": "black",
+  "java.compile.nullAnalysis.mode": "automatic"
 }
