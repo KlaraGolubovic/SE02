@@ -1,6 +1,7 @@
 <h1 style="text-align:center;"> Academic Flow - SE02 Projekt </h1>
 
 
+
 ![](doc/usability/CorporateDesign/af_logo_small.png)
 
 Ein Projekt von: <br/>[Johannes Meyerhoff](https://vm-2d21.inf.h-brs.de/jmeyer2s), [Fiona Schwindt](https://vm-2d21.inf.h-brs.de/fschwi2s), [Marcel Stabenow](https://vm-2d21.inf.h-brs.de/mstabe2s), [Jonas Koehle](https://vm-2d21.inf.h-brs.de/jkoehl2s), [Tom Keppeler](https://vm-2d21.inf.h-brs.de/tkeppe2s), [Sophie Reckers](https://vm-2d21.inf.h-brs.de/srecke2s), [Sophia Nowicki](https://vm-2d21.inf.h-brs.de/snowic2s), [Gökhan Topcu](https://vm-2d21.inf./), [Thomas Diegel](https://vm-2d21.inf.h-brs.de/tdiege2s), [Klara Golubovic](https://vm-2d21.inf.h-brs.de/kgolub2s)
