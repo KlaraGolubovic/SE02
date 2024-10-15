@@ -34,9 +34,11 @@ public class PermissionGroup extends BaseEntity {
       nullable = false,
       columnDefinition = "VARCHAR(36) DEFAULT 'GroupName'")
   private String name = "";
+
   @NotNull
   @Column(name = "level", nullable = false)
   private Integer level = -1;
+
   @NotNull
   @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
   private Set<User> users = new HashSet<>();

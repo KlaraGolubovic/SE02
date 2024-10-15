@@ -99,29 +99,31 @@ public class DemoDummyDataCreator extends Div {
     Collection<User> studentArray = new ArrayList<>();
 
     Collection<User> companyArray = new ArrayList<>();
-    this.resetDemoStateButton.addClickListener(event -> {
-      if (!this.confirmationTextField.getValue().equals("ENABLEDEMO")) {
-        Notification.show("Nothing happened, wrong input.", 3000, Notification.Position.MIDDLE);
-        return;
-      }
-      Notification.show("Reverting back to demo state, please wait!", 3000,
-          Notification.Position.MIDDLE);
-      this.purge();
-      Notification.show("Deleted " + this.del + " Entities!", 3000, Notification.Position.MIDDLE);
-      this.setPermissionGroups();
+    this.resetDemoStateButton.addClickListener(
+        event -> {
+          if (!this.confirmationTextField.getValue().equals("ENABLEDEMO")) {
+            Notification.show("Nothing happened, wrong input.", 3000, Notification.Position.MIDDLE);
+            return;
+          }
+          Notification.show(
+              "Reverting back to demo state, please wait!", 3000, Notification.Position.MIDDLE);
+          this.purge();
+          Notification.show(
+              "Deleted " + this.del + " Entities!", 3000, Notification.Position.MIDDLE);
+          this.setPermissionGroups();
 
-      this.setListValues(studentArray, companyArray);
-      // order is important setusers generates the values for setstudents
-      Consumer<User> setComps = this::setCompanies;
-      companyArray.forEach(setComps.andThen(this::setAdvertisements));
-      Consumer<User> setStuds = this::setStudents;
-      studentArray.forEach(setStuds.andThen(this::setRatings).andThen(this::setApplications));
-      Notification.show("Standard restored.", 3000, Notification.Position.MIDDLE);
+          this.setListValues(studentArray, companyArray);
+          // order is important setusers generates the values for setstudents
+          Consumer<User> setComps = this::setCompanies;
+          companyArray.forEach(setComps.andThen(this::setAdvertisements));
+          Consumer<User> setStuds = this::setStudents;
+          studentArray.forEach(setStuds.andThen(this::setRatings).andThen(this::setApplications));
+          Notification.show("Standard restored.", 3000, Notification.Position.MIDDLE);
 
-      Notification.show("Created " + this.created + " Entities!", 3000,
-          Notification.Position.MIDDLE);
-      log.info("Demostate finished, " + this.created + " entries created\n");
-    });
+          Notification.show(
+              "Created " + this.created + " Entities!", 3000, Notification.Position.MIDDLE);
+          log.info("Demostate finished, " + this.created + " entries created\n");
+        });
     final FormLayout formLayout = new FormLayout();
     formLayout.add(this.confirmationTextField, this.resetDemoStateButton);
     formLayout.setColspan(this.confirmationTextField, 1);
@@ -132,31 +134,47 @@ public class DemoDummyDataCreator extends Div {
 
   private void setAdvertisements(User user) {
     log.info("Setting advertisements for " + user.getUsername());
-    final Location location = this.locationService.save(
-        Location.builder().city("Bonn").country("Deutschland").zipCode("53117").houseNumber("5B")
-            .street("Friedensstrasse").build());
+    final Location location =
+        this.locationService.save(
+            Location.builder()
+                .city("Bonn")
+                .country("Deutschland")
+                .zipCode("53117")
+                .houseNumber("5B")
+                .street("Friedensstrasse")
+                .build());
     Company comp = companyService.findCompanyByFullUser(this.companyuser);
     if (comp == null) {
       log.error("Company not found");
       return;
     }
-    this.applyStored = this.advertisementService.doCreateAdvertisement(
-        Advertisement.builder().active(true).company(comp).deadline(Instant.now()).description(
-                "Bei Exxeta fordern wir das traditionelle Konzept von Beratung und Tech heraus."
-                    + " Über 1000 Kolleg:innen an verschiedenen Standorten schaffen jeden Tag"
-                    + " gemeinsam digitale Lösungen, verändern Märkte und Mindsets – angetrieben"
-                    + " von unserer Leidenschaft für Technologie, unserem Teamspirit und dem Drang,"
-                    + " echten Impact zu schaffen. Hightech with a heartbeat eben. \n" + "\n"
-                    + "Du bist interessiert an Softwareentwicklung und hast bereits erste"
-                    + " Coding-Erfahrung? Du weißt noch nicht genau, welche Rolle in der"
-                    + " Entwicklung am besten zu dir passt? Dann komm zu Exxeta und wir finden es"
-                    + " gemeinsam heraus. Gestalte dein Studium zusammen mit uns! Bringe dich mit"
-                    + " neuen Ideen und Themen sowie deinen Stärken ein. Wir bieten keine"
-                    + " festgeschriebene Position, sondern die Möglichkeit deine Rolle im"
-                    + " Unternehmen selbst zu finden oder eine neue Rolle zu schaffen. Wähle"
-                    + " selbst, ob du im Frontend oder Backend tätig sein willst.")
-            .jobType("Werkstudent").remote(true).location(location)
-            .title("Werkstudent/Praktikant Softwareentwicklung (m/w/d)").build());
+    this.applyStored =
+        this.advertisementService.doCreateAdvertisement(
+            Advertisement.builder()
+                .active(true)
+                .company(comp)
+                .deadline(Instant.now())
+                .description(
+                    "Bei Exxeta fordern wir das traditionelle Konzept von Beratung und Tech heraus."
+                        + " Über 1000 Kolleg:innen an verschiedenen Standorten schaffen jeden Tag"
+                        + " gemeinsam digitale Lösungen, verändern Märkte und Mindsets –"
+                        + " angetrieben von unserer Leidenschaft für Technologie, unserem"
+                        + " Teamspirit und dem Drang, echten Impact zu schaffen. Hightech with a"
+                        + " heartbeat eben. \n"
+                        + "\n"
+                        + "Du bist interessiert an Softwareentwicklung und hast bereits erste"
+                        + " Coding-Erfahrung? Du weißt noch nicht genau, welche Rolle in der"
+                        + " Entwicklung am besten zu dir passt? Dann komm zu Exxeta und wir finden"
+                        + " es gemeinsam heraus. Gestalte dein Studium zusammen mit uns! Bringe"
+                        + " dich mit neuen Ideen und Themen sowie deinen Stärken ein. Wir bieten"
+                        + " keine festgeschriebene Position, sondern die Möglichkeit deine Rolle im"
+                        + " Unternehmen selbst zu finden oder eine neue Rolle zu schaffen. Wähle"
+                        + " selbst, ob du im Frontend oder Backend tätig sein willst.")
+                .jobType("Werkstudent")
+                .remote(true)
+                .location(location)
+                .title("Werkstudent/Praktikant Softwareentwicklung (m/w/d)")
+                .build());
     this.created = this.created + 2;
   }
 
@@ -182,11 +200,14 @@ public class DemoDummyDataCreator extends Div {
     a.setStudent(student);
     a.setApplied(Instant.now());
     a.setNote(
-        "Guten Tag, mein Name ist " + student.getFirstName() + " und ich studiere an der HBRS. "
-            + "Ich bin sehr interessiert an"
-            + " Softwareentwicklung und bin bereits Erfahren. Ich weiß noch nicht"
-            + " genau, welche Rolle in der Entwicklung am besten zu mir passt. Aber ich würde gerne zu einem Bewerbungsgespräch vorbeikommen. "
-            + "Mit freundlichen Grüßen," + " " + student.getFirstName() + " "
+        "Guten Tag, mein Name ist "
+            + student.getFirstName()
+            + " und ich studiere an der HBRS. Ich bin sehr interessiert an Softwareentwicklung und"
+            + " bin bereits Erfahren. Ich weiß noch nicht genau, welche Rolle in der Entwicklung am"
+            + " besten zu mir passt. Aber ich würde gerne zu einem Bewerbungsgespräch vorbeikommen."
+            + " Mit freundlichen Grüßen, "
+            + student.getFirstName()
+            + " "
             + student.getLastName());
     a.setAdvertisement(applyStored);
     this.applyService.doSaveApplication(a);
@@ -196,29 +217,66 @@ public class DemoDummyDataCreator extends Div {
   private void setListValues(Collection<User> studentArray, Collection<User> companyArray) {
 
     studentArray.add(
-        User.builder().username(LAURA_STUDENT).password(Encryption.sha256(LAURA_STUDENT))
-            .email(LAURA_STUDENT + STUDYHAPPY_DE).build());
-    studentArray.add(User.builder().username(PAUL_STUDENT).password(Encryption.sha256(PAUL_STUDENT))
-        .email(PAUL_STUDENT + STUDYHAPPY_DE).build());
+        User.builder()
+            .username(LAURA_STUDENT)
+            .password(Encryption.sha256(LAURA_STUDENT))
+            .email(LAURA_STUDENT + STUDYHAPPY_DE)
+            .build());
     studentArray.add(
-        User.builder().username(HENRY_STUDENT).password(Encryption.sha256(HENRY_STUDENT))
-            .email(HENRY_STUDENT + STUDYHAPPY_DE).build());
-    studentArray.add(User.builder().username(ERIN_STUDENT).password(Encryption.sha256(ERIN_STUDENT))
-        .email(ERIN_STUDENT + STUDYHAPPY_DE).build());
-    studentArray.add(User.builder().username(MAX_STUDENT).password(Encryption.sha256(MAX_STUDENT))
-        .email(MAX_STUDENT + STUDYHAPPY_DE).build());
+        User.builder()
+            .username(PAUL_STUDENT)
+            .password(Encryption.sha256(PAUL_STUDENT))
+            .email(PAUL_STUDENT + STUDYHAPPY_DE)
+            .build());
+    studentArray.add(
+        User.builder()
+            .username(HENRY_STUDENT)
+            .password(Encryption.sha256(HENRY_STUDENT))
+            .email(HENRY_STUDENT + STUDYHAPPY_DE)
+            .build());
+    studentArray.add(
+        User.builder()
+            .username(ERIN_STUDENT)
+            .password(Encryption.sha256(ERIN_STUDENT))
+            .email(ERIN_STUDENT + STUDYHAPPY_DE)
+            .build());
+    studentArray.add(
+        User.builder()
+            .username(MAX_STUDENT)
+            .password(Encryption.sha256(MAX_STUDENT))
+            .email(MAX_STUDENT + STUDYHAPPY_DE)
+            .build());
 
-    companyArray.add(User.builder().username(ORGA_LAURA).password(Encryption.sha256(ORGA_LAURA))
-        .email("umaidwal@bado.de").build());
-    companyArray.add(User.builder().username(ORGA_HENRY).password(Encryption.sha256(ORGA_HENRY))
-        .email("umadsail@bado.de").build());
-    companyArray.add(User.builder().username(ORGA_ERIN).password(Encryption.sha256(ORGA_ERIN))
-        .email("umadsadsdil@bado.de").build());
-    companyArray.add(User.builder().username(ORGA_MAX).password(Encryption.sha256(ORGA_MAX))
-        .email("umadsadasil@bado.de").build());
+    companyArray.add(
+        User.builder()
+            .username(ORGA_LAURA)
+            .password(Encryption.sha256(ORGA_LAURA))
+            .email("umaidwal@bado.de")
+            .build());
+    companyArray.add(
+        User.builder()
+            .username(ORGA_HENRY)
+            .password(Encryption.sha256(ORGA_HENRY))
+            .email("umadsail@bado.de")
+            .build());
+    companyArray.add(
+        User.builder()
+            .username(ORGA_ERIN)
+            .password(Encryption.sha256(ORGA_ERIN))
+            .email("umadsadsdil@bado.de")
+            .build());
+    companyArray.add(
+        User.builder()
+            .username(ORGA_MAX)
+            .password(Encryption.sha256(ORGA_MAX))
+            .email("umadsadasil@bado.de")
+            .build());
     // Orga_Paul als Letztes hinzufügen, damit alle bewerbungen bei orgapaul eingehen
     companyArray.add(
-        User.builder().username(ORGA_PAUL).password(Encryption.sha256(ORGA_PAUL)).email(PAULGMBH_DE)
+        User.builder()
+            .username(ORGA_PAUL)
+            .password(Encryption.sha256(ORGA_PAUL))
+            .email(PAULGMBH_DE)
             .build());
   }
 
@@ -227,10 +285,13 @@ public class DemoDummyDataCreator extends Div {
     // apply -> advertisement -> organizations -> user -> permissiongroup
     log.info("Purging ratings");
     try {
-      this.ratingService.findAll().forEach(rating -> {
-        this.ratingService.delete(rating);
-        this.del++;
-      });
+      this.ratingService
+          .findAll()
+          .forEach(
+              rating -> {
+                this.ratingService.delete(rating);
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "ratings", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "rating: " + e.getMessage());
@@ -238,10 +299,13 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging applications");
     try {
-      this.applyService.findAll().forEach(apply -> {
-        this.applyService.delete(apply);
-        this.del++;
-      });
+      this.applyService
+          .findAll()
+          .forEach(
+              apply -> {
+                this.applyService.delete(apply);
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "applications", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "applications: " + e.getMessage());
@@ -249,10 +313,13 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging advertisements");
     try {
-      this.advertisementService.findAll().forEach(advertisement -> {
-        this.advertisementService.deleteAdvertisementById(advertisement.getId());
-        this.del++;
-      });
+      this.advertisementService
+          .findAll()
+          .forEach(
+              advertisement -> {
+                this.advertisementService.deleteAdvertisementById(advertisement.getId());
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "advertisements", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "advertisements: " + e.getMessage());
@@ -260,22 +327,28 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging companyProfiles");
     try {
-      this.companyProfileService.findAll().forEach(companyProfile -> {
-        this.companyProfileService.deleteCompanyProfile(companyProfile);
-        this.del++;
-      });
+      this.companyProfileService
+          .findAll()
+          .forEach(
+              companyProfile -> {
+                this.companyProfileService.deleteCompanyProfile(companyProfile);
+                this.del++;
+              });
     } catch (Exception e) {
-      Notification.show(ERROR_WHILE_PURGING + "companyProfiles", 3000,
-          Notification.Position.MIDDLE);
+      Notification.show(
+          ERROR_WHILE_PURGING + "companyProfiles", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "companyProfile: " + e.getMessage());
     }
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging companies");
     try {
-      this.companyService.findAll().forEach(company -> {
-        this.companyService.deleteCompany(company);
-        this.del++;
-      });
+      this.companyService
+          .findAll()
+          .forEach(
+              company -> {
+                this.companyService.deleteCompany(company);
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "companies", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "company: " + e.getMessage());
@@ -283,22 +356,28 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging studentProfiles");
     try {
-      this.studentProfileService.findAll().forEach(studentProfile -> {
-        this.studentProfileService.deleteStudentProfile(studentProfile);
-        this.del++;
-      });
+      this.studentProfileService
+          .findAll()
+          .forEach(
+              studentProfile -> {
+                this.studentProfileService.deleteStudentProfile(studentProfile);
+                this.del++;
+              });
     } catch (Exception e) {
-      Notification.show(ERROR_WHILE_PURGING + "studentProfiles", 3000,
-          Notification.Position.MIDDLE);
+      Notification.show(
+          ERROR_WHILE_PURGING + "studentProfiles", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "studentProfile: " + e.getMessage());
     }
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging students");
     try {
-      this.studentService.findAll().forEach(student -> {
-        this.studentService.deleteStudent(student);
-        this.del++;
-      });
+      this.studentService
+          .findAll()
+          .forEach(
+              student -> {
+                this.studentService.deleteStudent(student);
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "student", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "student: " + e.getMessage());
@@ -306,10 +385,13 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging locations");
     try {
-      this.locationService.findAll().forEach(location -> {
-        this.locationService.deleteById(location.getId());
-        this.del++;
-      });
+      this.locationService
+          .findAll()
+          .forEach(
+              location -> {
+                this.locationService.deleteById(location.getId());
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "locations", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "location: " + e.getMessage());
@@ -317,10 +399,13 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging users");
     try {
-      this.userService.findAllUsers().forEach(user -> {
-        this.userService.deleteById(user.getId());
-        this.del++;
-      });
+      this.userService
+          .findAllUsers()
+          .forEach(
+              user -> {
+                this.userService.deleteById(user.getId());
+                this.del++;
+              });
     } catch (Exception e) {
       Notification.show(ERROR_WHILE_PURGING + "users", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "user: " + e.getMessage());
@@ -328,14 +413,17 @@ public class DemoDummyDataCreator extends Div {
     // ----------------------------------------------------------------------------------------------------------------------
     log.info("Purging permissionGroups");
     try {
-      this.permissionService.findAllUncached().forEach(group -> {
-        log.info("deleting " + group.getName());
-        this.permissionService.deleteById(group.getId());
-        this.del++;
-      });
+      this.permissionService
+          .findAllUncached()
+          .forEach(
+              group -> {
+                log.info("deleting " + group.getName());
+                this.permissionService.deleteById(group.getId());
+                this.del++;
+              });
     } catch (Exception e) {
-      Notification.show(ERROR_WHILE_PURGING + "permissionGroups", 3000,
-          Notification.Position.MIDDLE);
+      Notification.show(
+          ERROR_WHILE_PURGING + "permissionGroups", 3000, Notification.Position.MIDDLE);
       log.error(ERROR_WHILE_PURGING + "permissionGroup: " + e.getMessage());
     }
     log.info("Purge finished, " + this.del + " entries deleted\n");
@@ -349,8 +437,8 @@ public class DemoDummyDataCreator extends Div {
       this.permissionService.save(new PermissionGroup(STUDENT, 5, new HashSet<>()));
       this.created = this.created + 2;
     } catch (Exception e) {
-      Notification.show("Error while creating permission groups", 3000,
-          Notification.Position.MIDDLE);
+      Notification.show(
+          "Error while creating permission groups", 3000, Notification.Position.MIDDLE);
       log.error("Error while creating permission groups: " + e.getMessage());
     }
   }
@@ -365,19 +453,32 @@ public class DemoDummyDataCreator extends Div {
       Notification.show("User could not be created");
     }
     this.companyService.doCreateCompany(
-        Company.builder().name(company.getUsername() + " GmbH").phone("01642388468")
-            .user(this.companyuser).build());
-    final Location location = this.locationService.save(
-        Location.builder().city("Bonn").country("Deutschland").zipCode("53117").houseNumber("6B")
-            .street("Friedensstrasse").build());
+        Company.builder()
+            .name(company.getUsername() + " GmbH")
+            .phone("01642388468")
+            .user(this.companyuser)
+            .build());
+    final Location location =
+        this.locationService.save(
+            Location.builder()
+                .city("Bonn")
+                .country("Deutschland")
+                .zipCode("53117")
+                .houseNumber("6B")
+                .street("Friedensstrasse")
+                .build());
     Company cu = this.companyService.findCompanyByFullUser(this.companyuser);
     if (cu == null) {
       log.error("Company not found");
       return;
     }
     this.companyProfileService.updateCompanyProfile(
-        CompanyProfile.builder().company(cu).description("GmbH ist eine Firma").location(location)
-            .image(2).build());
+        CompanyProfile.builder()
+            .company(cu)
+            .description("GmbH ist eine Firma")
+            .location(location)
+            .image(2)
+            .build());
     this.created = this.created + 2;
   }
 
@@ -390,10 +491,12 @@ public class DemoDummyDataCreator extends Div {
       Notification.show("User could not be created: " + e.getMessage());
     }
     this.studentService.doCreateStudent(
-        Student.builder().firstName(StringUtils.removeEnd(student.getUsername(), STUDENT))
-            .lastName(STUDENT).phone("46912874").user(this.studentuser).build());
+        Student.builder()
+            .firstName(StringUtils.removeEnd(student.getUsername(), STUDENT))
+            .lastName(STUDENT)
+            .phone("46912874")
+            .user(this.studentuser)
+            .build());
     this.created++;
   }
-
-
 }

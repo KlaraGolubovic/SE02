@@ -8,12 +8,12 @@ public class ManualLocationBuilder {
     location = new Location();
   }
 
-  //build method
+  // build method
   public Location build() {
     return location;
   }
 
-  //setter methods
+  // setter methods
   public ManualLocationBuilder street(String street) {
     location.setStreet(street);
     return this;
@@ -39,7 +39,7 @@ public class ManualLocationBuilder {
     return this;
   }
 
-  //concat methods
+  // concat methods
   public ManualLocationBuilder and() {
     return this;
   }

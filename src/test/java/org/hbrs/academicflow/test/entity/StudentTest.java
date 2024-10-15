@@ -13,24 +13,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class StudentTest {
 
   @Test
   void testStudent() {
     Student student = new Student();
-    assertDoesNotThrow(() -> {
-      student.setFirstName("Test");
-      student.setLastName("Test");
-      student.setPhone("Test");
-      student.setDateOfBirth(Instant.now());
-
-    });
+    assertDoesNotThrow(
+        () -> {
+          student.setFirstName("Test");
+          student.setLastName("Test");
+          student.setPhone("Test");
+          student.setDateOfBirth(Instant.now());
+        });
     assertThrows(Exception.class, () -> student.setFirstName(null));
     assertThrows(Exception.class, () -> student.setLastName(null));
-
   }
 }
-
-

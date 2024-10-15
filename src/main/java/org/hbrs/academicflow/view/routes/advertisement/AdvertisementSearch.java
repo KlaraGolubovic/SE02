@@ -1,6 +1,7 @@
 package org.hbrs.academicflow.view.routes.advertisement;
 
 import com.google.common.collect.Lists;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -58,13 +59,20 @@ public class AdvertisementSearch extends Div {
     searchBar.add(searchTerm);
     searchTerm.setPreventInvalidInput(true);
     Button search = new Button("suchen");
-    search.addClickListener(event -> {
-      this.suchanfrage.setFilterString(advertisement -> (
-          advertisement.getTitle().toLowerCase().contains(searchTerm.getValue().toLowerCase())
-              || advertisement.getDescription().toLowerCase()
-              .contains(searchTerm.getValue().toLowerCase())));
-      fill(layout);
-    });
+    search.addClickListener(
+        event -> {
+          this.suchanfrage.setFilterString(
+              advertisement ->
+                  (advertisement
+                          .getTitle()
+                          .toLowerCase()
+                          .contains(searchTerm.getValue().toLowerCase())
+                      || advertisement
+                          .getDescription()
+                          .toLowerCase()
+                          .contains(searchTerm.getValue().toLowerCase())));
+          fill(layout);
+        });
     searchBar.add(search);
     return searchBar;
   }
@@ -82,30 +90,35 @@ public class AdvertisementSearch extends Div {
 
   private Button filterNotRemoteButton() {
     Button button = new Button("Nur Präsenz");
-    button.addClickListener(event -> {
-      this.suchanfrage.setFilterRemote(advertisement -> !advertisement.getRemote());
-      fill(layout);
-    });
+    button.addClickListener(this::filterNotRemoteAction);
     return button;
+  }
+
+  private void filterNotRemoteAction(ClickEvent<Button> buttonClickEvent) {
+
+    this.suchanfrage.setFilterRemote(advertisement -> !advertisement.getRemote());
+    fill(layout);
   }
 
   private Button filterRemoteIrellevantButton() {
     Button button = new Button("Remote und Präsenz");
-    button.addClickListener(event -> {
-      this.suchanfrage.setFilterRemote(advertisement -> true);
+    button.addClickListener(
+        event -> {
+          this.suchanfrage.setFilterRemote(advertisement -> true);
 
-      fill(layout);
-    });
+          fill(layout);
+        });
     return button;
   }
 
   private Button filterRemoteButton() {
     Button filterRemote = new Button("Nur Remoteangebote");
-    filterRemote.addClickListener(event -> {
-      this.suchanfrage.setFilterRemote(Advertisement::getRemote);
+    filterRemote.addClickListener(
+        event -> {
+          this.suchanfrage.setFilterRemote(Advertisement::getRemote);
 
-      fill(layout);
-    });
+          fill(layout);
+        });
     return filterRemote;
   }
 

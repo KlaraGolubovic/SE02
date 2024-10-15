@@ -28,8 +28,7 @@ class PermissionTest {
   public static final String ORGANISATION_TEST = "OrganisationTEST";
   public static final String ORGANISATION_TEST_2 = "OrganisationTEST2";
   private static final String TEMPORARY_GROUP_NAME = "TemporaryTestingGroupName";
-  @Autowired
-  private PermissionGroupService permissionGroupService;
+  @Autowired private PermissionGroupService permissionGroupService;
 
   @Test
   @Order(1)

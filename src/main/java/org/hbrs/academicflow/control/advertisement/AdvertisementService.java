@@ -43,8 +43,8 @@ public class AdvertisementService {
   }
 
   /**
-   * This function will return all existing advertisements created by a given
-   * {@link org.hbrs.academicflow.model.company.user.Company}
+   * This function will return all existing advertisements created by a given {@link
+   * org.hbrs.academicflow.model.company.user.Company}
    *
    * @param companyId which has created the requested advertisements
    * @return List of all existing {@link AdvertisementDTO}s created by the given companyId
@@ -58,11 +58,10 @@ public class AdvertisementService {
   /**
    * This function will return the advertisement with a specific id
    *
-   * @param advertisementId for which an
-   *                        {@link org.hbrs.academicflow.model.advertisement.Advertisement} should
-   *                        be searched
+   * @param advertisementId for which an {@link
+   *     org.hbrs.academicflow.model.advertisement.Advertisement} should be searched
    * @return Either the found {@link AdvertisementDTO} or null if there is no advertisement with the
-   * given id
+   *     given id
    */
   public @Nullable AdvertisementDTO findAdvertisementById(@NotNull UUID advertisementId) {
     return this.repository.findById(advertisementId).map(this.mapper::toDTO).orElse(null);
@@ -72,9 +71,8 @@ public class AdvertisementService {
    * This function will delete an {@link org.hbrs.academicflow.model.advertisement.Advertisement}
    * with a given id
    *
-   * @param advertisementId for which an
-   *                        {@link org.hbrs.academicflow.model.advertisement.Advertisement} should
-   *                        be deleted
+   * @param advertisementId for which an {@link
+   *     org.hbrs.academicflow.model.advertisement.Advertisement} should be deleted
    */
   public void deleteAdvertisementById(@NotNull UUID advertisementId) {
     this.repository.deleteById(advertisementId);
@@ -121,11 +119,10 @@ public class AdvertisementService {
   /**
    * This function will return the advertisement with a specific id
    *
-   * @param advertisementId for which an
-   *                        {@link org.hbrs.academicflow.model.advertisement.Advertisement} should
-   *                        be searched
+   * @param advertisementId for which an {@link
+   *     org.hbrs.academicflow.model.advertisement.Advertisement} should be searched
    * @return Either the found {@link Advertisement} or null if there is no advertisement with the
-   * given id
+   *     given id
    */
   public Advertisement findFullAdvertisementById(@NotNull UUID advertisementId) {
     return this.repository.findById(advertisementId).orElse(null);

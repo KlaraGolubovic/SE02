@@ -91,10 +91,15 @@ public class EditStudentProfile extends Div {
     select.setValue("Most recent first");
     upload.setAcceptedFileTypes("application/pdf", ".pdf");
     upload.setUploadButton(uploadButton);
-    upload.getElement().addEventListener("max-files-reached-changed", event -> {
-      boolean maxFilesReached = event.getEventData().getBoolean("event.detail.value");
-      uploadButton.setEnabled(!maxFilesReached);
-    }).addEventData("event.detail.value");
+    upload
+        .getElement()
+        .addEventListener(
+            "max-files-reached-changed",
+            event -> {
+              boolean maxFilesReached = event.getEventData().getBoolean("event.detail.value");
+              uploadButton.setEnabled(!maxFilesReached);
+            })
+        .addEventData("event.detail.value");
     upload.setI18n(uploadI18N());
     add(hLayout);
     try {
@@ -116,14 +121,25 @@ public class EditStudentProfile extends Div {
     this.saveButton.addClickListener(event -> this.saveAndExit());
     // Start: Build components
     final FormLayout formLayout = new FormLayout();
-    Paragraph hint = new Paragraph(
-        "Lade hier deine Dokumente (z. B. Lebenslauf, Nachweise...) hoch:");
+    Paragraph hint =
+        new Paragraph("Lade hier deine Dokumente (z. B. Lebenslauf, Nachweise...) hoch:");
     hint.getStyle().set("color", "var(--lumo-secondary-text-color)");
     hint.getStyle().set("padding-bottom", "1em");
     upload.getStyle().set("margin-bottom", "2em");
-    formLayout.add(this.vorname, this.nachname, this.streetField, this.houseNumberField,
-        this.zipCodeField, this.cityField, this.countryField, this.select, this.descriptionField,
-        hint, upload, this.saveButton, this.resetButton);
+    formLayout.add(
+        this.vorname,
+        this.nachname,
+        this.streetField,
+        this.houseNumberField,
+        this.zipCodeField,
+        this.cityField,
+        this.countryField,
+        this.select,
+        this.descriptionField,
+        hint,
+        upload,
+        this.saveButton,
+        this.resetButton);
     saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     formLayout.setColspan(this.streetField, 1);
     formLayout.setColspan(this.zipCodeField, 1);
@@ -145,20 +161,34 @@ public class EditStudentProfile extends Div {
 
   UploadI18N uploadI18N() {
     UploadI18N i18N = new UploadI18N();
-    i18N.setDropFiles(new DropFiles().setOne("Lade hier deinen Lebenslauf hoch")
-        .setMany("Lade hier deinen Lebenslauf hoch"));
+    i18N.setDropFiles(
+        new DropFiles()
+            .setOne("Lade hier deinen Lebenslauf hoch")
+            .setMany("Lade hier deinen Lebenslauf hoch"));
     i18N.setAddFiles(new AddFiles().setOne("Upload File...").setMany("Upload Files..."));
     i18N.setCancel("Cancel");
-    i18N.setError(new Error().setTooManyFiles("Too Many Files.").setFileIsTooBig("File is Too Big.")
-        .setIncorrectFileType("Incorrect File Type."));
-    i18N.setUploading(new Uploading().setStatus(
-        new Uploading.Status().setConnecting("Connecting...").setStalled("Stalled")
-            .setProcessing("Processing File...").setHeld("Queued")).setRemainingTime(
-        new Uploading.RemainingTime().setPrefix("remaining time: ")
-            .setUnknown("unknown remaining time")).setError(
-        new Uploading.Error().setServerUnavailable("Upload failed, please try again later")
-            .setUnexpectedServerError("Upload failed due to server error")
-            .setForbidden("Upload forbidden")));
+    i18N.setError(
+        new Error()
+            .setTooManyFiles("Too Many Files.")
+            .setFileIsTooBig("File is Too Big.")
+            .setIncorrectFileType("Incorrect File Type."));
+    i18N.setUploading(
+        new Uploading()
+            .setStatus(
+                new Uploading.Status()
+                    .setConnecting("Connecting...")
+                    .setStalled("Stalled")
+                    .setProcessing("Processing File...")
+                    .setHeld("Queued"))
+            .setRemainingTime(
+                new Uploading.RemainingTime()
+                    .setPrefix("remaining time: ")
+                    .setUnknown("unknown remaining time"))
+            .setError(
+                new Uploading.Error()
+                    .setServerUnavailable("Upload failed, please try again later")
+                    .setUnexpectedServerError("Upload failed due to server error")
+                    .setForbidden("Upload forbidden")));
     i18N.setUnits(
         new Units().setSize(Arrays.asList("B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")));
     return i18N;
@@ -191,15 +221,21 @@ public class EditStudentProfile extends Div {
     this.studentService.doUpdateStudent(student);
     final LocationDTO locationDTO = this.toLocationDTO();
     if (this.newlyGenerated.get()) {
-      final Location location = this.locationService.save(
-          this.locationMapper.toEntity(locationDTO));
-      final StudentProfile studentProfil = StudentProfile.builder().student(student)
-          .description(this.descriptionField.getValue()).image(0).location(location).build();
+      final Location location =
+          this.locationService.save(this.locationMapper.toEntity(locationDTO));
+      final StudentProfile studentProfil =
+          StudentProfile.builder()
+              .student(student)
+              .description(this.descriptionField.getValue())
+              .image(0)
+              .location(location)
+              .build();
       this.profileService.updateStudentProfile(studentProfil);
       Notification.show("Das Profil wurde erstellt");
     } else {
-      final Location location = this.locationMapper.update(locationDTO,
-          this.profile.getLocation().getId(), this.profile.getLocation());
+      final Location location =
+          this.locationMapper.update(
+              locationDTO, this.profile.getLocation().getId(), this.profile.getLocation());
       this.profile.setDescription(this.descriptionField.getValue());
       this.profile.setLocation(this.locationService.save(location));
       this.profileService.updateStudentProfile(this.profile);
@@ -208,8 +244,12 @@ public class EditStudentProfile extends Div {
   }
 
   private @NotNull LocationDTO toLocationDTO() {
-    return new LocationDTO(this.streetField.getValue(), this.houseNumberField.getValue(),
-        this.cityField.getValue(), this.zipCodeField.getValue(), this.countryField.getValue());
+    return new LocationDTO(
+        this.streetField.getValue(),
+        this.houseNumberField.getValue(),
+        this.cityField.getValue(),
+        this.zipCodeField.getValue(),
+        this.countryField.getValue());
   }
 
   private @Nullable StudentProfile buildEmptyCompanyProfile() {
@@ -217,9 +257,13 @@ public class EditStudentProfile extends Div {
     if (student == null) {
       return null;
     }
-    final Location location = Location.builder().zipCode("").street("").houseNumber("").country("")
-        .city("").build();
-    return StudentProfile.builder().location(location).student(student).description("").image(0)
+    final Location location =
+        Location.builder().zipCode("").street("").houseNumber("").country("").city("").build();
+    return StudentProfile.builder()
+        .location(location)
+        .student(student)
+        .description("")
+        .image(0)
         .build();
   }
 }

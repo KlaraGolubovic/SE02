@@ -20,7 +20,7 @@ public class AuthorizationService {
   /**
    * This function will check if the given user has access to the requested content
    *
-   * @param user            who should be checked
+   * @param user who should be checked
    * @param permissionLevel which is required for the later action
    * @return boolean either true if the user is permitted or false if not so
    */

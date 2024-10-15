@@ -55,8 +55,10 @@ public class RegistrationView extends Div {
   private final TextField firstNameField = new TextField("Vorname");
   private final TextField lastNameField = new TextField("Nachname");
   private final TextField phoneField = new TextField("Telefonnummer");
+
   @PropertyId("roles")
   private final Select<String> groupSelector = new Select<>("Rolle");
+
   private final transient UserService userService;
   private final transient StudentService studentService;
   private final transient PermissionGroupService groupService;

@@ -16,10 +16,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ApplyService {
 
-  @Autowired
-  private final ApplyMapper mapper;
-  @Autowired
-  private final ApplyRepository repository;
+  @Autowired private final ApplyMapper mapper;
+  @Autowired private final ApplyRepository repository;
 
   public @NotNull List<ApplyDTO> findApplication() {
     return this.repository.findAll().stream().map(this.mapper::toDTO).collect(Collectors.toList());

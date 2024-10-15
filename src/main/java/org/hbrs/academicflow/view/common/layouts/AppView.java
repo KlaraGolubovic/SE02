@@ -52,9 +52,7 @@ import org.hbrs.academicflow.view.routes.welcome.WelcomeView;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * The main view is a top-level placeholder for other views.
- */
+/** The main view is a top-level placeholder for other views. */
 @CssImport("./styles/views/main/main-view.css")
 @Route("main")
 @PWA(name = "AcademicFlow", shortName = "AcademicFlow", enableInstallPrompt = false)
@@ -74,7 +72,6 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
   private transient AuthorizationService authorizationControl;
 
   private Image logoSmall = new Image("images/logo.png", "AcademicFlow logo");
-
 
   @PostConstruct
   public void init() {
@@ -129,10 +126,11 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     this.viewTitle = new H1();
     this.viewTitle.setWidthFull();
     layout.add(this.viewTitle);
-    this.logoSmall.addClickListener(clickEvent -> {
-      UI ui = UI.getCurrent();
-      ui.navigate(Constants.Pages.WELCOME_VIEW);
-    });
+    this.logoSmall.addClickListener(
+        clickEvent -> {
+          UI ui = UI.getCurrent();
+          ui.navigate(Constants.Pages.WELCOME_VIEW);
+        });
     layout.add(this.logoSmall);
     // Interner Layout
     HorizontalLayout topRightPanel = new HorizontalLayout();
@@ -152,19 +150,21 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
   }
 
   private void logoutUser() {
-    this.getUI().ifPresent(ui -> {
-      this.loginService.logout();
-      ui.getSession().close();
-      ui.navigate(Constants.Pages.LANDING_VIEW);
-      Notification n = Notification.show("Erfolgreich abgemeldet", 9000, Position.BOTTOM_CENTER);
-      n.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-    });
+    this.getUI()
+        .ifPresent(
+            ui -> {
+              this.loginService.logout();
+              ui.getSession().close();
+              ui.navigate(Constants.Pages.LANDING_VIEW);
+              Notification n =
+                  Notification.show("Erfolgreich abgemeldet", 9000, Position.BOTTOM_CENTER);
+              n.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+            });
   }
 
   /**
    * Hinzufügen der vertikalen Leiste (Drawer) Diese besteht aus dem Logo ganz oben links sowie den
-   * Menu-Einträgen (menu items). Die Menu Items sind zudem verlinkt zu den internen
-   * Tab-Components.
+   * Menu-Einträgen (menu items). Die Menu Items sind zudem verlinkt zu den internen Tab-Components.
    *
    * @param menu Inhalte für den Drawer
    * @return Drawer Content links
@@ -209,7 +209,7 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
   private Component[] buildMenuItems() {
     final UserDTO user = SessionAttributes.getCurrentUser();
     if (user == null) {
-      return new Component[]{};
+      return new Component[] {};
     }
     final ArrayList<Tab> tabs = new ArrayList<>();
     // hier werden die Tabs manuell gebaut
@@ -251,9 +251,11 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
     if (this.menu == null) {
       return Optional.empty();
     }
-    return this.menu.getChildren()
+    return this.menu
+        .getChildren()
         .filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
-        .findFirst().map(Tab.class::cast);
+        .findFirst()
+        .map(Tab.class::cast);
   }
 
   private @NotNull String getPageTitle() {
@@ -296,14 +298,16 @@ public class AppView extends AppLayout implements BeforeEnterObserver {
       if (company == null) {
         log.info("Showing AppView logged in as neither {}", user.getUsername());
         if (Constants.organizationOnlyRefs().contains(event.getLocation().getPath())) {
-          log.info("User is not associated with a company. Redirecting to profile view."
-              + event.getLocation().getPath() + " for user " + user.getUsername());
+          log.info(
+              "User is not associated with a company. Redirecting to profile view."
+                  + event.getLocation().getPath()
+                  + " for user "
+                  + user.getUsername());
           event.rerouteTo(Constants.Pages.WELCOME_VIEW);
         }
       } else {
         log.info("Showing AppView logged in as Company {}", company.getName());
       }
     }
-
   }
 }

@@ -18,7 +18,11 @@ public class RatingDTO {
   private CompanyProfile companyProfile;
 
   public Rating buildRatingFromDTO() {
-    return Rating.builder().timestamp(this.timestamp).companyProfile(this.companyProfile)
-        .student(this.student).value(this.value).build();
+    return Rating.builder()
+        .timestamp(this.timestamp)
+        .companyProfile(this.companyProfile)
+        .student(this.student)
+        .value(this.value)
+        .build();
   }
 }

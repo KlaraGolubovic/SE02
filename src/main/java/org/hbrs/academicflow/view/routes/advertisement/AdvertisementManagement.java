@@ -64,7 +64,8 @@ public class AdvertisementManagement extends Div {
     }
     this.advertisements.stream()
         .filter(advertisement -> advertisement.getCompany().getId().equals(company.getId()))
-        .filter(AdvertisementDTO::getActive).forEach(a -> layout.add(new EditableAdvertisement(a)));
+        .filter(AdvertisementDTO::getActive)
+        .forEach(a -> layout.add(new EditableAdvertisement(a)));
     return layout;
   }
 

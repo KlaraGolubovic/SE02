@@ -31,8 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
-  @Autowired
-  private transient LoginService loginService;
+  @Autowired private transient LoginService loginService;
 
   @PostConstruct
   private void init() {

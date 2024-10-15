@@ -22,23 +22,27 @@ import org.jetbrains.annotations.NotNull;
     name = "location",
     schema = "public",
     indexes = {
-        @Index(name = "idx_city", columnList = "city"),
-        @Index(name = "idx_zip_code", columnList = "zip_code"),
+      @Index(name = "idx_city", columnList = "city"),
+      @Index(name = "idx_zip_code", columnList = "zip_code"),
     })
 public class Location extends BaseEntity {
 
   @NotNull
   @Column(name = "street", nullable = false)
   private String street;
+
   @NotNull
   @Column(name = "house_number", nullable = false)
   private String houseNumber;
+
   @NotNull
   @Column(name = "city", nullable = false)
   private String city;
+
   @NotNull
   @Column(name = "zip_code", nullable = false)
   private String zipCode;
+
   @NotNull
   @Column(name = "country", nullable = false)
   private String country;

@@ -29,10 +29,12 @@ public class StudentProfile extends BaseEntity {
   @NotNull
   @Column(name = "image", nullable = false)
   private Integer image;
+
   @Nullable
   @Builder.Default
   @Column(name = "description")
   private String description = "";
+
   @NotNull
   @OneToOne(optional = false)
   @JoinColumn(
@@ -40,6 +42,7 @@ public class StudentProfile extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_location_id"))
   private Location location;
+
   @NotNull
   @OneToOne(orphanRemoval = true, optional = false)
   @JoinColumn(

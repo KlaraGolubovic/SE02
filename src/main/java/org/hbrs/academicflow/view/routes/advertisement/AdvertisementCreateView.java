@@ -67,16 +67,19 @@ public class AdvertisementCreateView extends AdvertisementDetailsOrg {
     this.fillFieldsWithProfileInformation();
     // End: Fill Components with CompanyProfile information
     this.resetButton.addClickListener(event -> this.fillFieldsWithProfileInformation());
-    this.saveButton.addClickListener(event -> {
-      if (this.titleField.getValue().equals("") || this.descriptionField.getValue().equals("")) {
-        Notification notification = Notification.show("Bitte füllen Sie alle Felder aus", 8000,
-            Notification.Position.TOP_STRETCH);
-        notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
-        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-        return;
-      }
-      this.saveAndExit();
-    });
+    this.saveButton.addClickListener(
+        event -> {
+          if (this.titleField.getValue().equals("")
+              || this.descriptionField.getValue().equals("")) {
+            Notification notification =
+                Notification.show(
+                    "Bitte füllen Sie alle Felder aus", 8000, Notification.Position.TOP_STRETCH);
+            notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+          }
+          this.saveAndExit();
+        });
     // Start: Build components
     final FormLayout formLayout = new FormLayout();
     jobTypeField.setLabel("Stellen-Typ");

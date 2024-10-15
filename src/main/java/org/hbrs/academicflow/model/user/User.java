@@ -31,12 +31,12 @@ import org.jetbrains.annotations.NotNull;
     name = "user",
     schema = "public",
     indexes = {
-        @Index(name = "idx_username", columnList = "username"),
-        @Index(name = "idx_email", columnList = "email"),
+      @Index(name = "idx_username", columnList = "username"),
+      @Index(name = "idx_email", columnList = "email"),
     },
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_username", columnNames = "username"),
-        @UniqueConstraint(name = "uk_email", columnNames = "email"),
+      @UniqueConstraint(name = "uk_username", columnNames = "username"),
+      @UniqueConstraint(name = "uk_email", columnNames = "email"),
     })
 // uniqueconstraint makes sure a username is unique
 public class User extends BaseEntity {
@@ -45,14 +45,17 @@ public class User extends BaseEntity {
   @Builder.Default
   @Column(name = "email", nullable = false)
   private String email = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "password", nullable = false)
   private String password = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "username", nullable = false)
   private String username = "";
+
   @NotNull
   @Builder.Default
   @ManyToMany(fetch = FetchType.EAGER)
@@ -60,17 +63,17 @@ public class User extends BaseEntity {
       name = "user_group",
       schema = "public",
       joinColumns =
-      @JoinColumn(
-          name = "user_id",
-          referencedColumnName = "id",
-          nullable = false,
-          foreignKey = @ForeignKey(name = "fk_user_id")),
+          @JoinColumn(
+              name = "user_id",
+              referencedColumnName = "id",
+              nullable = false,
+              foreignKey = @ForeignKey(name = "fk_user_id")),
       inverseJoinColumns =
-      @JoinColumn(
-          name = "group_id",
-          referencedColumnName = "id",
-          nullable = false,
-          foreignKey = @ForeignKey(name = "fk_group_id")))
+          @JoinColumn(
+              name = "group_id",
+              referencedColumnName = "id",
+              nullable = false,
+              foreignKey = @ForeignKey(name = "fk_group_id")))
   private Set<PermissionGroup> groups = new HashSet<>();
 
   public void addPermissionGroup(PermissionGroup group) {

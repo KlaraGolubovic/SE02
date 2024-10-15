@@ -7,7 +7,7 @@
 const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { BabelMultiTargetPlugin } = require('webpack-babel-multi-target-plugin');
+const {BabelMultiTargetPlugin} = require('webpack-babel-multi-target-plugin');
 
 const path = require('path');
 const baseDir = path.resolve(__dirname);
@@ -15,7 +15,7 @@ const baseDir = path.resolve(__dirname);
 const frontendFolder = require('path').resolve(__dirname, 'frontend');
 
 const fileNameOfTheFlowGeneratedMainEntryPoint = require('path').resolve(__dirname, 'target/frontend/generated-flow-imports.js');
-const mavenOutputFolderForFlowBundledFiles = require('path').resolve(__dirname, 'target/classes/META-INF/VAADIN');
+const mavenOutputFolderForFlowBundledFiles = require('path').resolve(__dirname, '');
 
 const devmodeGizmoJS = '@vaadin/flow-frontend/VaadinDevmodeGizmo.js'
 
@@ -94,17 +94,17 @@ module.exports = {
   devServer: {
     // webpack-dev-server serves ./ ,  webpack-generated,  and java webapp
     contentBase: [mavenOutputFolderForFlowBundledFiles, 'src/main/webapp'],
-    after: function (app, server) {
-      app.get(`/stats.json`, function (req, res) {
+    after: function(app, server) {
+      app.get(`/stats.json`, function(req, res) {
         res.json(stats);
       });
-      app.get(`/stats.hash`, function (req, res) {
+      app.get(`/stats.hash`, function(req, res) {
         res.json(stats.hash.toString());
       });
-      app.get(`/assetsByChunkName`, function (req, res) {
+      app.get(`/assetsByChunkName`, function(req, res) {
         res.json(stats.assetsByChunkName);
       });
-      app.get(`/stop`, function (req, res) {
+      app.get(`/stop`, function(req, res) {
         // eslint-disable-next-line no-console
         console.log("Stopped 'webpack-dev-server'");
         process.exit(0);
@@ -267,7 +267,7 @@ function collectModules(statsJson, acceptedChunks) {
     statsJson.modules.forEach(function (module) {
       // Add module if module chunks contain an accepted chunk and the module is generated-flow-imports.js module
       if (module.chunks.filter(key => acceptedChunks.includes(key)).length > 0
-        && (module.name.includes("generated-flow-imports.js") || module.name.includes("generated-flow-imports-fallback.js"))) {
+          && (module.name.includes("generated-flow-imports.js") || module.name.includes("generated-flow-imports-fallback.js"))) {
         let subModules = [];
         // Create sub modules only if they are available
         if (module.modules) {

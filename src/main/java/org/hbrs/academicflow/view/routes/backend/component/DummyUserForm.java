@@ -90,9 +90,12 @@ public class DummyUserForm extends Div {
   }
 
   private @NotNull User buildUser() {
-    final User user = User.builder().username(this.usernameField.getValue())
-        .password(Encryption.sha256(this.passwordField.getValue())).email(this.mailField.getValue())
-        .build();
+    final User user =
+        User.builder()
+            .username(this.usernameField.getValue())
+            .password(Encryption.sha256(this.passwordField.getValue()))
+            .email(this.mailField.getValue())
+            .build();
     final PermissionGroup group = this.permissionService.findPermissionGroupByName("student");
     if (group != null) {
       user.addPermissionGroup(group);
@@ -101,8 +104,12 @@ public class DummyUserForm extends Div {
   }
 
   private @NotNull Student buildStudent(User user) {
-    return Student.builder().user(user).firstName(this.firstNameField.getValue())
-        .lastName(this.lastNameField.getValue()).phone(this.phoneField.getValue()).build();
+    return Student.builder()
+        .user(user)
+        .firstName(this.firstNameField.getValue())
+        .lastName(this.lastNameField.getValue())
+        .phone(this.phoneField.getValue())
+        .build();
   }
 
   private void doRefreshUserGridTable() {
@@ -118,15 +125,23 @@ public class DummyUserForm extends Div {
     this.userGrid.addColumn(User::getId).setHeader("ID").setWidth("20px");
     this.userGrid.addColumn(User::getUsername).setHeader("Username");
     this.userGrid.addColumn(User::getEmail).setHeader(EMAIL).setWidth("180px");
-    this.userGrid.addComponentColumn(item -> new Button("Edit", click -> {
-      final Dialog dialog = new Dialog();
-      final VerticalLayout dialogLayout = buildUserEditDialogLayout(dialog, item);
-      dialog.add(dialogLayout);
-      dialog.setModal(false);
-      dialog.setDraggable(true);
-      add(dialog);
-      dialog.open();
-    })).setHeader("Bearbeiten").setWidth("180px").setKey("key");
+    this.userGrid
+        .addComponentColumn(
+            item ->
+                new Button(
+                    "Edit",
+                    click -> {
+                      final Dialog dialog = new Dialog();
+                      final VerticalLayout dialogLayout = buildUserEditDialogLayout(dialog, item);
+                      dialog.add(dialogLayout);
+                      dialog.setModal(false);
+                      dialog.setDraggable(true);
+                      add(dialog);
+                      dialog.open();
+                    }))
+        .setHeader("Bearbeiten")
+        .setWidth("180px")
+        .setKey("key");
     this.userGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     this.userGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
     this.userGrid.addThemeVariants(GridVariant.MATERIAL_COLUMN_DIVIDERS);
@@ -140,11 +155,15 @@ public class DummyUserForm extends Div {
     final HorizontalLayout header = new HorizontalLayout(headline);
     header.getElement().getClassList().add("draggable");
     header.setSpacing(false);
-    header.getStyle().set("border-bottom", "1px solid var(--lumo-contrast-20pct)")
+    header
+        .getStyle()
+        .set("border-bottom", "1px solid var(--lumo-contrast-20pct)")
         .set("cursor", "move");
     // Use negative margins to make draggable header stretch over full width,
     // covering the padding of the dialog
-    header.getStyle().set("padding", "var(--lumo-space-m) var(--lumo-space-l)")
+    header
+        .getStyle()
+        .set("padding", "var(--lumo-space-m) var(--lumo-space-l)")
         .set("margin", "calc(var(--lumo-space-s) * -1) calc(var(--lumo-space-l) * -1) 0");
     final TextField titleField = new TextField("Username");
     titleField.setValue(user.getUsername());
@@ -167,60 +186,65 @@ public class DummyUserForm extends Div {
   }
 
   private Component buildDeleteDummyUsersButton() {
-    this.deleteDummiesButton.addClickListener(event -> {
-      final AtomicBoolean deleted = new AtomicBoolean();
-      this.userService.findAllUsers().stream().filter(user -> user.getEmail().contains("dummy"))
-          .forEach(user -> {
-            final Student student = this.studentService.findStudentByUserID(user.getId());
-            if (student != null) {
-              this.studentRepository.delete(student);
-            }
-            final Company comp = this.companyService.findCompanyByFullUser(user);
-            if (comp != null) {
-              this.companyService.deleteCompany(comp);
-            }
-            this.userService.deleteByUsername(user.getUsername());
-            deleted.set(true);
-          });
-      this.userService.deleteByUsername("exxeta");
-      if (deleted.get()) {
-        Notification.show("Dummy users have been deleted.");
-      } else {
-        Notification.show("No dummy users were found.");
-      }
-      this.doRefreshUserGridTable();
-    });
+    this.deleteDummiesButton.addClickListener(
+        event -> {
+          final AtomicBoolean deleted = new AtomicBoolean();
+          this.userService.findAllUsers().stream()
+              .filter(user -> user.getEmail().contains("dummy"))
+              .forEach(
+                  user -> {
+                    final Student student = this.studentService.findStudentByUserID(user.getId());
+                    if (student != null) {
+                      this.studentRepository.delete(student);
+                    }
+                    final Company comp = this.companyService.findCompanyByFullUser(user);
+                    if (comp != null) {
+                      this.companyService.deleteCompany(comp);
+                    }
+                    this.userService.deleteByUsername(user.getUsername());
+                    deleted.set(true);
+                  });
+          this.userService.deleteByUsername("exxeta");
+          if (deleted.get()) {
+            Notification.show("Dummy users have been deleted.");
+          } else {
+            Notification.show("No dummy users were found.");
+          }
+          this.doRefreshUserGridTable();
+        });
     this.deleteDummiesButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
     return this.deleteDummiesButton;
   }
 
   private Component buildDummyUserButton() {
     final Button save = new Button("Add dummy user");
-    save.addClickListener(event -> {
-      try {
-        final User user = createDummyUser();
-        if (user == null) {
-          Notification.show("User could not be created");
-          return;
-        }
-        final Student student = this.studentService.doCreateStudent(this.buildStudent(user));
-        if (student == null) {
-          Notification.show("Student could not be created");
-          return;
-        }
-        Notification.show("User account has been created");
-        this.doRefreshUserGridTable();
-      } catch (IllegalArgumentException e) {
-        log.error(e.getMessage());
-      } catch (org.springframework.dao.DataIntegrityViolationException die) {
-        log.error(die.getMessage());
-        if (Objects.requireNonNull(die.getRootCause()).getMessage().contains("email")) {
-          Notification.show("Error: email adress already in use: " + this.mailField.getValue());
-        } else {
-          Notification.show("Error: something that is not the email is restricting user-creation");
-        }
-      }
-    });
+    save.addClickListener(
+        event -> {
+          try {
+            final User user = createDummyUser();
+            if (user == null) {
+              Notification.show("User could not be created");
+              return;
+            }
+            final Student student = this.studentService.doCreateStudent(this.buildStudent(user));
+            if (student == null) {
+              Notification.show("Student could not be created");
+              return;
+            }
+            Notification.show("User account has been created");
+            this.doRefreshUserGridTable();
+          } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
+          } catch (org.springframework.dao.DataIntegrityViolationException die) {
+            log.error(die.getMessage());
+            if (Objects.requireNonNull(die.getRootCause()).getMessage().contains("email")) {
+              Notification.show("Error: email adress already in use: " + this.mailField.getValue());
+            } else {
+              Notification.show(
+                  "Error: something that is not the email is restricting user-creation");
+            }
+          }
+        });
     save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     return save;
   }

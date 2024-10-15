@@ -47,21 +47,41 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class ViewBuildabilityTest {
 
-  private static final String DISABLEDTF = "    <vaadin-text-field colspan=\"1\" disabled></vaadin-text-field>\n";
-  private static final String REGISTRATIONHTML = "<div class=\"registration-view\">\n" + " <div>\n"
-      + "  <vaadin-vertical-layout theme=\"padding spacing\" style=\"width:100%\">\n"
-      + "   <span><h1>Registrieren</h1></span>\n" + "   <vaadin-form-layout>\n"
-      + "    <vaadin-text-field colspan=\"1\" id=\"usernameField\"></vaadin-text-field>\n"
-      + "    <vaadin-password-field colspan=\"1\"></vaadin-password-field>\n" + DISABLEDTF
-      + DISABLEDTF + "    <vaadin-email-field colspan=\"1\"></vaadin-email-field>\n" + DISABLEDTF
-      + "    <vaadin-select colspan=\"1\">\n" + "     <vaadin-list-box>\n"
-      + "      <vaadin-item value=\"2\">\n" + "       Organisation\n" + "      </vaadin-item>\n"
-      + "      <vaadin-item value=\"3\">\n" + "       Student\n" + "      </vaadin-item>\n"
-      + "     </vaadin-list-box>\n" + "    </vaadin-select>\n" + "    <span></span>\n"
-      + "    <vaadin-button colspan=\"1\" theme=\"primary\" id=\"registerFormSubmit\">\n"
-      + "     Registrieren\n" + "    </vaadin-button>\n" + "    <vaadin-button colspan=\"1\">\n"
-      + "     Bereits registriert? Hier anmelden!\n" + "    </vaadin-button>\n"
-      + "   </vaadin-form-layout>\n" + "  </vaadin-vertical-layout>\n" + " </div>\n" + "</div>";
+  private static final String DISABLEDTF =
+      "    <vaadin-text-field colspan=\"1\" disabled></vaadin-text-field>\n";
+  private static final String REGISTRATIONHTML =
+      "<div class=\"registration-view\">\n"
+          + " <div>\n"
+          + "  <vaadin-vertical-layout theme=\"padding spacing\" style=\"width:100%\">\n"
+          + "   <span><h1>Registrieren</h1></span>\n"
+          + "   <vaadin-form-layout>\n"
+          + "    <vaadin-text-field colspan=\"1\" id=\"usernameField\"></vaadin-text-field>\n"
+          + "    <vaadin-password-field colspan=\"1\"></vaadin-password-field>\n"
+          + DISABLEDTF
+          + DISABLEDTF
+          + "    <vaadin-email-field colspan=\"1\"></vaadin-email-field>\n"
+          + DISABLEDTF
+          + "    <vaadin-select colspan=\"1\">\n"
+          + "     <vaadin-list-box>\n"
+          + "      <vaadin-item value=\"2\">\n"
+          + "       Organisation\n"
+          + "      </vaadin-item>\n"
+          + "      <vaadin-item value=\"3\">\n"
+          + "       Student\n"
+          + "      </vaadin-item>\n"
+          + "     </vaadin-list-box>\n"
+          + "    </vaadin-select>\n"
+          + "    <span></span>\n"
+          + "    <vaadin-button colspan=\"1\" theme=\"primary\" id=\"registerFormSubmit\">\n"
+          + "     Registrieren\n"
+          + "    </vaadin-button>\n"
+          + "    <vaadin-button colspan=\"1\">\n"
+          + "     Bereits registriert? Hier anmelden!\n"
+          + "    </vaadin-button>\n"
+          + "   </vaadin-form-layout>\n"
+          + "  </vaadin-vertical-layout>\n"
+          + " </div>\n"
+          + "</div>";
   private final UserService userService;
   private final StudentService studentService;
   private final StudentProfileService studentProfileService;
@@ -81,8 +101,8 @@ class ViewBuildabilityTest {
 
   @Test
   void contextLoads() {
-    RegistrationView registrationView = new RegistrationView(userService, studentService,
-        permissionGroupService, companyService);
+    RegistrationView registrationView =
+        new RegistrationView(userService, studentService, permissionGroupService, companyService);
     assertNotNull(registrationView);
     registrationView.doInitialSetup();
     assertEquals(REGISTRATIONHTML, registrationView.getElement().getOuterHTML());
@@ -91,11 +111,24 @@ class ViewBuildabilityTest {
   @Test
   void testBackendView() {
     assertDoesNotThrow(
-        () -> new BackendDevelopmentView(dummyUserForm, studentViewer, administration, applyList,
-            new OrganisationViewer(companyService, companyProfileService, advertisementService),
-            new DemoDummyDataCreator(permissionGroupService, studentService, companyService,
-                userService, advertisementService, applyService, studentProfileService,
-                companyProfileService, locationService, ratingService)));
+        () ->
+            new BackendDevelopmentView(
+                dummyUserForm,
+                studentViewer,
+                administration,
+                applyList,
+                new OrganisationViewer(companyService, companyProfileService, advertisementService),
+                new DemoDummyDataCreator(
+                    permissionGroupService,
+                    studentService,
+                    companyService,
+                    userService,
+                    advertisementService,
+                    applyService,
+                    studentProfileService,
+                    companyProfileService,
+                    locationService,
+                    ratingService)));
     assertDoesNotThrow(
         () -> dummyUserForm.buildUserEditDialogLayout(new Dialog(), DefaultValues.DEFAULT_USER));
   }
@@ -109,8 +142,9 @@ class ViewBuildabilityTest {
 
   @Test
   void testSEPView() {
-    EditStudentProfile editStudentProfile = new EditStudentProfile(locationMapper, studentService,
-        locationService, studentProfileService);
+    EditStudentProfile editStudentProfile =
+        new EditStudentProfile(
+            locationMapper, studentService, locationService, studentProfileService);
     assertNotNull(editStudentProfile);
   }
 
@@ -129,14 +163,16 @@ class ViewBuildabilityTest {
 
   @Test
   void testConstructorsDoNotThrow() {
-    assertDoesNotThrow(() -> {
-      new Navbar().getNavbar();
-      EditOrganisationProfile ep = new EditOrganisationProfile(locationMapper, companyService,
-          locationService, companyProfileService);
-      new ProfileView(ep).doInitialSetup();
-      new PublicAppView();
-      new VerticalSpacerGenerator("2vh").buildVerticalSpacer();
-      new WelcomeView(stats);
-    });
+    assertDoesNotThrow(
+        () -> {
+          new Navbar().getNavbar();
+          EditOrganisationProfile ep =
+              new EditOrganisationProfile(
+                  locationMapper, companyService, locationService, companyProfileService);
+          new ProfileView(ep).doInitialSetup();
+          new PublicAppView();
+          new VerticalSpacerGenerator("2vh").buildVerticalSpacer();
+          new WelcomeView(stats);
+        });
   }
 }

@@ -18,8 +18,8 @@ public class RatingService {
   private final RatingRepository repository;
 
   public Rating doCreateRating(Rating r) {
-    Rating existing = this.findRatingByStudentAndCompanyProfile(r.getStudent(),
-        r.getCompanyProfile());
+    Rating existing =
+        this.findRatingByStudentAndCompanyProfile(r.getStudent(), r.getCompanyProfile());
     if (existing == null) {
       log.info("Rating created: {}", r);
       return this.repository.save(r);
@@ -29,8 +29,8 @@ public class RatingService {
     }
   }
 
-  private Rating findRatingByStudentAndCompanyProfile(Student student,
-      CompanyProfile companyProfile) {
+  private Rating findRatingByStudentAndCompanyProfile(
+      Student student, CompanyProfile companyProfile) {
     return this.repository.findByStudentAndCompanyProfile(student, companyProfile);
   }
 

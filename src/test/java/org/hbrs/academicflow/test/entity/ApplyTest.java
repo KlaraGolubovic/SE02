@@ -50,20 +50,13 @@ class ApplyTest {
   private static Company storedCompany;
   private static Advertisement storedJobAd;
   private static PermissionGroup storedPermissionGroup;
-  @Autowired
-  private PermissionGroupService permissionGroupService;
-  @Autowired
-  private LocationService locationService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private CompanyService companyService;
-  @Autowired
-  private StudentService studentService;
-  @Autowired
-  private AdvertisementService advertisementService;
-  @Autowired
-  private ApplyService applyService;
+  @Autowired private PermissionGroupService permissionGroupService;
+  @Autowired private LocationService locationService;
+  @Autowired private UserService userService;
+  @Autowired private CompanyService companyService;
+  @Autowired private StudentService studentService;
+  @Autowired private AdvertisementService advertisementService;
+  @Autowired private ApplyService applyService;
 
   @Test
   @Order(1)
@@ -79,35 +72,56 @@ class ApplyTest {
     } catch (Exception e) {
       log.error("PermissionGroupService could not save PermissionGroup");
     }
-    Location localLoc = Location.builder().street("Albert-Nestler-Straße").houseNumber("19")
-        .zipCode("76131").city("Karlsruhe").country("Deutschland").build();
+    Location localLoc =
+        Location.builder()
+            .street("Albert-Nestler-Straße")
+            .houseNumber("19")
+            .zipCode("76131")
+            .city("Karlsruhe")
+            .country("Deutschland")
+            .build();
     storedLocation = this.locationService.save(localLoc);
     HashSet<PermissionGroup> ug = new HashSet<>();
     ug.add(storedPermissionGroup);
-    User u = User.builder().username("TempTestCompany")
-        .password(Encryption.sha256("OrTempTestCompanygaPaul"))
-        .email("TempTestCompany@TempTestCompany.de").groups(ug).build();
+    User u =
+        User.builder()
+            .username("TempTestCompany")
+            .password(Encryption.sha256("OrTempTestCompanygaPaul"))
+            .email("TempTestCompany@TempTestCompany.de")
+            .groups(ug)
+            .build();
     try {
       storedCompanyUser = this.userService.createUser(u);
     } catch (DatabaseUserException e1) {
       storedCompanyUser = this.userService.findUserByEmail("TempTestCompany@TempTestCompany.de");
       log.error("UserService could not create User");
     }
-    Company compLocal = Company.builder().name(TEMPTEST).phone("1111111111")
-        .user(storedCompanyUser).build();
+    Company compLocal =
+        Company.builder().name(TEMPTEST).phone("1111111111").user(storedCompanyUser).build();
     storedCompany = this.companyService.doCreateCompany(compLocal);
-    Advertisement localAd = Advertisement.builder().active(true).company(storedCompany)
-        .deadline(Instant.now()).description(
-            "Arch Linux is a general-purpose distribution. Upon installation, only a"
-                + " command-line environment is provided; rather than tearing out unneeded and"
-                + " unwanted packages, the user is offered the ability to build a custom system"
-                + " by choosing among thousands of high-quality packages provided in the"
-                + " official repositories for the x86-64 architecture. ").jobType(TEMPTEST)
-        .remote(true).location(storedLocation).title(TEMPTEST).build();
+    Advertisement localAd =
+        Advertisement.builder()
+            .active(true)
+            .company(storedCompany)
+            .deadline(Instant.now())
+            .description(
+                "Arch Linux is a general-purpose distribution. Upon installation, only a"
+                    + " command-line environment is provided; rather than tearing out unneeded and"
+                    + " unwanted packages, the user is offered the ability to build a custom system"
+                    + " by choosing among thousands of high-quality packages provided in the"
+                    + " official repositories for the x86-64 architecture. ")
+            .jobType(TEMPTEST)
+            .remote(true)
+            .location(storedLocation)
+            .title(TEMPTEST)
+            .build();
     storedJobAd = this.advertisementService.doCreateAdvertisement(localAd);
-    User localStudent = User.builder().username(TEMP_TEST_STUDENTEN)
-        .password(Encryption.sha256(TEMP_TEST_STUDENTEN))
-        .email("TempTestStuenten@TempTestStuenten.de").build();
+    User localStudent =
+        User.builder()
+            .username(TEMP_TEST_STUDENTEN)
+            .password(Encryption.sha256(TEMP_TEST_STUDENTEN))
+            .email("TempTestStuenten@TempTestStuenten.de")
+            .build();
     try {
       storedStudentUser = this.userService.createUser(localStudent);
       storedStudentUser.setGroups(ug);
@@ -115,19 +129,30 @@ class ApplyTest {
       log.error("UserService could not create User");
       storedStudentUser = this.userService.findUserByEmail("TempTestStuenten@TempTestStuenten.de");
     }
-    Student studentX = Student.builder().firstName(TEMP_TEST_STUDENTEN).lastName(
-            TEMP_TEST_STUDENTEN)
-        .dateOfBirth(Instant.now()).phone("111111111").user(storedStudentUser).build();
+    Student studentX =
+        Student.builder()
+            .firstName(TEMP_TEST_STUDENTEN)
+            .lastName(TEMP_TEST_STUDENTEN)
+            .dateOfBirth(Instant.now())
+            .phone("111111111")
+            .user(storedStudentUser)
+            .build();
     storedStudent = this.studentService.doCreateStudent(studentX);
     if (storedStudent == null) {
       log.error("StudentService could not create Student");
       storedStudent = this.studentService.findStudentByUserID(storedStudentUser.getId());
     }
-    Apply applyLocal = Apply.builder().advertisement(storedJobAd).applied(Instant.now()).note(
-        "Whereas many GNU/Linux distributions attempt to be more user-friendly, Arch Linux"
-            + " has always been, and shall always remain user-centric. the proficient"
-            + " GNU/Linux user, or anyone with a do-it-yourself attitude who is willing to"
-            + " read t").student(storedStudent).build();
+    Apply applyLocal =
+        Apply.builder()
+            .advertisement(storedJobAd)
+            .applied(Instant.now())
+            .note(
+                "Whereas many GNU/Linux distributions attempt to be more user-friendly, Arch Linux"
+                    + " has always been, and shall always remain user-centric. the proficient"
+                    + " GNU/Linux user, or anyone with a do-it-yourself attitude who is willing to"
+                    + " read t")
+            .student(storedStudent)
+            .build();
     storedApply = assertDoesNotThrow(() -> this.applyService.doSaveApplication(applyLocal));
     assertNotNull(storedApply);
   }
@@ -135,8 +160,9 @@ class ApplyTest {
   @Test
   @Order(2)
   synchronized void read() {
-    assertNotNull(this.applyService.findApplicationByStudent(
-        DefaultValues.DEFAULT_APPLY.getStudent().getId()));
+    assertNotNull(
+        this.applyService.findApplicationByStudent(
+            DefaultValues.DEFAULT_APPLY.getStudent().getId()));
   }
 
   @Test
@@ -156,8 +182,8 @@ class ApplyTest {
   @Test
   @Order(4)
   synchronized void delete() {
-    Apply apply = this.applyService.findByStudentAndAdvertisement(storedStudent.getId(),
-        storedJobAd.getId());
+    Apply apply =
+        this.applyService.findByStudentAndAdvertisement(storedStudent.getId(), storedJobAd.getId());
     assertDoesNotThrow(() -> this.applyService.delete(apply));
   }
 

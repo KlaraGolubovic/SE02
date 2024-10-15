@@ -66,7 +66,7 @@ public class OrganisationProfile extends Div implements HasUrlParameter<String> 
       Component rating = new RatingGenerator().getRatingDisplay(profile.getRating());
       /*
 
-       */
+      */
       this.image.addClassName("profile-picture");
       this.companyImage.addClassName("companyPic");
       topLayout.setAlignItems(FlexComponent.Alignment.CENTER);

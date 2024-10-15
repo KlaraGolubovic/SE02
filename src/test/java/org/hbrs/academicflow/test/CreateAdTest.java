@@ -17,12 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class CreateAdTest {
 
   private static final Object EMPTYDIV = "<div></div>";
-  @Autowired
-  private AdvertisementService adService;
-  @Autowired
-  private CompanyService companyService;
-  @Autowired
-  private CompanyProfileService profileService;
+  @Autowired private AdvertisementService adService;
+  @Autowired private CompanyService companyService;
+  @Autowired private CompanyProfileService profileService;
 
   @Test
   void testContentsForVisibleAd() {

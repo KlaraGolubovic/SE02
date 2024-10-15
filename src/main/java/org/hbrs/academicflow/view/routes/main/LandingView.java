@@ -30,8 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @PageTitle("")
 public class LandingView extends VerticalLayout implements BeforeEnterObserver {
 
-  @Autowired
-  private transient LoginService loginService;
+  @Autowired private transient LoginService loginService;
 
   public LandingView() {
     setSizeFull();

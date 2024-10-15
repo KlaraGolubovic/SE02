@@ -18,10 +18,8 @@ class VersionedEntityTest {
   @Test
   @Transactional
   void testVersionedEntity() {
-    VersionedEntity versionedEntityA = new VersionedEntity() {
-    };
-    VersionedEntity versionedEntityB = new VersionedEntity() {
-    };
+    VersionedEntity versionedEntityA = new VersionedEntity() {};
+    VersionedEntity versionedEntityB = new VersionedEntity() {};
     assertEquals(0, versionedEntityA.getVersion());
     assertEquals(0, versionedEntityB.getVersion());
     assertNotEquals(versionedEntityA, versionedEntityB);
@@ -46,8 +44,7 @@ class VersionedEntityTest {
     assertEquals(false, versionedEntityA.equals(null));
     // test if not a VersionedEntity
     assertNotEquals("hallo", versionedEntityA);
-    BaseEntity baseEntity = new BaseEntity() {
-    };
+    BaseEntity baseEntity = new BaseEntity() {};
     assertNotEquals(baseEntity, versionedEntityA);
     VersionedEntity versionedEntityB = new VersionedEntityTestClass();
     assertNotEquals(versionedEntityA, versionedEntityB);
@@ -78,7 +75,5 @@ class VersionedEntityTest {
   }
 
   // Inner Test class for testing VersionedEntity
-  public static class VersionedEntityTestClass extends VersionedEntity {
-
-  }
+  public static class VersionedEntityTestClass extends VersionedEntity {}
 }

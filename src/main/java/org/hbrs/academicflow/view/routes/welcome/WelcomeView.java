@@ -34,20 +34,23 @@ public class WelcomeView extends Div {
   @PostConstruct
   public void doInitialSetup() {
     VerticalLayout layoutV = new VerticalLayout();
-    layoutV.add(new H2(
-        "Willkommen bei Academic Flow, " + SessionAttributes.getCurrentUser().getUsername()));
+    layoutV.add(
+        new H2(
+            "Willkommen bei Academic Flow, " + SessionAttributes.getCurrentUser().getUsername()));
     HorizontalLayout layoutH = new HorizontalLayout();
     layoutH.setWidth("80%");
     this.image.addClassName("profile-picture");
     this.image.setWidth("15vw");
     layoutH.add(new H2(""));
     layoutH.add(this.image);
-    Paragraph beschreibung = new Paragraph(
-        "Wilkommen auf AcadamicFlow. " + "Unser Ziel ist es, DIE Jobbörse für Studenten zu werden. "
-            + "Wir haben viele spannende Stellenanzeigen von den Top - Unternehmen. "
-            + "Wir bieten außerdem die Möglichkeit, nach Tätigkeitsfeldern wie Informatik "
-            + "oder Maschinenbau zu suchen. Da ist sicher auch für dich etwas dabei."
-            + " Leg jetzt los und finde deinen Traumjob!");
+    Paragraph beschreibung =
+        new Paragraph(
+            "Wilkommen auf AcadamicFlow. "
+                + "Unser Ziel ist es, DIE Jobbörse für Studenten zu werden. "
+                + "Wir haben viele spannende Stellenanzeigen von den Top - Unternehmen. "
+                + "Wir bieten außerdem die Möglichkeit, nach Tätigkeitsfeldern wie Informatik "
+                + "oder Maschinenbau zu suchen. Da ist sicher auch für dich etwas dabei."
+                + " Leg jetzt los und finde deinen Traumjob!");
     beschreibung.getStyle().set("font-size", "var(--lumo-font-size-l)");
     layoutH.add(beschreibung);
     // Abstände verkleinern

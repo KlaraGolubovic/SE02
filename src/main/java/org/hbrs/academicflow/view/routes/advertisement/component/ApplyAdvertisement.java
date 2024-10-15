@@ -84,17 +84,16 @@ public class ApplyAdvertisement extends Div implements HasUrlParameter<String> {
       layout.add(note);
       applyButton.addClickListener(event -> this.apply());
       layout.add(applyButton);
-      currentStudent = studentService.findStudentByUserID(
-          SessionAttributes.getCurrentUser().getId());
-      alreadyapplied = applyService.findByStudentAndAdvertisement(currentStudent.getId(),
-          advertisement.getId());
+      currentStudent =
+          studentService.findStudentByUserID(SessionAttributes.getCurrentUser().getId());
+      alreadyapplied =
+          applyService.findByStudentAndAdvertisement(currentStudent.getId(), advertisement.getId());
       if (alreadyapplied != null) {
         applyButton.setEnabled(false);
         applyButton.setText("Bewerbung bereits gesendet");
         note.setValue(alreadyapplied.getNote());
         note.setEnabled(false);
       }
-
     }
     HorizontalLayout hLayout = new HorizontalLayout();
     hLayout.setWidthFull();
@@ -108,8 +107,8 @@ public class ApplyAdvertisement extends Div implements HasUrlParameter<String> {
 
   private void apply() {
     if (note.getValue().length() < 20) {
-      Notification zukurz = Notification.show("Nachricht zu kurz (min 20 Zeichen)", 9000,
-          Position.BOTTOM_CENTER);
+      Notification zukurz =
+          Notification.show("Nachricht zu kurz (min 20 Zeichen)", 9000, Position.BOTTOM_CENTER);
       zukurz.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
       zukurz.addThemeVariants(NotificationVariant.LUMO_ERROR);
       return;
@@ -122,8 +121,9 @@ public class ApplyAdvertisement extends Div implements HasUrlParameter<String> {
     applydto.setApplied(Instant.now());
     applydto.setNote(note.getValue());
     if (alreadyapplied != null) {
-      Notification bereitsBeworben = Notification.show(
-          "Du hast dich bereits auf diese Jobanzeige beworben!", 9000, Position.BOTTOM_CENTER);
+      Notification bereitsBeworben =
+          Notification.show(
+              "Du hast dich bereits auf diese Jobanzeige beworben!", 9000, Position.BOTTOM_CENTER);
       bereitsBeworben.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
       bereitsBeworben.addThemeVariants(NotificationVariant.LUMO_ERROR);
     } else {

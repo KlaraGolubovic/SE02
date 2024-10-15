@@ -16,9 +16,7 @@ import org.hbrs.academicflow.view.routes.backend.component.StudentViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-/**
- * https://vaadin.com/components/vaadin-grid/java-examples/header-and-footer
- */
+/** https://vaadin.com/components/vaadin-grid/java-examples/header-and-footer */
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Route(value = "DEVELOPMENT", layout = PublicAppView.class)
 @PageTitle("Show Everything")

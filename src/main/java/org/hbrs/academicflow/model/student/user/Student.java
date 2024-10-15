@@ -30,18 +30,22 @@ public class Student extends BaseEntity {
   @Builder.Default
   @Column(name = "date_of_birth", nullable = false)
   private Instant dateOfBirth = Instant.now();
+
   @NotNull
   @Builder.Default
   @Column(name = "first_name", nullable = false)
   private String firstName = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "last_name", nullable = false)
   private String lastName = "";
+
   @Nullable
   @Builder.Default
   @Column(name = "phone")
   private String phone = "";
+
   // UNIQUE UND NULLABLE GEHT NICHT.
   @NotNull
   @OneToOne(orphanRemoval = true, optional = false)

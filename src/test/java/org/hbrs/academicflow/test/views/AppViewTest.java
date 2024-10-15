@@ -39,9 +39,7 @@ class AppViewTest {
   protected final UserService userService;
   protected final LoginService loginService;
 
-  /**
-   * Test the @Link{org.hbrs.academicflow.view.common.layouts.AppView} class.
-   */
+  /** Test the @Link{org.hbrs.academicflow.view.common.layouts.AppView} class. */
   @SuppressWarnings("java:S1192")
   // specific string could be changed depending on role, merge would be antipattern of "TDD" using a
   // refactor to the test as a fixation of design choice.

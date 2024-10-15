@@ -11,8 +11,7 @@ public class LabeledButtonCollection {
 
   private static final int BUTTON_WIDTH_PER_CHAR = 8;
 
-  private LabeledButtonCollection() {
-  }
+  private LabeledButtonCollection() {}
 
   public static Button generalButton(String text, String target) {
     Button button = new Button(text);
@@ -71,7 +70,7 @@ public class LabeledButtonCollection {
   public static Button loginButton(String text) {
     Button button = new Button(text);
     button.addClickListener(
-        clickEvent -> {
+        (clickEvent) -> {
           UI ui = UI.getCurrent();
           ui.getPage().getHistory().pushState(null, "#");
           ui.navigate(Constants.Pages.LOGIN_VIEW);

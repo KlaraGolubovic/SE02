@@ -17,7 +17,6 @@ import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 
 @SpringBootTest
 @Slf4j
-
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class RatingTest {
 
@@ -42,9 +41,7 @@ class RatingTest {
     rating.setStudent(new Student());
     rating.setTimestamp(Instant.now());
     rating.setCompanyProfile(new CompanyProfile());
-    assertThrows(JpaObjectRetrievalFailureException.class,
-        () -> this.ratingService.doCreateRating(rating));
-
+    assertThrows(
+        JpaObjectRetrievalFailureException.class, () -> this.ratingService.doCreateRating(rating));
   }
-
 }

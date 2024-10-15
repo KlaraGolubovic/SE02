@@ -20,25 +20,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 class LocationTest {
 
   private static Location storedlLocation;
-  @Autowired
-  private LocationService locationService;
+  @Autowired private LocationService locationService;
 
   @Test
   @Order(1)
   synchronized void testCreateLocation() {
-    Location location = Location.manualBuilder().street("Test Location Street").having()
-        .city("TestCity").and().also().zipCode("6422DE").country("Deutschland").furthermore()
-        .houseNumber("44a").build();
+    Location location =
+        Location.manualBuilder()
+            .street("Test Location Street")
+            .having()
+            .city("TestCity")
+            .and()
+            .also()
+            .zipCode("6422DE")
+            .country("Deutschland")
+            .furthermore()
+            .houseNumber("44a")
+            .build();
     assertDoesNotThrow(() -> storedlLocation = locationService.save(location));
   }
 
   @Test
   @Order(2)
   synchronized void testReadLocation() {
-    assertDoesNotThrow(() -> {
-      Location location = locationService.findById(storedlLocation.getId());
-      log.info("Location: {}", location);
-    });
+    assertDoesNotThrow(
+        () -> {
+          Location location = locationService.findById(storedlLocation.getId());
+          log.info("Location: {}", location);
+        });
   }
 
   @Test

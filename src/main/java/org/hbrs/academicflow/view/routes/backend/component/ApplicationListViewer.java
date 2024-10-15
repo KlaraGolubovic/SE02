@@ -54,11 +54,12 @@ public class ApplicationListViewer extends Div {
     this.applyGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
     this.applyGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
     this.applyGrid.addThemeVariants(GridVariant.MATERIAL_COLUMN_DIVIDERS);
-    this.applyGrid.addSelectionListener(selectionEvent -> {
-      Optional<Apply> optionalApply = selectionEvent.getFirstSelectedItem();
-      optionalApply.ifPresent(
-          apply -> UI.getCurrent().navigate("deine-bewerbung/" + apply.getId()));
-    });
+    this.applyGrid.addSelectionListener(
+        selectionEvent -> {
+          Optional<Apply> optionalApply = selectionEvent.getFirstSelectedItem();
+          optionalApply.ifPresent(
+              apply -> UI.getCurrent().navigate("deine-bewerbung/" + apply.getId()));
+        });
     div.add(this.applyGrid);
     refreshTableData();
     return div;
@@ -75,8 +76,6 @@ public class ApplicationListViewer extends Div {
       this.applications.addAll(applyService.findApplicationsByUserID(currentUser.getId()));
       this.applyGrid.getDataProvider().refreshAll();
     }
-
-
   }
 
   public void showAll() {

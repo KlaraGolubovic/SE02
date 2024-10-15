@@ -38,8 +38,8 @@ public class StudentService {
   }
 
   // find Students by firstname and lastname
-  public @NotNull Set<Student> findStudentsByFirstnameAndLastname(@NotNull String firstname,
-      @NotNull String lastname) {
+  public @NotNull Set<Student> findStudentsByFirstnameAndLastname(
+      @NotNull String firstname, @NotNull String lastname) {
     return this.repository.findStudentsByFirstnameAndLastname(firstname, lastname);
   }
 }

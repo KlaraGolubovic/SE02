@@ -30,16 +30,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 class AdvertisementTest {
 
   private static final String ORGATEST = "OrganisationTEST";
-  @Autowired
-  private AdvertisementService adService;
-  @Autowired
-  private CompanyService companyService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private LocationService locationService;
-  @Autowired
-  private PermissionGroupService permissionGroupService;
+  @Autowired private AdvertisementService adService;
+  @Autowired private CompanyService companyService;
+  @Autowired private UserService userService;
+  @Autowired private LocationService locationService;
+  @Autowired private PermissionGroupService permissionGroupService;
 
   // Test des Repositorys
   // Test des Services

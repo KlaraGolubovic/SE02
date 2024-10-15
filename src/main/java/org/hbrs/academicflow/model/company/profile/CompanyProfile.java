@@ -38,10 +38,12 @@ public class CompanyProfile extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_company_id"))
   private Company company;
+
   @Nullable
   @Builder.Default
   @Column(name = "description")
   private String description = "";
+
   @NotNull
   @OneToOne(optional = false)
   @JoinColumn(
@@ -49,6 +51,7 @@ public class CompanyProfile extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_location_id"))
   private Location location;
+
   // CURRENTLY NOT A LOB (INDEXED IMAGES)
   // @Lob
   // @Type(type = "org.hibernate.type.ImageType")
@@ -56,6 +59,7 @@ public class CompanyProfile extends BaseEntity {
   @Builder.Default
   @Column(name = "image", nullable = false)
   private Integer image = -1;
+
   @OneToMany(mappedBy = "companyProfile", fetch = FetchType.EAGER)
   private Set<Rating> ratings = new HashSet<>();
 

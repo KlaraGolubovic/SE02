@@ -36,47 +36,51 @@ class CompanyTest {
 
   private static User storedUser;
   private static CompanyProfile storedCompanyProfile;
-  @Autowired
-  private CompanyService companyService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private PermissionGroupService permissionGroupService;
-  @Autowired
-  private CompanyProfileService companyProfileService;
-  @Autowired
-  private LocationService locationService;
+  @Autowired private CompanyService companyService;
+  @Autowired private UserService userService;
+  @Autowired private PermissionGroupService permissionGroupService;
+  @Autowired private CompanyProfileService companyProfileService;
+  @Autowired private LocationService locationService;
 
   @Test
   @Order(1)
   synchronized void create() {
-    PermissionGroup lPermissionGroup = new PermissionGroup("OrganisationCompanyTest", 50,
-        new HashSet<>());
+    PermissionGroup lPermissionGroup =
+        new PermissionGroup("OrganisationCompanyTest", 50, new HashSet<>());
     try {
       this.permissionGroupService.save(lPermissionGroup);
     } catch (Exception e) {
       log.info("PermissionGroupService could not save PermissionGroup: {}", e.getMessage());
     }
     HashSet<PermissionGroup> ug = new HashSet<>();
-    User u = User.builder().username("Temp2CompanyTest")
-        .password(Encryption.sha256("Temp2CompanyTestgaPaul"))
-        .email("Temp2CompanyTest@Temp2CompanyTest.de").groups(ug).build();
+    User u =
+        User.builder()
+            .username("Temp2CompanyTest")
+            .password(Encryption.sha256("Temp2CompanyTestgaPaul"))
+            .email("Temp2CompanyTest@Temp2CompanyTest.de")
+            .groups(ug)
+            .build();
     try {
       storedUser = this.userService.createUser(u);
     } catch (DatabaseUserException e1) {
       storedUser = this.userService.findUserByEmail("Temp2CompanyTest@Temp2CompanyTest.de");
       log.error("UserService could not create User");
     }
-    Company compLocal = Company.builder().name("TempTest").phone("1111111111").user(storedUser)
-        .build();
-    Company storedCompany = assertDoesNotThrow(
-        () -> this.companyService.doCreateCompany(compLocal));
+    Company compLocal =
+        Company.builder().name("TempTest").phone("1111111111").user(storedUser).build();
+    Company storedCompany =
+        assertDoesNotThrow(() -> this.companyService.doCreateCompany(compLocal));
     Location loc = DefaultValues.DEFAULT_LOCATION;
     Location storedlLocation = this.locationService.save(loc);
-    CompanyProfile compProfilLocal = CompanyProfile.builder().company(storedCompany)
-        .description("Hi i am a Test!").image(-1).location(storedlLocation).build();
-    storedCompanyProfile = assertDoesNotThrow(
-        () -> this.companyProfileService.updateCompanyProfile(compProfilLocal));
+    CompanyProfile compProfilLocal =
+        CompanyProfile.builder()
+            .company(storedCompany)
+            .description("Hi i am a Test!")
+            .image(-1)
+            .location(storedlLocation)
+            .build();
+    storedCompanyProfile =
+        assertDoesNotThrow(() -> this.companyProfileService.updateCompanyProfile(compProfilLocal));
   }
 
   @Test

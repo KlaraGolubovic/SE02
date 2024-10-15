@@ -29,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class UserTest {
 
-
   private final UserService userService;
   private final PermissionGroupService permissionGroupService;
 

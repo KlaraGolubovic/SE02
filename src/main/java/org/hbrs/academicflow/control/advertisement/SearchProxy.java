@@ -28,7 +28,8 @@ public class SearchProxy implements Search {
   @Override
   public List<Advertisement> suche(Suchanfrage suchanfrage) {
     log.info(
-        "Searching for advertisements matching the given criteria by forwarding the request to search control");
+        "Searching for advertisements matching the given criteria by forwarding the request to"
+            + " search control");
     return this.searchControl.suche(suchanfrage);
   }
 }

@@ -16,10 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class AdListTest {
 
   private static final Object WEBSTRING = "<div></div>";
-  @Autowired
-  private AdvertisementService adService;
-  @Autowired
-  private CompanyService companyService;
+  @Autowired private AdvertisementService adService;
+  @Autowired private CompanyService companyService;
 
   @Test
   void testContentsForVisibleAd() {

@@ -13,6 +13,8 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
   @Query("select student from Student student where student.user.id=:userId")
   Student findStudentByUserId(@Param("userId") UUID userId);
 
-  @Query("select student from Student student where student.firstName=:firstname and student.lastName=:lastname")
+  @Query(
+      "select student from Student student where student.firstName=:firstname and"
+          + " student.lastName=:lastname")
   Set<Student> findStudentsByFirstnameAndLastname(String firstname, String lastname);
 }

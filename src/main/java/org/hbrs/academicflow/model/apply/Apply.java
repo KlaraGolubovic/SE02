@@ -33,10 +33,12 @@ public class Apply extends BaseEntity {
   @Builder.Default
   @Column(name = "note", length = 1100)
   private String note = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "applied")
   private Instant applied = Instant.now();
+
   @NotNull
   @ManyToOne(optional = false)
   @JoinColumn(
@@ -44,6 +46,7 @@ public class Apply extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_student_id"))
   private Student student;
+
   @NotNull
   @ManyToOne(optional = false)
   @JoinColumn(

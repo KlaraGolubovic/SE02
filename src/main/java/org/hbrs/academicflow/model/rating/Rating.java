@@ -32,9 +32,11 @@ public class Rating extends BaseEntity {
   @Builder.Default
   @Column(name = "timestamp", nullable = false)
   private Instant timestamp = Instant.now();
+
   @Builder.Default
   @Column(name = "value", nullable = false)
   private int value = 1;
+
   @NotNull
   @ManyToOne(optional = false)
   @JoinColumn(
@@ -42,6 +44,7 @@ public class Rating extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_rating_student"))
   private Student student;
+
   @NotNull
   @ManyToOne(optional = false)
   @JoinColumn(

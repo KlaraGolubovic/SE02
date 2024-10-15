@@ -40,8 +40,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @UIScope
 @Slf4j
 @CssImport("./styles/views/backend/show-users-view.css")
-public class AdvertisementEditView extends AdvertisementDetailsOrg implements
-    HasUrlParameter<String> {
+public class AdvertisementEditView extends AdvertisementDetailsOrg
+    implements HasUrlParameter<String> {
 
   private final transient AdvertisementService advertisementService;
   private final transient CompanyService companyService;

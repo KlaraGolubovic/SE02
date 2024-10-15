@@ -74,7 +74,7 @@ public class UserService {
    *
    * @param user who should be validated
    * @return boolean either true if everything is fine or false if there are some issues related to
-   * the given {@link User}
+   *     the given {@link User}
    */
   public boolean validateUser(@NotNull User user) {
     if (UserValidation.isNotValidMailAddress(user.getEmail())) {

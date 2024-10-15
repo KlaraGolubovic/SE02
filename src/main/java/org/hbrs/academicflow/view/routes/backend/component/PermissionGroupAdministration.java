@@ -44,24 +44,28 @@ public class PermissionGroupAdministration extends Div {
     div.add(this.groupGrid);
     this.groupGrid.setDataProvider(new ListDataProvider<>(this.permissionGroups));
     this.groupGrid.addColumn(PermissionGroup::getName).setHeader("Name").setWidth("200px");
-    this.groupGrid.addColumn(permissionGroup -> permissionGroup.getUsers().size())
-        .setHeader("Number of Users").setWidth("200px");
-    this.saveGroupButton.addClickListener(event -> {
-      String name = groupNameField.getValue();
-      if (name.equals("")) {
-        Notification.show("Name cannot be empty.");
-        return;
-      }
-      if (this.isNameAlreadyInUse(name)) {
-        Notification.show("Permission Group could not be created. " + name + " is already in use.");
-        return;
-      }
-      final PermissionGroup permissionGroup = new PermissionGroup();
-      permissionGroup.setName(groupNameField.getValue());
-      this.permissionService.save(permissionGroup);
-      Notification.show("Permission Group has been created");
-      refreshTableData();
-    });
+    this.groupGrid
+        .addColumn(permissionGroup -> permissionGroup.getUsers().size())
+        .setHeader("Number of Users")
+        .setWidth("200px");
+    this.saveGroupButton.addClickListener(
+        event -> {
+          String name = groupNameField.getValue();
+          if (name.equals("")) {
+            Notification.show("Name cannot be empty.");
+            return;
+          }
+          if (this.isNameAlreadyInUse(name)) {
+            Notification.show(
+                "Permission Group could not be created. " + name + " is already in use.");
+            return;
+          }
+          final PermissionGroup permissionGroup = new PermissionGroup();
+          permissionGroup.setName(groupNameField.getValue());
+          this.permissionService.save(permissionGroup);
+          Notification.show("Permission Group has been created");
+          refreshTableData();
+        });
     final FormLayout formLayout = new FormLayout();
     formLayout.add(this.groupNameField, this.saveGroupButton);
     formLayout.setColspan(this.groupNameField, 1);

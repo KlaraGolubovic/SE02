@@ -30,30 +30,43 @@ public class Advertisement extends BaseEntity {
   @Builder.Default
   @Column(name = "title", nullable = false)
   private String title = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "deadline")
   private Instant deadline = Instant.now();
+
   @NotNull
   @Builder.Default
   @Column(name = "description", columnDefinition = "text", length = 1000000)
   private String description = "";
+
   @NotNull
   @Builder.Default
   @Column(name = "job_type", nullable = false)
   private String jobType = "";
+
   @NotNull
   @ManyToOne(optional = false)
-  @JoinColumn(name = "location_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_location_id"))
+  @JoinColumn(
+      name = "location_id",
+      referencedColumnName = "id",
+      foreignKey = @ForeignKey(name = "fk_location_id"))
   private Location location;
+
   @NotNull
   @Builder.Default
   @Column(name = "remote", nullable = false)
   private Boolean remote = false;
+
   @NotNull
   @ManyToOne(optional = false)
-  @JoinColumn(name = "company_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_company_id"))
+  @JoinColumn(
+      name = "company_id",
+      referencedColumnName = "id",
+      foreignKey = @ForeignKey(name = "fk_company_id"))
   private Company company;
+
   @NotNull
   @Builder.Default
   @Column(name = "active", nullable = false)

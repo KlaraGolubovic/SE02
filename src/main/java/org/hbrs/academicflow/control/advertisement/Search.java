@@ -6,5 +6,4 @@ import org.hbrs.academicflow.model.advertisement.Advertisement;
 public interface Search {
 
   List<Advertisement> suche(Suchanfrage suchanfrage);
-
 }

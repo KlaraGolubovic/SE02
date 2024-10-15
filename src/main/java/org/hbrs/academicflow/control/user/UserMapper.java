@@ -11,10 +11,10 @@ public interface UserMapper {
 
   @Mappings(
       value = {
-          @Mapping(target = "id", source = "id"),
-          @Mapping(target = "username", source = "username"),
-          @Mapping(target = "email", source = "email"),
-          @Mapping(target = "groups", source = "groups")
+        @Mapping(target = "id", source = "id"),
+        @Mapping(target = "username", source = "username"),
+        @Mapping(target = "email", source = "email"),
+        @Mapping(target = "groups", source = "groups")
       })
   UserDTO toDTO(User user);
 }

@@ -32,13 +32,14 @@ import org.jetbrains.annotations.Nullable;
     name = "company",
     schema = "public",
     indexes = {
-        @Index(name = "idx_name", columnList = "name", unique = true),
-        @Index(name = "idx_phone", columnList = "phone"),
+      @Index(name = "idx_name", columnList = "name", unique = true),
+      @Index(name = "idx_phone", columnList = "phone"),
     })
 public class Company extends BaseEntity {
 
   @OneToMany(mappedBy = "company", orphanRemoval = true)
   Collection<Advertisement> advertisements;
+
   @NotNull
   @OneToOne(orphanRemoval = true, optional = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
@@ -47,10 +48,12 @@ public class Company extends BaseEntity {
       referencedColumnName = "id",
       foreignKey = @ForeignKey(name = "fk_user_id"))
   private User user;
+
   @NotNull
   @Builder.Default
   @Column(name = "name", nullable = false)
   private String name = "";
+
   @Nullable
   @Builder.Default
   @Column(name = "phone")

@@ -19,9 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class SessionAttributesTest {
 
-  /**
-   * This function tests @Link{org.hbrs.academicflow.util.SessionAttributes}
-   */
+  /** This function tests @Link{org.hbrs.academicflow.util.SessionAttributes} */
   @Test
   @Transactional
   void testSessionAttributes() {

@@ -42,6 +42,4 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, UU
           + "or lower(advertisement.title) like lower(concat('%', :suche, '%'))"
           + "and advertisement.active=true")
   List<Advertisement> findAdvertisementsBySearchTerm(@Param("suche") String searchTerm);
-
-
 }

@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CssImport("./styles/views/backend/show-users-view.css")
 public class StudentProfileView extends Div {
 
-
   private final EditStudentProfile editStudentProfile;
   private final transient StudentService studentService;
 

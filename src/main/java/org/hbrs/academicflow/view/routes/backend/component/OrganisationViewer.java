@@ -44,7 +44,9 @@ public class OrganisationViewer extends Div {
     this.organisationsGrid.addColumn(Company::getId).setHeader("ID").setWidth("145px");
     this.organisationsGrid.addColumn(Company::getName).setHeader("Name").setWidth(PX200);
     this.organisationsGrid.addColumn(this::hasProfile).setHeader("Hat Profil").setWidth(PX200);
-    this.organisationsGrid.addColumn(this::getAmountOfAds).setHeader("Menge der Anzeigen")
+    this.organisationsGrid
+        .addColumn(this::getAmountOfAds)
+        .setHeader("Menge der Anzeigen")
         .setWidth(PX200);
     this.organisationsGrid.addColumn(Company::getPhone).setHeader("Telefonnummer").setWidth(PX200);
     this.organisationsGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);

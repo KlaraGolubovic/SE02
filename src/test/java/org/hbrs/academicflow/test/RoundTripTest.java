@@ -53,9 +53,14 @@ class RoundTripTest {
   @Test
   void createReadAndDeleteStudent() {
     // Start: user creation
-    final User rawUser = assertDoesNotThrow(
-        () -> User.builder().username(DEFAULT_USER_NAME).email(DEFAULT_MAIL)
-            .password(Encryption.sha256("VogelSpass03")).build());
+    final User rawUser =
+        assertDoesNotThrow(
+            () ->
+                User.builder()
+                    .username(DEFAULT_USER_NAME)
+                    .email(DEFAULT_MAIL)
+                    .password(Encryption.sha256("VogelSpass03"))
+                    .build());
     User userTry;
     try {
       userTry = this.userService.createUser(rawUser);
@@ -69,8 +74,13 @@ class RoundTripTest {
     }
     // End: user creation
     // Start: student creation
-    final Student rawStudent = Student.builder().firstName(DEFAULT_FIRST_NAME)
-        .lastName(DEFAULT_LAST_NAME).dateOfBirth(Instant.now()).user(user).build();
+    final Student rawStudent =
+        Student.builder()
+            .firstName(DEFAULT_FIRST_NAME)
+            .lastName(DEFAULT_LAST_NAME)
+            .dateOfBirth(Instant.now())
+            .user(user)
+            .build();
     final Student student = this.studentRepository.save(rawStudent);
     assertNotNull(student);
     // End: student creation

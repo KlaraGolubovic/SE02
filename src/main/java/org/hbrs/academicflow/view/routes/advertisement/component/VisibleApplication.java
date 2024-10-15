@@ -32,16 +32,22 @@ public class VisibleApplication extends Div implements HasUrlParameter<String> {
     layout.setMaxWidth("1400px");
     Apply apply = applyService.findByApplicationID(applicationID);
     H2 h2 =
-        new H2("Bewerbung von " + apply.getStudentName() + " für " + apply.getCompanyName() + " am "
-            + apply.getFormattedDate());
+        new H2(
+            "Bewerbung von "
+                + apply.getStudentName()
+                + " für "
+                + apply.getCompanyName()
+                + " am "
+                + apply.getFormattedDate());
     layout.add(h2);
     H3 header = new H3("Bewerbungstext:");
     Paragraph paragraph = new Paragraph();
     paragraph.setText(apply.getNote());
     layout.add(header, paragraph);
 
-    layout.add(new VisibleAd(apply.getAdvertisement()).actionButtonForAd(
-        new AdvertisementMapperImpl().toDTO(apply.getAdvertisement())));
+    layout.add(
+        new VisibleAd(apply.getAdvertisement())
+            .actionButtonForAd(new AdvertisementMapperImpl().toDTO(apply.getAdvertisement())));
     add(layout);
   }
 

@@ -18,9 +18,7 @@ import org.hbrs.academicflow.util.Constants.Pages;
 import org.hbrs.academicflow.view.common.components.LabeledButtonCollection;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * The main view is a top-level placeholder for other views.
- */
+/** The main view is a top-level placeholder for other views. */
 @CssImport("./styles/views/main/main-view.css")
 @Route("publicmain")
 @JsModule("./styles/shared-styles.js")

@@ -40,7 +40,9 @@ public class StudentViewer extends Div {
     this.studentsGrid.addColumn(Student::getId).setHeader("ID").setWidth("145px");
     this.studentsGrid.addColumn(Student::getFirstName).setHeader("Vorname").setWidth(PX200);
     this.studentsGrid.addColumn(Student::getLastName).setHeader("Nachname").setWidth(PX200);
-    this.studentsGrid.addColumn(Student::getDateOfBirth).setHeader("Geburtsdatum")
+    this.studentsGrid
+        .addColumn(Student::getDateOfBirth)
+        .setHeader("Geburtsdatum")
         .setWidth("270px");
     this.studentsGrid.addColumn(Student::getPhone).setHeader("Telefonnummer").setWidth(PX200);
     this.studentsGrid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);

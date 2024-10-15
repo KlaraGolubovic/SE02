@@ -15,8 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class AdSearchTest {
 
-  @Autowired
-  private SearchProxy adService;
+  @Autowired private SearchProxy adService;
 
   @Test
   void testContainer() {
@@ -25,7 +24,8 @@ class AdSearchTest {
     assertEquals(0, va.getChildren().count());
     assertDoesNotThrow(va::init);
     assertEquals(4, va.getChildren().count());
-    assertTrue(va.toString()
-        .contains("org.hbrs.academicflow.view.routes.advertisement.AdvertisementSearch"));
+    assertTrue(
+        va.toString()
+            .contains("org.hbrs.academicflow.view.routes.advertisement.AdvertisementSearch"));
   }
 }
